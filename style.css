@@ -3,8 +3,10 @@ html {
 }
 
 body {
+    position: relative;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     background-image: linear-gradient(to bottom, #000000, #040303, #070707, #0a0a0b, #0d0d0e, #13151e, #121c2e, #07243f, #073063, #2b3884, #593aa1, #8d31b5);
-    font-family: 'Shadows Into Light Two', cursive;
 }
 
 ::placeholder {
@@ -27,6 +29,22 @@ button {
     cursor: pointer;
 }
 
+.card .btn-outline-primary:hover {
+    color: #fff;
+    background-color: transparent;
+    border-color: #fff;
+}
+
+.btn-check:focus+.btn-outline-primary, .btn-outline-primary:focus {
+    box-shadow: 0 0 0 0.25rem rgb(13 110 253 / 0%);
+}
+
+.btn-check:active+.btn-outline-primary:focus, .btn-check:checked+.btn-outline-primary:focus, .btn-outline-primary.active:focus, .btn-outline-primary.dropdown-toggle.show:focus, .btn-outline-primary:active:focus {
+    box-shadow: 0 0 0 0.25rem rgb(13 110 253 / 0%);
+    color: rgb(202, 202, 202);
+
+}
+
 .logo {
     display: block;
 }
@@ -42,6 +60,7 @@ button {
 .header {
     background-color: black;
     padding: 10px 0px;
+    transition: all 0.50s ease-in-out!important;
     -webkit-box-shadow: 0px -12px 50px 0px rgb(41 10 230 / 59%);
     box-shadow: 0px -12px 50px 0px rgb(41 10 230 / 59%);
 }
@@ -49,6 +68,13 @@ button {
 .header a {
     font-size: 30px;
     color: rgb(97 65 148);
+}
+
+.scroll-down{
+    position: sticky;
+    top: -65px;
+    transform: translate3d(0, -100%, 0);
+    z-index: 1020;
 }
 
 .search {
@@ -85,8 +111,15 @@ button {
     color: rgb(230, 10, 186)!important;
 }
 
-.card-shadow {
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px, 0 -10px 10px -10px #0d6efd inset;
+
+.random-btn{
+    width: 70px;
+    height: 70px;
+    border-radius: 999px;
+    background-color: #e60aba;
+    color: #ffffff;
+    border-color: #e60aba;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
 }
 
 .img-cards {
@@ -96,11 +129,27 @@ button {
     background-color: rgb(106 118 227 / 17%);
 }
 
-.start-btn {
-    border-color: #0d6efd;
+.img-cards .start-btn {
     border-top: 1px solid transparent!important;
     border-left: 1px solid transparent!important;
     border-right: 1px solid transparent!important;
+}
+
+.blue-text {
+    color: #00ceff;
+}
+
+.blue-border {
+    border-color: #00ceff;
+}
+
+.card-shadow-blue {
+    box-shadow: rgb(255 255 255 / 1%) 0px 20px 25px -5px, rgb(0 206 255 / 25%) 0px 10px 10px -5px, 0 -10px 10px -10px #00ceff inset;
+}
+
+.yellow-card{
+    color: #fff;
+
 }
 
 .yellow-text {
@@ -112,8 +161,48 @@ button {
 }
 
 .card-shadow-yellow {
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px, 0 -10px 10px -10px #ffc100 inset;
+    box-shadow: rgb(255 255 255 / 1%) 0px 20px 25px -5px, rgb(255 193 0 / 25%) 0px 10px 10px -5px, 0 -10px 10px -10px #ffc100 inset;
 }
+
+.green-text {
+    color: #06ff00;
+}
+
+.green-border {
+    border-color: #06ff00;
+}
+
+.card-shadow-green {
+    box-shadow: rgb(255 255 255 / 1%) 0px 20px 25px -5px, rgb(6 255 0 / 25%) 0px 10px 10px -5px, 0 -10px 10px -10px #06ff00 inset;
+}
+
+.red-text {
+    color: #ff0059;
+}
+
+.red-border {
+    border-color: #ff0059;
+}
+
+.card-shadow-red {
+    box-shadow: rgb(255 255 255 / 1%) 0px 20px 25px -5px, rgb(255 0 89 / 25%) 0px 10px 10px -5px, 0 -10px 10px -10px #ff0059 inset;
+}
+
+.pink-text {
+    color: #fd00ff;
+}
+
+.pink-border {
+    border-color: #fd00ff;
+}
+
+.card-shadow-pink {
+    box-shadow: rgb(255 255 255 / 1%) 0px 20px 25px -5px, rgb(255 0 89 / 25%) 0px 10px 10px -5px, 0 -10px 10px -10px #fd00ff inset;
+}
+
+
+
+
 
 @media (max-width: 1200px) {
     .search-input {
