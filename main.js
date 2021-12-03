@@ -1,3 +1,6 @@
+const body = document.body;
+const hidden = "hidden";
+
 const header = document.getElementById("header");
 const scrollUp = "sticky-top";
 const scrollDown = "scroll-down";
@@ -25,3 +28,30 @@ window.addEventListener("scroll", () => {
     }
     lastScroll = currentScroll;
 });
+
+const search_btn = document.getElementById("search-btn");
+const search_icon = document.getElementById("search-icon");
+const at_icon = document.getElementById("at-icon");
+const search_input = document.getElementById("search-input");
+
+
+search_icon.addEventListener("click", () => {
+    search_input.placeholder = "username";
+})
+search_input.addEventListener("focus", () => {
+    search_icon.classList.add(hidden);
+    at_icon.classList.remove(hidden);
+})
+search_input.addEventListener("blur", () => {
+    search_input.value = "";
+    if (body.scrollWidth <= 768) {
+        search_input.placeholder = "I'm going back!";
+    }
+    search_btn.classList.add(hidden);
+    search_icon.classList.remove(hidden);
+    at_icon.classList.add(hidden);
+})
+search_input.addEventListener("keydown", () => {
+    search_btn.classList.remove(hidden);
+    at_icon.classList.add(hidden);
+})
