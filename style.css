@@ -33,6 +33,12 @@ button {
     display: none;
 }
 
+.form-control{
+    color: #ced6dd;
+    background-color: rgb(106 118 227 / 30%);
+    border: unset;
+}
+
 .card .btn-outline-primary:hover {
     color: #fff;
     background-color: transparent;
@@ -134,7 +140,11 @@ button {
 }
 
 .category-add {
-    color: rgb(230, 10, 186)!important;
+    color: rgb(230, 10, 186);
+}
+
+.category-add:active {
+    color: rgb(163, 19, 134);
 }
 
 .modal-header {
@@ -262,7 +272,7 @@ button {
 
 @media (max-width: 992px) {
     .search-input {
-        width: 120px;
+        width: 150px;
     }
 }
 
@@ -293,6 +303,9 @@ button {
         z-index: 2;
         transition: all 0.50s ease-in-out;
     }
+
+    .mash-img{}
+
 }
 
 
