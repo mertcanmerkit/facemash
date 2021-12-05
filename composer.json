@@ -1,0 +1,11 @@
+{
+    "name": "mertcanmerkit/facemash",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Osman Taha Kıyıcılar",
+            "email": "tr.osmantaha@gmail.com"
+        }
+    ],
+    "require": {}
+}
