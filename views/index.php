@@ -1,56 +1,3 @@
-<!doctype html>
-<html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
-
-    <title>Hello, world!</title>
-</head>
-
-<body>
-
-    <div class="header" id="header">
-        <div class="container">
-            <div class="row">
-                <div class="col-4">
-                    <ul class="nav d-flex align-items-center justify-content-start">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="login.php"><i
-                                    class="fas fa-user-circle"></i></a>
-                        </li>
-                        <li class="nav-item search">
-                            <div></div>
-                            <form class="d-flex align-items-center" action="#">
-                                <div class="at-icon hidden mx-auto my-auto" id="at-icon" type="submit"><i
-                                        class="fas fa-at"></i></div>
-                                <div class="search-icon mx-auto my-auto" id="search-icon" type="submit"><i
-                                        class="fas fa-search"></i></div>
-                                <input class="search-input" id="search-input" type="search" placeholder="username"
-                                    aria-label="Search">
-                                <button class="search-btn hidden mx-auto my-auto" id="search-btn" type="submit"><i
-                                        class="fas fa-search"></i></button>
-                            </form>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-4 d-flex align-items-center justify-content-center">
-                    <a href="index.html" class="logo"><img src="img/logo.svg" alt="logo" height="30"></a>
-                </div>
-                <div class="col-4">
-                    <ul class="nav justify-content-end">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="add-category.html"><i
-                                    class="fas fa-plus-square category-add"></i></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <div class="fixed-bottom mb-3">
         <div class="container">
@@ -80,10 +27,10 @@
                             <div class="col-md-6 mb-3">
 
                                 <a href="" class="card-a">
-                                    <img src="img/pp/pp (2).jpg" class="card__image" alt="" />
+                                    <img src="views/img/pp/pp%20(2).jpg" class="card__image" alt="" />
                                     <div class="card__overlay">
                                         <div class="card__header">
-                                            <img class="card__thumb" src="img/pp/pp (2).jpg" alt="" />
+                                            <img class="card__thumb" src="views/img/pp/pp%20(2).jpg" alt="" />
                                             <div class="card__header-text">
                                                 <h3 class="card__title">Jessica Parker</h3>
                                                 <span class="card__status">1 hour ago</span>
@@ -100,7 +47,7 @@
                                 <a href="" class="card-a">
                                     <div class="card__overlay">
                                         <div class="card__header">
-                                            <img class="card__thumb" src="img/pp/pp (1).jpg" alt="" />
+                                            <img class="card__thumb" src="views/img/pp/pp%20(1).jpg" alt="" />
                                             <div class="card__header-text">
                                                 <h3 class="card__title">Jessica Parker</h3>
                                                 <span class="card__status">1 hour ago</span>
@@ -109,7 +56,7 @@
                                         <p class="card__description">Lorem ipsum dolor sit amet consectetur adipisicing
                                             elit. Asperiores, blanditiis?</p>
                                     </div>
-                                    <img src="img/pp/pp (1).jpg" class="card__image" alt="" />
+                                    <img src="views/img/pp/pp%20(1).jpg" class="card__image" alt="" />
 
                                 </a>
 
@@ -127,7 +74,7 @@
             <div class="col-lg-3 col-md-4 col-sm-6 mt-3 mb-3">
                 <div class="card card-shadow-blue img-cards">
                     <h5 class="blue-text text-break" style="padding: 1rem 1rem 0rem 1rem;">Card title 🚀
-                        <a href="add-photo.html">
+                        <a href="add-photo.php">
                             <i class="far fa-plus-square float-end"></i>
                         </a>
                     </h5>
@@ -137,22 +84,22 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-4">
-                                            <img src="img/pp/pp (1).jpg" class="card-img" alt="...">
+                                            <img src="views/img/pp/pp%20(1).jpg" class="card-img" alt="...">
                                         </div>
                                         <div class="col-4">
-                                            <img src="img/pp/pp (2).jpg" class="card-img" alt="...">
+                                            <img src="views/img/pp/pp%20(2).jpg" class="card-img" alt="...">
                                         </div>
                                         <div class="col-4">
-                                            <img src="img/pp/pp (3).jpg" class="card-img" alt="...">
+                                            <img src="views/img/pp/pp%20(3).jpg" class="card-img" alt="...">
                                         </div>
                                         <div class="col-4 mt-3">
-                                            <img src="img/pp/pp (4).jpg" class="card-img" alt="...">
+                                            <img src="views/img/pp/pp%20(4).jpg" class="card-img" alt="...">
                                         </div>
                                         <div class="col-4 mt-3">
-                                            <img src="img/pp/pp (5).jpg" class="card-img" alt="...">
+                                            <img src="views/img/pp/pp%20(5).jpg" class="card-img" alt="...">
                                         </div>
                                         <div class="col-4 mt-3">
-                                            <img src="img/pp/pp (6).jpg" class="card-img" alt="...">
+                                            <img src="views/img/pp/pp%20(6).jpg" class="card-img" alt="...">
                                         </div>
                                     </div>
                                 </div>
@@ -161,22 +108,22 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-4">
-                                            <img src="img/pp/pp (7).jpg" class="card-img" alt="...">
+                                            <img src="views/img/pp/pp%20(7).jpg" class="card-img" alt="...">
                                         </div>
                                         <div class="col-4">
-                                            <img src="img/pp/pp (8).jpg" class="card-img" alt="...">
+                                            <img src="views/img/pp/pp%20(8).jpg" class="card-img" alt="...">
                                         </div>
                                         <div class="col-4">
-                                            <img src="img/pp/pp (9).jpg" class="card-img" alt="...">
+                                            <img src="views/img/pp/pp%20(9).jpg" class="card-img" alt="...">
                                         </div>
                                         <div class="col-4 mt-3">
-                                            <img src="img/pp/pp (10).jpg" class="card-img" alt="...">
+                                            <img src="views/img/pp/pp%20(10).jpg" class="card-img" alt="...">
                                         </div>
                                         <div class="col-4 mt-3">
-                                            <img src="img/pp/pp (11).jpg" class="card-img" alt="...">
+                                            <img src="views/img/pp/pp%20(11).jpg" class="card-img" alt="...">
                                         </div>
                                         <div class="col-4 mt-3">
-                                            <img src="img/pp/pp (12).jpg" class="card-img" alt="...">
+                                            <img src="views/img/pp/pp%20(12).jpg" class="card-img" alt="...">
                                         </div>
                                     </div>
                                 </div>
@@ -197,22 +144,22 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-4">
-                                            <img src="img/150x150.jpg" class="card-img" alt="...">
+                                            <img src="views/img/150x150.jpg" class="card-img" alt="...">
                                         </div>
                                         <div class="col-4">
-                                            <img src="img/150x150.jpg" class="card-img" alt="...">
+                                            <img src="views/img/150x150.jpg" class="card-img" alt="...">
                                         </div>
                                         <div class="col-4">
-                                            <img src="img/150x150.jpg" class="card-img" alt="...">
+                                            <img src="views/img/150x150.jpg" class="card-img" alt="...">
                                         </div>
                                         <div class="col-4 mt-3">
-                                            <img src="img/150x150.jpg" class="card-img" alt="...">
+                                            <img src="views/img/150x150.jpg" class="card-img" alt="...">
                                         </div>
                                         <div class="col-4 mt-3">
-                                            <img src="img/150x150.jpg" class="card-img" alt="...">
+                                            <img src="views/img/150x150.jpg" class="card-img" alt="...">
                                         </div>
                                         <div class="col-4 mt-3">
-                                            <img src="img/150x150.jpg" class="card-img" alt="...">
+                                            <img src="views/img/150x150.jpg" class="card-img" alt="...">
                                         </div>
                                     </div>
                                 </div>
@@ -221,22 +168,22 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-4">
-                                            <img src="img/150x150.jpg" class="card-img" alt="...">
+                                            <img src="views/img/150x150.jpg" class="card-img" alt="...">
                                         </div>
                                         <div class="col-4">
-                                            <img src="img/150x150.jpg" class="card-img" alt="...">
+                                            <img src="views/img/150x150.jpg" class="card-img" alt="...">
                                         </div>
                                         <div class="col-4">
-                                            <img src="img/150x150.jpg" class="card-img" alt="...">
+                                            <img src="views/img/150x150.jpg" class="card-img" alt="...">
                                         </div>
                                         <div class="col-4 mt-3">
-                                            <img src="img/150x150.jpg" class="card-img" alt="...">
+                                            <img src="views/img/150x150.jpg" class="card-img" alt="...">
                                         </div>
                                         <div class="col-4 mt-3">
-                                            <img src="img/150x150.jpg" class="card-img" alt="...">
+                                            <img src="views/img/150x150.jpg" class="card-img" alt="...">
                                         </div>
                                         <div class="col-4 mt-3">
-                                            <img src="img/150x150.jpg" class="card-img" alt="...">
+                                            <img src="views/img/150x150.jpg" class="card-img" alt="...">
                                         </div>
                                     </div>
                                 </div>
@@ -257,22 +204,22 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-4">
-                                            <img src="img/150x150.jpg" class="card-img" alt="...">
+                                            <img src="views/img/150x150.jpg" class="card-img" alt="...">
                                         </div>
                                         <div class="col-4">
-                                            <img src="img/150x150.jpg" class="card-img" alt="...">
+                                            <img src="views/img/150x150.jpg" class="card-img" alt="...">
                                         </div>
                                         <div class="col-4">
-                                            <img src="img/150x150.jpg" class="card-img" alt="...">
+                                            <img src="views/img/150x150.jpg" class="card-img" alt="...">
                                         </div>
                                         <div class="col-4 mt-3">
-                                            <img src="img/150x150.jpg" class="card-img" alt="...">
+                                            <img src="views/img/150x150.jpg" class="card-img" alt="...">
                                         </div>
                                         <div class="col-4 mt-3">
-                                            <img src="img/150x150.jpg" class="card-img" alt="...">
+                                            <img src="views/img/150x150.jpg" class="card-img" alt="...">
                                         </div>
                                         <div class="col-4 mt-3">
-                                            <img src="img/150x150.jpg" class="card-img" alt="...">
+                                            <img src="views/img/150x150.jpg" class="card-img" alt="...">
                                         </div>
                                     </div>
                                 </div>
@@ -281,22 +228,22 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-4">
-                                            <img src="img/150x150.jpg" class="card-img" alt="...">
+                                            <img src="views/img/150x150.jpg" class="card-img" alt="...">
                                         </div>
                                         <div class="col-4">
-                                            <img src="img/150x150.jpg" class="card-img" alt="...">
+                                            <img src="views/img/150x150.jpg" class="card-img" alt="...">
                                         </div>
                                         <div class="col-4">
-                                            <img src="img/150x150.jpg" class="card-img" alt="...">
+                                            <img src="views/img/150x150.jpg" class="card-img" alt="...">
                                         </div>
                                         <div class="col-4 mt-3">
-                                            <img src="img/150x150.jpg" class="card-img" alt="...">
+                                            <img src="views/img/150x150.jpg" class="card-img" alt="...">
                                         </div>
                                         <div class="col-4 mt-3">
-                                            <img src="img/150x150.jpg" class="card-img" alt="...">
+                                            <img src="views/img/150x150.jpg" class="card-img" alt="...">
                                         </div>
                                         <div class="col-4 mt-3">
-                                            <img src="img/150x150.jpg" class="card-img" alt="...">
+                                            <img src="views/img/150x150.jpg" class="card-img" alt="...">
                                         </div>
                                     </div>
                                 </div>
@@ -317,22 +264,22 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-4">
-                                            <img src="img/150x150.jpg" class="card-img" alt="...">
+                                            <img src="views/img/150x150.jpg" class="card-img" alt="...">
                                         </div>
                                         <div class="col-4">
-                                            <img src="img/150x150.jpg" class="card-img" alt="...">
+                                            <img src="views/img/150x150.jpg" class="card-img" alt="...">
                                         </div>
                                         <div class="col-4">
-                                            <img src="img/150x150.jpg" class="card-img" alt="...">
+                                            <img src="views/img/150x150.jpg" class="card-img" alt="...">
                                         </div>
                                         <div class="col-4 mt-3">
-                                            <img src="img/150x150.jpg" class="card-img" alt="...">
+                                            <img src="views/img/150x150.jpg" class="card-img" alt="...">
                                         </div>
                                         <div class="col-4 mt-3">
-                                            <img src="img/150x150.jpg" class="card-img" alt="...">
+                                            <img src="views/img/150x150.jpg" class="card-img" alt="...">
                                         </div>
                                         <div class="col-4 mt-3">
-                                            <img src="img/150x150.jpg" class="card-img" alt="...">
+                                            <img src="views/img/150x150.jpg" class="card-img" alt="...">
                                         </div>
                                     </div>
                                 </div>
@@ -341,22 +288,22 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-4">
-                                            <img src="img/150x150.jpg" class="card-img" alt="...">
+                                            <img src="views/img/150x150.jpg" class="card-img" alt="...">
                                         </div>
                                         <div class="col-4">
-                                            <img src="img/150x150.jpg" class="card-img" alt="...">
+                                            <img src="views/img/150x150.jpg" class="card-img" alt="...">
                                         </div>
                                         <div class="col-4">
-                                            <img src="img/150x150.jpg" class="card-img" alt="...">
+                                            <img src="views/img/150x150.jpg" class="card-img" alt="...">
                                         </div>
                                         <div class="col-4 mt-3">
-                                            <img src="img/150x150.jpg" class="card-img" alt="...">
+                                            <img src="views/img/150x150.jpg" class="card-img" alt="...">
                                         </div>
                                         <div class="col-4 mt-3">
-                                            <img src="img/150x150.jpg" class="card-img" alt="...">
+                                            <img src="views/img/150x150.jpg" class="card-img" alt="...">
                                         </div>
                                         <div class="col-4 mt-3">
-                                            <img src="img/150x150.jpg" class="card-img" alt="...">
+                                            <img src="views/img/150x150.jpg" class="card-img" alt="...">
                                         </div>
                                     </div>
                                 </div>
@@ -377,22 +324,22 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-4">
-                                            <img src="img/150x150.jpg" class="card-img" alt="...">
+                                            <img src="views/img/150x150.jpg" class="card-img" alt="...">
                                         </div>
                                         <div class="col-4">
-                                            <img src="img/150x150.jpg" class="card-img" alt="...">
+                                            <img src="views/img/150x150.jpg" class="card-img" alt="...">
                                         </div>
                                         <div class="col-4">
-                                            <img src="img/150x150.jpg" class="card-img" alt="...">
+                                            <img src="views/img/150x150.jpg" class="card-img" alt="...">
                                         </div>
                                         <div class="col-4 mt-3">
-                                            <img src="img/150x150.jpg" class="card-img" alt="...">
+                                            <img src="views/img/150x150.jpg" class="card-img" alt="...">
                                         </div>
                                         <div class="col-4 mt-3">
-                                            <img src="img/150x150.jpg" class="card-img" alt="...">
+                                            <img src="views/img/150x150.jpg" class="card-img" alt="...">
                                         </div>
                                         <div class="col-4 mt-3">
-                                            <img src="img/150x150.jpg" class="card-img" alt="...">
+                                            <img src="views/img/150x150.jpg" class="card-img" alt="...">
                                         </div>
                                     </div>
                                 </div>
@@ -401,22 +348,22 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-4">
-                                            <img src="img/150x150.jpg" class="card-img" alt="...">
+                                            <img src="views/img/150x150.jpg" class="card-img" alt="...">
                                         </div>
                                         <div class="col-4">
-                                            <img src="img/150x150.jpg" class="card-img" alt="...">
+                                            <img src="views/img/150x150.jpg" class="card-img" alt="...">
                                         </div>
                                         <div class="col-4">
-                                            <img src="img/150x150.jpg" class="card-img" alt="...">
+                                            <img src="views/img/150x150.jpg" class="card-img" alt="...">
                                         </div>
                                         <div class="col-4 mt-3">
-                                            <img src="img/150x150.jpg" class="card-img" alt="...">
+                                            <img src="views/img/150x150.jpg" class="card-img" alt="...">
                                         </div>
                                         <div class="col-4 mt-3">
-                                            <img src="img/150x150.jpg" class="card-img" alt="...">
+                                            <img src="views/img/150x150.jpg" class="card-img" alt="...">
                                         </div>
                                         <div class="col-4 mt-3">
-                                            <img src="img/150x150.jpg" class="card-img" alt="...">
+                                            <img src="views/img/150x150.jpg" class="card-img" alt="...">
                                         </div>
                                     </div>
                                 </div>
@@ -429,10 +376,3 @@
             </div>
         </div>
 
-        <script src="https://kit.fontawesome.com/7c5c91e47c.js" crossorigin="anonymous"></script>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="main.js"></script>
-</body>
-
-</html>
