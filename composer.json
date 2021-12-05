@@ -1,11 +1,14 @@
 {
-    "name": "mertcanmerkit/facemash",
-    "type": "project",
-    "authors": [
-        {
-            "name": "Osman Taha Kıyıcılar",
-            "email": "tr.osmantaha@gmail.com"
-        }
-    ],
-    "require": {}
+  "name": "mertcanmerkit/facemash",
+  "type": "project",
+  "authors": [
+    {
+      "name": "Osman Taha Kıyıcılar",
+      "email": "tr.osmantaha@gmail.com"
+    }
+  ],
+  "require": {
+    "filp/whoops": "^2.14",
+    "ext-pdo": "*"
+  }
 }
