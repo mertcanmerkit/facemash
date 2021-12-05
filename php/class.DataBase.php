@@ -8,7 +8,7 @@ class DataBase
     {
         try {
 
-            $db = new PDO("mysql:host=localhost;dbname=facemash", "root", "", array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+            $db = new PDO("mysql:host=localhost;dbname=" . DB_NAME, DB_USER, DB_PASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
             $db->exec("SET CHARSET UTF8");
             $db->exec("SET NAMES UTF8");
         } catch (PDOException $e) {
@@ -26,5 +26,27 @@ class DataBase
         return $this->db;
     }
 
+// username = osman, pass = asd.1234, email = tr@tr.tr, token = askljfalf, ip = 192.162
+    public function addUser($array)
+    {
+        $array["token"] = generateRandomString();
+        $array["ip"] = getIpAdress();
+        foreach ($array as $key => $value) {
+            if (empty($value) || $value != null) {
+                return array("error" => true, "reason" => "Check all inputs");
+            }
+        }
+        $fields = array_keys($array); // here you have to trust your field names!
+        $values = array_values($array);
+        $fieldlist = implode(',', $fields);
+        $qs = str_repeat("?,", count($fields) - 1);
+        $sql = "insert into user($fieldlist) values(${qs}?)";
+        $q = $this->db->prepare($sql);
+        if ($q->execute($values) ) {
+            return array("error" => false, "token" => $array["token"]);
+        } else {
+            return array("error" => true, "reason" => "Database Error", "errorCode" => $q->errorCode());
+        }
+    }
 
 }
