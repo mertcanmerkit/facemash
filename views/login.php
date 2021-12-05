@@ -22,7 +22,8 @@
                     </div>
                 </div>
                 <button type="button"
-                        class="btn btn-outline-primary start-btn green-border green-text fw-bold">Login
+                        class="btn btn-outline-primary start-btn green-border green-text fw-bold" onclick="login()">
+                    Login
                 </button>
             </div>
         </div>

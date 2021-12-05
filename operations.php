@@ -7,7 +7,7 @@ switch ($operation) {
     case "login":
         $database = new DataBase();
         $user = new User($database->getDb());
-        if ($user->checkLoginWithCredentials($_POST["username"], $_POST["pass"], 0)) {
+        if ($user->checkLoginWithCredentials($_POST["email"], $_POST["pass"], 0)) {
             myDie(array(
                 "login" => true,
                 "token" => $user->getToken()
@@ -20,7 +20,7 @@ switch ($operation) {
         $database = new DataBase();
         $user = new User($database->getDb());
         $verify = $user->verifyCredentials($_POST, 0);
-        if ($verify["status"]) {
+        if (!$verify["error"]) {
             myDie($database->addUser($_POST));
         } else {
             myDie($verify);

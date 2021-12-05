@@ -1,3 +1,15 @@
+
+<?php
+if ($isLogged){
+    echo "isloged";
+    echo $user->user["username"];
+}else{
+    echo "isnotLogged";
+
+}
+
+?>
+
 <div class="fixed-bottom mb-3">
     <div class="container">
         <div class="row mt-3">

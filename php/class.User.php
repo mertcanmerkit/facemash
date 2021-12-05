@@ -7,6 +7,7 @@ class User
      */
     public $db = null;
     public $token = null;
+    public $user = null;
 
     public function __construct($db)
     {
@@ -36,13 +37,13 @@ class User
             if ($rowCount == 0) {
                 return $this->verifyCredentials($post, 1);
             } else {
-                return array("status" => false, "reason" => "username");
+                return array("error" => true, "reason" => "username");
             }
         } else {
             if ($rowCount == 0) {
-                return array("status" => true);
+                return array("error" => false);
             } else {
-                return array("status" => false, "reason" => "email");
+                return array("error" => true, "reason" => "email");
             }
         }
     }
@@ -57,6 +58,7 @@ class User
         $rowCount = $sql->rowCount();
         if ($rowCount > 0) {
             $this->token = $token;
+            $this->user = $this->getUser();
             return true;
         } else {
             return false;
@@ -67,19 +69,20 @@ class User
     {
 
         if ($state == 0) {
-            $sql = $this->db->prepare("select token from users where username = :username and pass = :pass");
+            $sql = $this->db->prepare("select token from users where username = ? and pass = ?");
         } else {
-            $sql = $this->db->prepare("select token from users where email = :username and pass = :pass");
+            $sql = $this->db->prepare("select token from users where email = ? and pass = ?");
         }
         $sql->execute(array(
-            "username" => $username,
-            "pass" => $pass
+            $username,
+            $pass
         ));
         $fth = $sql->fetch(PDO::FETCH_ASSOC);
-
         $rowCount = $sql->rowCount();
         if ($rowCount > 0) {
             $this->token = $fth["token"];
+            $this->user = $this->getUser();
+
             return true;
         } else {
             if ($state == 1) {
@@ -88,7 +91,13 @@ class User
                 return $this->checkLoginWithCredentials($username, $pass, 1);
             }
         }
-        return null;
+    }
+
+    public function getUser()
+    {
+        $sth = $this->db->prepare("select * from users where token = ?");
+        $sth->execute(array($this->getToken()));
+        return $sth->fetch(PDO::FETCH_ASSOC);
     }
 
     /**
