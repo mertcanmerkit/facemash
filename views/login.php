@@ -7,11 +7,11 @@
                     <div class="row">
                         <div class="mb-3">
                             <label class="form-label">Email</label>
-                            <input class="form-control" id="inputEmail" placeholder="email@example.com">
+                            <input class="form-control" id="inputEmailLogin" placeholder="email@example.com">
                         </div>
                         <div class="mb-2">
                             <label class="form-label">Password</label>
-                            <input class="form-control" type="password" id="inputPassword" placeholder="******">
+                            <input class="form-control" type="password" id="inputPasswordLogin" placeholder="******">
                             <!-- <small id="passwordHelp" class="text-danger">
                                 The email address or password is incorrect.
                             </small> -->
@@ -41,6 +41,15 @@
                         </div>
 
                         <div class="mb-3">
+                            <label class="form-label">Username</label>
+                            <input class="form-control" id="inputUsername" placeholder="@username">
+
+                            <!-- <small id="passwordHelp" class="text-danger">
+                                Please enter a valid email address.
+                            </small> -->
+                        </div>
+
+                        <div class="mb-3">
                             <label class="form-label">Password</label>
                             <input class="form-control" type="password" id="inputPassword" placeholder="******">
                             <!-- <small id="passwordHelp" class="text-danger">
@@ -49,7 +58,8 @@
                         </div>
                     </div>
                 </div>
-                <button type="button" class="btn btn-outline-primary start-btn pink-border pink-text fw-bold">Sign
+                <button type="button" class="btn btn-outline-primary start-btn pink-border pink-text fw-bold"
+                        onclick="register()">Sign
                     Up
                 </button>
             </div>

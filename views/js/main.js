@@ -55,3 +55,29 @@ search_input.addEventListener("keydown", () => {
     search_btn.classList.remove(hidden);
     at_icon.classList.add(hidden);
 })
+
+
+function register() {
+    var email = $("#inputEmail").val();
+    var username = $("#inputUsername").val();
+    var pass = $("#inputPassword").val();
+    var settings = {
+        "url": "operations.php",
+        "method": "POST",
+        "timeout": 0,
+        "headers": {
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        "processData": false,
+        "mimeType": "multipart/form-data",
+        "contentType": false,
+        "data": "email=" + email + "&username=" + username + "&pass=" + pass + "&operation=register"
+    };
+
+    $.ajax(settings).done(function (response) {
+        console.log(response);
+
+    });
+
+
+}

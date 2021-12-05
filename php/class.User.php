@@ -13,6 +13,40 @@ class User
         $this->db = $db;
     }
 
+    public function verifyCredentials(array $post, $state)
+    {
+
+        if ($state == 0) {
+            $key = "username";
+        } else {
+            $key = "email";
+        }
+        $sql = $this->db->prepare("select id from users where " . $key . " = :username ");
+        if ($state == 0) {
+            $sql->execute(array(
+                "username" => $post["username"]
+            ));
+        } else {
+            $sql->execute(array(
+                "username" => $post["email"]
+            ));
+        }
+        $rowCount = $sql->rowCount();
+        if ($state == 0) {
+            if ($rowCount == 0) {
+                return $this->verifyCredentials($post, 1);
+            } else {
+                return array("status" => false, "reason" => "username");
+            }
+        } else {
+            if ($rowCount == 0) {
+                return array("status" => true);
+            } else {
+                return array("status" => false, "reason" => "email");
+            }
+        }
+    }
+
     public function checkLoginWithToken($token)
     {
         $sql = $this->db->prepare("select id from users where token = :tkn");
@@ -51,7 +85,7 @@ class User
             if ($state == 1) {
                 return false;
             } else {
-                $this->checkLoginWithCredentials($username, $pass, 1);
+                return $this->checkLoginWithCredentials($username, $pass, 1);
             }
         }
         return null;
@@ -64,5 +98,6 @@ class User
     {
         return $this->token;
     }
+
 
 }

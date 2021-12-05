@@ -1,6 +1,6 @@
 <?php
 
-
+include __DIR__ . "/vendor/autoload.php";
 include __DIR__ . "/php/include.php";
 $operation = $_POST["operation"];
 switch ($operation) {
@@ -19,7 +19,12 @@ switch ($operation) {
     case "register":
         $database = new DataBase();
         $user = new User($database->getDb());
-        myDie($database->addUser($_POST));
+        $verify = $user->verifyCredentials($_POST, 0);
+        if ($verify["status"]) {
+            myDie($database->addUser($_POST));
+        } else {
+            myDie($verify);
+        }
 
         break;
     default:

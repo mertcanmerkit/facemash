@@ -8,7 +8,7 @@ function getIpAdress()
     return $_SERVER["REMOTE_ADDR"];
 }
 
-function generateRandomString($length = 8) {
+function generateRandomString($length = 12) {
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $charactersLength = strlen($characters);
     $randomString = '';

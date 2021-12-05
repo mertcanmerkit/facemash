@@ -1,5 +1,6 @@
 <?php
 include __DIR__ . "/vendor/autoload.php";
+
 include __DIR__ . "/php/include.php";
 $whoops = new \Whoops\Run;
 $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);

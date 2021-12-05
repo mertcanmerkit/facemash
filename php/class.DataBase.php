@@ -29,10 +29,13 @@ class DataBase
 // username = osman, pass = asd.1234, email = tr@tr.tr, token = askljfalf, ip = 192.162
     public function addUser($array)
     {
+
+
+        unset($array["operation"]);
         $array["token"] = generateRandomString();
         $array["ip"] = getIpAdress();
         foreach ($array as $key => $value) {
-            if (empty($value) || $value != null) {
+            if (empty($value) || $value == null) {
                 return array("error" => true, "reason" => "Check all inputs");
             }
         }
@@ -40,9 +43,9 @@ class DataBase
         $values = array_values($array);
         $fieldlist = implode(',', $fields);
         $qs = str_repeat("?,", count($fields) - 1);
-        $sql = "insert into user($fieldlist) values(${qs}?)";
+        $sql = "insert into users($fieldlist) values(${qs}?)";
         $q = $this->db->prepare($sql);
-        if ($q->execute($values) ) {
+        if ($q->execute($values)) {
             return array("error" => false, "token" => $array["token"]);
         } else {
             return array("error" => true, "reason" => "Database Error", "errorCode" => $q->errorCode());

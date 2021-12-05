@@ -9,6 +9,7 @@
   ],
   "require": {
     "filp/whoops": "^2.14",
-    "ext-pdo": "*"
+    "ext-pdo": "*",
+    "maximebf/debugbar": "1.*"
   }
 }
