@@ -1,3 +1,12 @@
+
+<?php
+if ($isLogged){
+    echo "isloged";
+    echo $user->user["username"];
+}else{
+    ?>
+
+
 <div class="container" style="color: #fff;">
     <div class="row">
         <div class="col-12 col-md-6 mt-3">
@@ -12,9 +21,20 @@
                         <div class="mb-2">
                             <label class="form-label">Password</label>
                             <input class="form-control" type="password" id="inputPasswordLogin" placeholder="******">
+
                             <!-- <small id="passwordHelp" class="text-danger">
                                 The email address or password is incorrect.
                             </small> -->
+
+                            <?php
+                            if(isset($_GET["error"])){
+                                if($_GET["error"]=="incorrect"){
+                                    echo '<small id="passwordHelp" class="text-danger d-flex">
+                                The email address or password is incorrect.
+                            </small>';
+                                }
+                            }
+                            ?>
                         </div>
                         <a href="#" style="padding-top: 0">
                             <sub>Forgot your password?</sub>
@@ -36,23 +56,44 @@
                         <div class="mb-3">
                             <label class="form-label">Email</label>
                             <input class="form-control" id="inputEmail" placeholder="email@example.com">
+                            <small id="emailValidation" class="text-danger d-flex"></small>
+
                             <!-- <small id="passwordHelp" class="text-danger">
                                 Please enter a valid email address.
                             </small> -->
+
+                            <?php
+                            if(isset($_GET["error"])){
+                                if($_GET["error"]=="email"){
+                                    echo '<small id="passwordHelp" class="text-danger">
+                                The email already in use.
+                            </small>';
+                                }
+                            }
+                            ?>
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label">Username</label>
                             <input class="form-control" id="inputUsername" placeholder="@username">
+                            <small id="usernameValidation" class="text-danger d-flex"></small>
 
-                            <!-- <small id="passwordHelp" class="text-danger">
-                                Please enter a valid email address.
-                            </small> -->
+                            <?php
+                            if(isset($_GET["error"])){
+                                if($_GET["error"]=="username"){
+                                    echo '<small id="passwordHelp" class="text-danger d-flex">
+                                The username already in use.
+                            </small>';
+                                }
+                            }
+                            ?>
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label">Password</label>
                             <input class="form-control" type="password" id="inputPassword" placeholder="******">
+                            <small id="passValidation" class="text-danger d-flex"></small>
+
                             <!-- <small id="passwordHelp" class="text-danger">
                                 Must be 8-20 characters long.
                             </small> -->
@@ -65,11 +106,9 @@
                 </button>
             </div>
         </div>
-
-
     </div>
-
-
 </div>
-
+    <?php
+}
+?>
 

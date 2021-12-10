@@ -1,8 +1,3 @@
-<?php
-
-
-
-?>
 <!doctype html>
 <html lang="en">
 
@@ -25,7 +20,7 @@
             <div class="col-4">
                 <ul class="nav d-flex align-items-center justify-content-start">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="login.php"><i
+                        <a class="nav-link active" aria-current="page" href="login"><i
                                 class="fas fa-user-circle"></i></a>
                     </li>
                     <li class="nav-item search">
@@ -44,12 +39,12 @@
                 </ul>
             </div>
             <div class="col-4 d-flex align-items-center justify-content-center">
-                <a href="index.php" class="logo"><img src="views/img/logo.svg" alt="logo" height="30"></a>
+                <a href="index" class="logo"><img src="views/img/logo.svg" alt="logo" height="30"></a>
             </div>
             <div class="col-4">
                 <ul class="nav justify-content-end">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="add-category.php"><i
+                        <a class="nav-link active" aria-current="page" href="add-category"><i
                                 class="fas fa-plus-square category-add"></i></a>
                     </li>
                 </ul>

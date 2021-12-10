@@ -37,12 +37,14 @@ class User
             if ($rowCount == 0) {
                 return $this->verifyCredentials($post, 1);
             } else {
+                // username Already in Use error
                 return array("error" => true, "reason" => "username");
             }
         } else {
             if ($rowCount == 0) {
                 return array("error" => false);
             } else {
+                // Email Already in Use error
                 return array("error" => true, "reason" => "email");
             }
         }

@@ -113,9 +113,74 @@ function login() {
     });
 }
 
+const usernameInput = document.getElementById("inputUsername");
+const usernameValidation = document.getElementById("usernameValidation");
+
+usernameInput.addEventListener("keyup", () =>{
+    usernameInputValue = usernameInput.value;
+
+    if(usernameInputValue.length < 0 || usernameInputValue.length > 30) {
+        showSmall(usernameValidation);
+        setErrorFor(usernameInput, "0-30 olması lzm");
+    } else if(usernameInputValue.length == 0 ){
+        showSmall(usernameValidation);
+        setErrorFor(usernameInput, "Boş olamaz");
+    } else if(!usernameInputValue.match(/^[a-zA-Z0-9._]+$/)){
+        showSmall(usernameValidation);
+        setErrorFor(usernameInput, ">£#$½§ olmaz yawrum");
+    } else{
+        hideSmall(usernameValidation);
+    }
+})
+
+const emailInput = document.getElementById("inputEmail");
+const emailValidation = document.getElementById("emailValidation");
+
+emailInput.addEventListener("keyup", () =>{
+    emailInputValue = emailInput.value;
+
+    if(!emailInputValue.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)){
+        showSmall(emailValidation);
+        setErrorFor(emailInput, "No way! This e mail can't be real");
+    } else{
+        hideSmall(emailValidation);
+    }
+})
+
+const passInput = document.getElementById("inputPassword");
+const passValidation = document.getElementById("passValidation");
+
+passInput.addEventListener("keyup", () =>{
+    passInputValue = passInput.value;
+
+    if(passInputValue.length < 5 || passInputValue.length > 31){
+        showSmall(passValidation);
+        setErrorFor(passInput, "5-31 olcak");
+    } else{
+        hideSmall(passValidation);
+    }
+})
+
+function hideSmall(small){
+    small.classList.add("hidden");
+    small.classList.remove("d-flex");
+}
+
+function showSmall(small){
+    small.classList.remove("hidden");
+    small.classList.add("d-flex");
+}
+
+function setErrorFor(input, message) {
+    const formControl = input.parentElement;
+    const small = formControl.querySelector('small');
+    small.innerText = message;
+}
+
 function setCookie(cname, cvalue, exdays) {
     var d = new Date();
     d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
     var expires = "expires=" + d.toUTCString();
     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
+

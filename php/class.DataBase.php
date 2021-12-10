@@ -29,8 +29,6 @@ class DataBase
 // username = osman, pass = asd.1234, email = tr@tr.tr, token = askljfalf, ip = 192.162
     public function addUser($array)
     {
-
-
         unset($array["operation"]);
         $array["token"] = generateRandomString();
         $array["ip"] = getIpAdress();

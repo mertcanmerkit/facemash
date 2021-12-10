@@ -1,8 +1,8 @@
 <?php
-
 include __DIR__ . "/vendor/autoload.php";
 include __DIR__ . "/php/include.php";
 $operation = $_POST["operation"];
+
 switch ($operation) {
     case "login":
         $database = new DataBase();
@@ -13,6 +13,7 @@ switch ($operation) {
                 "token" => $user->getToken()
             ));
         } else {
+            header("location: login?error=incorrect");
             myDie(array("login" => false));
         }
         break;
@@ -20,17 +21,19 @@ switch ($operation) {
         $database = new DataBase();
         $user = new User($database->getDb());
         $verify = $user->verifyCredentials($_POST, 0);
-        if (!$verify["error"]) {
+        if (!$verify["error"] && filter_var($_POST["email"], FILTER_VALIDATE_EMAIL) && preg_match('/^[a-zA-Z0-9._].{1,30}+$/', $_POST["username"]) && preg_match('/^.{5,31}$/', $_POST["pass"])) {
             myDie($database->addUser($_POST));
-        } else {
+        } elseif($verify["reason"] == "username") {
+            header("location: login?error=username");
+            myDie($verify);
+        } elseif($verify["reason"] == "email") {
+            header("location: login?error=email");
             myDie($verify);
         }
-
         break;
     default:
         die(json_encode(array("error" => true)));
 }
-
 
 function myDie($array)
 {
