@@ -10,6 +10,7 @@
   "require": {
     "filp/whoops": "^2.14",
     "ext-pdo": "*",
-    "maximebf/debugbar": "1.*"
+    "maximebf/debugbar": "1.*",
+    "guzzlehttp/guzzle": "^7.0"
   }
 }

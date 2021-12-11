@@ -3,9 +3,6 @@
 if ($isLogged){
     echo "isloged";
     echo $user->user["username"];
-}else{
-    echo "isnotLogged - A";
-
 }
 
 ?>

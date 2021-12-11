@@ -56,6 +56,9 @@ search_input.addEventListener("keydown", () => {
     at_icon.classList.add(hidden);
 })
 
+const usernameInput = document.getElementById("inputUsername");
+const usernameValidation = document.getElementById("usernameValidation");
+
 
 function register() {
     var email = $("#inputEmail").val();
@@ -77,7 +80,16 @@ function register() {
     $.ajax(settings).done(function (response) {
         response = JSON.parse(response);
         if (response.error) {
-            //handle mert (response.reason)
+            if (response.reason === 'email') {
+                console.log("email -> ", response)
+                showSmall(emailValidation);
+                setErrorFor(emailInput, "Email zaten bulunmakta!");
+
+            } else if (response.reason === "username") {
+                showSmall(usernameValidation);
+                setErrorFor(usernameInput, "Username zaten bulunmakta!");
+
+            }
         } else {
             setCookie("__token__", response.token, 10);
         }
@@ -107,28 +119,25 @@ function login() {
             setCookie("__token__", response.token, 10);
         } else {
 
-            //handle mert (response.)
+            $(".loginStatus").text("Giriş yapılamadı.");
         }
 
     });
 }
 
-const usernameInput = document.getElementById("inputUsername");
-const usernameValidation = document.getElementById("usernameValidation");
-
-usernameInput.addEventListener("keyup", () =>{
+usernameInput.addEventListener("keyup", () => {
     usernameInputValue = usernameInput.value;
 
-    if(usernameInputValue.length < 0 || usernameInputValue.length > 30) {
+    if (usernameInputValue.length < 0 || usernameInputValue.length > 30) {
         showSmall(usernameValidation);
         setErrorFor(usernameInput, "0-30 olması lzm");
-    } else if(usernameInputValue.length == 0 ){
+    } else if (usernameInputValue.length == 0) {
         showSmall(usernameValidation);
         setErrorFor(usernameInput, "Boş olamaz");
-    } else if(!usernameInputValue.match(/^[a-zA-Z0-9._]+$/)){
+    } else if (!usernameInputValue.match(/^[a-zA-Z0-9._]+$/)) {
         showSmall(usernameValidation);
         setErrorFor(usernameInput, ">£#$½§ olmaz yawrum");
-    } else{
+    } else {
         hideSmall(usernameValidation);
     }
 })
@@ -136,13 +145,13 @@ usernameInput.addEventListener("keyup", () =>{
 const emailInput = document.getElementById("inputEmail");
 const emailValidation = document.getElementById("emailValidation");
 
-emailInput.addEventListener("keyup", () =>{
+emailInput.addEventListener("keyup", () => {
     emailInputValue = emailInput.value;
 
-    if(!emailInputValue.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)){
+    if (!emailInputValue.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) {
         showSmall(emailValidation);
         setErrorFor(emailInput, "No way! This e mail can't be real");
-    } else{
+    } else {
         hideSmall(emailValidation);
     }
 })
@@ -150,23 +159,23 @@ emailInput.addEventListener("keyup", () =>{
 const passInput = document.getElementById("inputPassword");
 const passValidation = document.getElementById("passValidation");
 
-passInput.addEventListener("keyup", () =>{
+passInput.addEventListener("keyup", () => {
     passInputValue = passInput.value;
 
-    if(passInputValue.length < 5 || passInputValue.length > 31){
+    if (passInputValue.length < 5 || passInputValue.length > 31) {
         showSmall(passValidation);
         setErrorFor(passInput, "5-31 olcak");
-    } else{
+    } else {
         hideSmall(passValidation);
     }
 })
 
-function hideSmall(small){
+function hideSmall(small) {
     small.classList.add("hidden");
     small.classList.remove("d-flex");
 }
 
-function showSmall(small){
+function showSmall(small) {
     small.classList.remove("hidden");
     small.classList.add("d-flex");
 }

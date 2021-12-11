@@ -1,12 +1,3 @@
-
-<?php
-if ($isLogged){
-    echo "isloged";
-    echo $user->user["username"];
-}else{
-    ?>
-
-
 <div class="container" style="color: #fff;">
     <div class="row">
         <div class="col-12 col-md-6 mt-3">
@@ -22,25 +13,18 @@ if ($isLogged){
                             <label class="form-label">Password</label>
                             <input class="form-control" type="password" id="inputPasswordLogin" placeholder="******">
 
-                            <!-- <small id="passwordHelp" class="text-danger">
-                                The email address or password is incorrect.
-                            </small> -->
+                         <small id="passwordHelp" class="text-danger loginStatus d-flex">
 
-                            <?php
-                            if(isset($_GET["error"])){
-                                if($_GET["error"]=="incorrect"){
-                                    echo '<small id="passwordHelp" class="text-danger d-flex">
-                                The email address or password is incorrect.
-                            </small>';
-                                }
-                            }
-                            ?>
+                            </small>
+
+
                         </div>
                         <a href="#" style="padding-top: 0">
                             <sub>Forgot your password?</sub>
                         </a>
                     </div>
                 </div>
+
                 <button type="button"
                         class="btn btn-outline-primary start-btn green-border green-text fw-bold" onclick="login()">
                     Login
@@ -63,8 +47,8 @@ if ($isLogged){
                             </small> -->
 
                             <?php
-                            if(isset($_GET["error"])){
-                                if($_GET["error"]=="email"){
+                            if (isset($_GET["error"])) {
+                                if ($_GET["error"] == "email") {
                                     echo '<small id="passwordHelp" class="text-danger">
                                 The email already in use.
                             </small>';
@@ -79,8 +63,8 @@ if ($isLogged){
                             <small id="usernameValidation" class="text-danger d-flex"></small>
 
                             <?php
-                            if(isset($_GET["error"])){
-                                if($_GET["error"]=="username"){
+                            if (isset($_GET["error"])) {
+                                if ($_GET["error"] == "username") {
                                     echo '<small id="passwordHelp" class="text-danger d-flex">
                                 The username already in use.
                             </small>';
@@ -108,7 +92,4 @@ if ($isLogged){
         </div>
     </div>
 </div>
-    <?php
-}
-?>
 
