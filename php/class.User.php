@@ -50,8 +50,11 @@ class User
         }
     }
 
-    public function checkLoginWithToken($token)
+    public function checkLoginWithToken($token = "empty")
     {
+        if ($token == "empty") {
+            $token = $_COOKIE[COOKIE_NAME];
+        }
         $sql = $this->db->prepare("select id from users where token = :tkn");
         $sql->execute(array(
             "tkn" => $token

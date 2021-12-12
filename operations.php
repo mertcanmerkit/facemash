@@ -24,10 +24,20 @@ switch ($operation) {
             myDie($database->addUser($_POST));
         }
         myDie($verify);
+        break;
+    case "addCategory":
+        $database = new DataBase();
+        $user = new User($database->getDb());
+        $category = new Category($database->getDb(),$user);
+        if ($user->checkLoginWithToken()) {
+            $category->addCategory($_POST["categoryName"], $_POST["firstUsername"]);
+        } else {
+            myDie(array("error" => true, "reason" => "Please Login."));
+        }
 
         break;
     default:
-        die(json_encode(array("error" => true)));
+        die(json_encode(array("error" => true, "reason" => "unexpected operation")));
 }
 
 function myDie($array)

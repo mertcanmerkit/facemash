@@ -18,17 +18,11 @@
 
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon3">instagram.com/</span>
-                            <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3"
+                            <input type="text" class="form-control" id="firstUsername" aria-describedby="basic-addon3"
                                    placeholder="username">
                         </div>
 
-                        <label class="form-label">Second Photo</label>
 
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="basic-addon3">instagram.com/</span>
-                            <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3"
-                                   placeholder="username">
-                        </div>
                         <small class="mb-3 text-break">Profile photos will be used for
                             voting.</small>
                         <!-- <small id="passwordHelp" class="text-danger">
@@ -38,7 +32,7 @@
                     </div>
                 </div>
                 <button type="button"
-                        class="btn btn-outline-primary start-btn blue-border blue-text fw-bold">Create
+                        class="btn btn-outline-primary start-btn blue-border blue-text fw-bold" onclick="addCategory()">Create
                 </button>
             </div>
         </div>

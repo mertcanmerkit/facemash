@@ -55,7 +55,17 @@ class DataBase
 
     public function addNewImage($igUserName)
     {
-        $sth = $this->db->prepare("insert into ");
+        $user = new User($this->db);
+        if (!$user->checkLoginWithToken($_COOKIE[COOKIE_NAME])) {
+            die("error for login");
+        }
+
+        $sth = $this->db->prepare("insert into images(username,adder) values(:username,:adder)");
+        $sth->execute(array(
+            "username" => $igUserName,
+            "adder" => $user->getUser()["id"]
+        ));
+        return $this->db->lastInsertId();
     }
 
 }

@@ -6,5 +6,5 @@ include __DIR__ . "/../vendor/autoload.php";
 include __DIR__ . "/class.Image.php";
 include __DIR__ . "/include.php";
 header('Content-type: image/png');
-$image = new Image($_GET["igname"]);
+$image = new Image($_GET["name"]);
 echo $image->getImage();

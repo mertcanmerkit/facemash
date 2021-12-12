@@ -193,3 +193,30 @@ function setCookie(cname, cvalue, exdays) {
     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
 
+
+function addCategory() {
+    var categoryName = $("#inputCategoryName").val();
+    var firstUsername = $("#firstUsername").val();
+    var settings = {
+        "url": "operations.php",
+        "method": "POST",
+        "timeout": 0,
+        "headers": {
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        "processData": false,
+        "mimeType": "multipart/form-data",
+        "contentType": false,
+        "data": "firstUsername=" + firstUsername + "&categoryName=" + categoryName + "&operation=addCategory"
+    };
+
+    $.ajax(settings).done(function (response) {
+        response = JSON.parse(response);
+        if (response.error) {
+
+        } else {
+
+        }
+
+    });
+}

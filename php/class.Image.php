@@ -5,6 +5,7 @@ class Image
     private $igUserName;
     private $conn;
     private $db;
+    public $imageId = null;
 
     public function __construct($igUserName)
     {
@@ -29,7 +30,7 @@ class Image
                 }
                 $file = file_get_contents($imageUri);
                 file_put_contents(__DIR__ . "/../assets/InstagramProfilePictures/" . $this->igUserName . ".jpg", $file);
-                $this->db->addNewImage($this->igUserName);
+                $this->imageId = $this->db->addNewImage($this->igUserName);
 
                 return $file;
             }

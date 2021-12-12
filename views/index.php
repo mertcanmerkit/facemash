@@ -35,7 +35,7 @@ if ($isLogged){
                         <div class="col-md-6 mb-3">
 
                             <a href="" class="card-a">
-                                <img src="views/img/pp/pp%20(2).jpg" class="card__image" alt=""/>
+                                <img src="views/img/pp/pp%20(1).jpg" class="card__image" alt=""/>
                                 <div class="card__overlay">
                                     <div class="card__header">
                                         <img class="card__thumb" src="views/img/pp/pp%20(2).jpg" alt=""/>
@@ -95,7 +95,7 @@ if ($isLogged){
                                         <img src="views/img/pp/pp%20(1).jpg" class="card-img" alt="...">
                                     </div>
                                     <div class="col-4">
-                                        <img src="views/img/pp/pp%20(2).jpg" class="card-img" alt="...">
+                                        <img src="php/Image.php?name=javaci" class="card-img" alt="...">
                                     </div>
                                     <div class="col-4">
                                         <img src="views/img/pp/pp%20(3).jpg" class="card-img" alt="...">
