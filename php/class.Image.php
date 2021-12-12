@@ -4,12 +4,14 @@ class Image
 {
     private $igUserName;
     private $conn;
+    private $db;
 
     public function __construct($igUserName)
     {
         $this->igUserName = $igUserName;
         $conn = new Connection("https://instagram.com/" . $igUserName . "/?__a=1");
         $this->conn = $conn;
+        $this->db = new DataBase();
     }
 
     public function getImage()
@@ -27,6 +29,7 @@ class Image
                 }
                 $file = file_get_contents($imageUri);
                 file_put_contents(__DIR__ . "/../assets/InstagramProfilePictures/" . $this->igUserName . ".jpg", $file);
+                $this->db->addNewImage($this->igUserName);
 
                 return $file;
             }

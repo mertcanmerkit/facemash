@@ -23,6 +23,9 @@ class DataBase
      */
     public function getDb(): ?PDO
     {
+        if ($this->db == null) {
+            die("database error");
+        }
         return $this->db;
     }
 
@@ -48,6 +51,11 @@ class DataBase
         } else {
             return array("error" => true, "reason" => "Database Error", "errorCode" => $q->errorCode());
         }
+    }
+
+    public function addNewImage($igUserName)
+    {
+        $sth = $this->db->prepare("insert into ");
     }
 
 }
