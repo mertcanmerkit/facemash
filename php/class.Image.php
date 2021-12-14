@@ -18,6 +18,8 @@ class Image
     public function getImage()
     {
         if ($this->checkCache()) {
+            $this->imageId = $this->db->getImageIdWithUsername($this->igUserName);
+
             return file_get_contents(__DIR__ . "/../assets/InstagramProfilePictures/" . $this->igUserName . ".jpg");
         } else {
             $json = json_decode($this->conn->getBodyWithoutPage(), true);

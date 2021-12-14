@@ -53,7 +53,7 @@ class User
     public function checkLoginWithToken($token = "empty")
     {
         if ($token == "empty") {
-            $token = $_COOKIE[COOKIE_NAME];
+            $token = @$_COOKIE[COOKIE_NAME];
         }
         $sql = $this->db->prepare("select id from users where token = :tkn");
         $sql->execute(array(
@@ -102,7 +102,9 @@ class User
     {
         $sth = $this->db->prepare("select * from users where token = ?");
         $sth->execute(array($this->getToken()));
-        return $sth->fetch(PDO::FETCH_ASSOC);
+        $user = $sth->fetch(PDO::FETCH_ASSOC);
+        $this->user = $user;
+        return $user;
     }
 
     /**
@@ -110,6 +112,9 @@ class User
      */
     public function getToken()
     {
+        if ($this->token == null){
+            $this->token = $_COOKIE[COOKIE_NAME];
+        }
         return $this->token;
     }
 

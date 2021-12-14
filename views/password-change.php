@@ -14,7 +14,8 @@
                 </div>
 
                 <button type="button"
-                        class="btn btn-outline-primary start-btn green-border green-text fw-bold" onclick="passwordChange()">
+                        class="btn btn-outline-primary start-btn green-border green-text fw-bold"
+                        onclick="passwordChange()">
                     Change
                 </button>
             </div>

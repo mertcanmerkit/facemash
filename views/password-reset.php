@@ -11,13 +11,15 @@
                         </div>
                         <small id="passwordHelp" class="text-danger sendMailStatus d-flex">
 
-                            </small>
-                        <small>Enter the e-mail address associated with your account. Click submit to have a password reset link e-mailed to you.</small>
+                        </small>
+                        <small>Enter the e-mail address associated with your account. Click submit to have a password
+                            reset link e-mailed to you.</small>
                     </div>
                 </div>
 
                 <button type="button"
-                        class="btn btn-outline-primary start-btn green-border green-text fw-bold" onclick="passwordReset()">
+                        class="btn btn-outline-primary start-btn green-border green-text fw-bold"
+                        onclick="passwordReset()">
                     Send Reset E-Mail
                 </button>
             </div>

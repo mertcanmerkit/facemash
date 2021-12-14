@@ -6,15 +6,18 @@ class Category
      * @var PDO
      */
     private $db = null;
-    private $imageId = null;
+    private $user = null;
+    //private $imageId = null;
 
     /**
      * @param $db
      * @param $user User
      */
-    public function __construct($db, $user)
+    public function __construct($db, $user = null)
     {
-        $this->user = $user->getUser();
+        if ($user != null) {
+            $this->user = $user->getUser();
+        }
         $this->db = $db;
     }
 
@@ -44,7 +47,7 @@ class Category
         $sth->execute(array($categoryName));
         $sth->fetch(PDO::FETCH_ASSOC);
         $rowCount = $sth->rowCount();
-        if ($rowCount > 0) {
+        if ($rowCount <= 0) {
             return true;
         } else {
             return false;
@@ -58,11 +61,11 @@ class Category
         $sth->fetch();
 
         $categoryId = $this->db->lastInsertId();
-        $sthCategoryData = $this->db->prepare("insert into categoryData (category_id,imageId) values (:category_id, :imageId)");
+        $sthCategoryData = $this->db->prepare("insert into categoryData (categoryId,imageId) values (:category_id, :imageId)");
         $sthCategoryData->execute(array("category_id" => $categoryId, "imageId" => $imageId));
 
 
-        return "";
+        return true;
     }
 
     private function createImage($firstUsername)
@@ -78,6 +81,55 @@ class Category
             return false;
         }
 
+    }
+
+    public function getCategoriesForIndex($page)
+    {
+        if ($page != 1) {
+            $limit = (($page - 1) * 16) . "," ($page * 16);
+        } else {
+            $limit = "0,16";
+        }
+
+        $sth = $this->db->prepare(" select distinct categoryId, SUM(count) as sumCount from categoryData group by categoryId order by sumCount desc limit " . $limit);
+        $sth->execute();
+        $fth = $sth->fetchAll(PDO::FETCH_ASSOC);
+        $renderedData = "";
+        foreach ($fth as $categoryData) {
+            $categoryId = $categoryData["categoryId"];
+            $categoryImages = $this->getCategoryImages($categoryId);
+            $categoryName = $this->getCategoryNameWithCategoryId($categoryId);
+            $categoryCard = new CategoryCard($categoryId, $categoryImages, $categoryName);
+            $renderedData .= $categoryCard->render();
+        }
+        return $renderedData;
+
+    }
+
+    private function getCategoryImages($categoryId)
+    {
+        $sth = $this->db->prepare("select * from categoryData where categoryId = :catid");
+        $sth->execute(array("catid" => $categoryId));
+        $fth = $sth->fetchAll(PDO::FETCH_ASSOC);
+        $arr = array();
+        foreach ($fth as $categoryData) {
+            array_push($arr, $this->getImageWithImageId($categoryData["imageId"]));
+        }
+        return $arr;
+    }
+
+    private function getCategoryNameWithCategoryId($categoryId)
+    {
+        $sth = $this->db->prepare("select name from categories where id = :catid");
+        $sth->execute(array("catid" => $categoryId));
+        return $sth->fetch(PDO::FETCH_ASSOC)["name"];
+    }
+
+    private function getImageWithImageId($imageId)
+    {
+        $sth = $this->db->prepare("select username from images where id = :id");
+        $sth->execute(array("id" => $imageId));
+        return $sth->fetch(PDO::FETCH_ASSOC)["username"];
     }
 
 }

@@ -6,3 +6,4 @@ include __DIR__ . "/class.DataBase.php";
 include __DIR__ . "/class.User.php";
 include __DIR__ . "/class.Category.php";
 include __DIR__ . "/class.Image.php";
+include __DIR__ . "/class.CategoryCard.php";

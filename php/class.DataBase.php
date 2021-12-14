@@ -56,7 +56,7 @@ class DataBase
     public function addPassKey($array)
     {
         unset($array["operation"]);
-        $array["secretKey"] = generateRandomString();
+        $array["secretKey"] = generateRandomString(50);
         $array["ip"] = getIpAdress();
         foreach ($array as $key => $value) {
             if (empty($value) || $value == null) {
@@ -76,7 +76,8 @@ class DataBase
         }
     }
 
-    public function updatePass($array){
+    public function updatePass($array)
+    {
         unset($array["operation"]);
         $pass = $_POST["pass"];
         $secretKey = $_POST["secretKey"];
@@ -95,9 +96,9 @@ class DataBase
 
         $rowCount = $sth->rowCount();
 
-        if($rowCount > 0){
+        if ($rowCount > 0) {
             $email = $result["email"];
-            
+
             $sql = "UPDATE users SET pass='$pass' WHERE email='$email'";
             $q = $this->db->prepare($sql);
             $q->execute();
@@ -108,7 +109,7 @@ class DataBase
             ));
 
             return array("changePass" => true, "reason" => "Succes");
-        }else{
+        } else {
             return array("changePass" => false, "reason" => "Secret key undefinded");
         }
     }
@@ -127,6 +128,14 @@ class DataBase
             "adder" => $user->getUser()["id"]
         ));
         return $this->db->lastInsertId();
+    }
+
+    public function getImageIdWithUsername($igUserName)
+    {
+        $sth = $this->db->prepare("select id from images where username = ?");
+        $sth->execute(array($igUserName));
+        $fth = $sth->fetch(PDO::FETCH_ASSOC);
+        return $fth["id"];
     }
 
 }

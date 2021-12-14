@@ -159,7 +159,9 @@ function query_string(variable) {
     var vars = query.split("&");
     for (var i = 0; i < vars.length; i++) {
         var pair = vars[i].split("=");
-        if (pair[0] == variable) { return pair[1]; }
+        if (pair[0] == variable) {
+            return pair[1];
+        }
     }
     return (false);
 }
@@ -182,6 +184,7 @@ function passwordChange() {
 
     $.ajax(settings).done(function (response) {
         response = JSON.parse(response);
+
         if (response.changePass) {
             // success
             $(".sendMailStatus").text("GÖNDERİLDİ");
@@ -194,52 +197,59 @@ function passwordChange() {
     });
 }
 
+if (usernameInput != null) {
+    usernameInput.addEventListener("keyup", () => {
+        usernameInputValue = usernameInput.value;
 
+        if (usernameInputValue.length < 0 || usernameInputValue.length > 30) {
+            showSmall(usernameValidation);
+            setErrorFor(usernameInput, "0-30 olması lzm");
+        } else if (usernameInputValue.length == 0) {
+            showSmall(usernameValidation);
+            setErrorFor(usernameInput, "Boş olamaz");
+        } else if (!usernameInputValue.match(/^[a-zA-Z0-9._]+$/)) {
+            showSmall(usernameValidation);
+            setErrorFor(usernameInput, ">£#$½§ olmaz yawrum");
+        } else {
+            hideSmall(usernameValidation);
+        }
+    })
+}
 
-usernameInput.addEventListener("keyup", () => {
-    usernameInputValue = usernameInput.value;
-
-    if (usernameInputValue.length < 0 || usernameInputValue.length > 30) {
-        showSmall(usernameValidation);
-        setErrorFor(usernameInput, "0-30 olması lzm");
-    } else if (usernameInputValue.length == 0) {
-        showSmall(usernameValidation);
-        setErrorFor(usernameInput, "Boş olamaz");
-    } else if (!usernameInputValue.match(/^[a-zA-Z0-9._]+$/)) {
-        showSmall(usernameValidation);
-        setErrorFor(usernameInput, ">£#$½§ olmaz yawrum");
-    } else {
-        hideSmall(usernameValidation);
-    }
-})
 
 const emailInput = document.getElementById("inputEmail");
 const emailValidation = document.getElementById("emailValidation");
+if (emailInput != null && emailValidation != null) {
 
-emailInput.addEventListener("keyup", () => {
-    emailInputValue = emailInput.value;
+    emailInput.addEventListener("keyup", () => {
+        emailInputValue = emailInput.value;
 
-    if (!emailInputValue.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) {
-        showSmall(emailValidation);
-        setErrorFor(emailInput, "No way! This e mail can't be real");
-    } else {
-        hideSmall(emailValidation);
-    }
-})
+        if (!emailInputValue.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) {
+            showSmall(emailValidation);
+            setErrorFor(emailInput, "No way! This e mail can't be real");
+        } else {
+            hideSmall(emailValidation);
+        }
+    })
+
+}
+
 
 const passInput = document.getElementById("inputPassword");
 const passValidation = document.getElementById("passValidation");
+if (passInput && passValidation) {
 
-passInput.addEventListener("keyup", () => {
-    passInputValue = passInput.value;
+    passInput.addEventListener("keyup", () => {
+        passInputValue = passInput.value;
 
-    if (passInputValue.length < 5 || passInputValue.length > 31) {
-        showSmall(passValidation);
-        setErrorFor(passInput, "5-31 olcak");
-    } else {
-        hideSmall(passValidation);
-    }
-})
+        if (passInputValue.length < 5 || passInputValue.length > 31) {
+            showSmall(passValidation);
+            setErrorFor(passInput, "5-31 olcak");
+        } else {
+            hideSmall(passValidation);
+        }
+    })
+}
 
 function hideSmall(small) {
     small.classList.add("hidden");
@@ -264,7 +274,6 @@ function setCookie(cname, cvalue, exdays) {
     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
 
-
 function addCategory() {
     var categoryName = $("#inputCategoryName").val();
     var firstUsername = $("#firstUsername").val();
@@ -283,6 +292,9 @@ function addCategory() {
 
     $.ajax(settings).done(function (response) {
         response = JSON.parse(response);
+        console.log(response);
+
+        // *** **** handle mert please handle
         if (response.error) {
 
         } else {
@@ -291,3 +303,32 @@ function addCategory() {
 
     });
 }
+
+
+function getCategories(page) {
+    var settings = {
+        "url": "operations.php",
+        "method": "POST",
+        "timeout": 0,
+        "headers": {
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        "processData": false,
+        "mimeType": "multipart/form-data",
+        "contentType": false,
+        "data": "page=" + page + "&operation=getCategory"
+    };
+
+    $.ajax(settings).done(function (response) {
+        $(".categories-out").append(response);
+        $('.carousel').carousel();
+    });
+
+
+}
+
+$(document).ready(function () {
+    if ($(".categories-out")[0]) {
+        getCategories(1);
+    }
+});
