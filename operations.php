@@ -25,6 +25,26 @@ switch ($operation) {
         }
         myDie($verify);
         break;
+    case "reset":
+        $database = new DataBase();
+        $user = new User($database->getDb());
+        $verify = $user->verifyCredentials($_POST, 1);
+        if ($verify["error"] && filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
+            myDie($database->addPassKey($_POST));
+            // Sıfırlama maili gönder.
+            // myDie(array("reset" => true, "reason" => "Mail sended"));
+
+        }
+        myDie(array("reset" => false, "reason" => "Mail undefined"));
+        break;
+    case "changePass":
+        $database = new DataBase();
+        $user = new User($database->getDb());
+        if(preg_match('/^.{5,31}$/', $_POST["pass"])){
+            myDie($database->updatePass($_POST));
+        }
+        myDie(array("changePass" => false, "reason" => "password problem"));
+        break;
     case "addCategory":
         $database = new DataBase();
         $user = new User($database->getDb());

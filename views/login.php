@@ -19,7 +19,7 @@
 
 
                         </div>
-                        <a href="#" style="padding-top: 0">
+                        <a href="password-reset" style="padding-top: 0">
                             <sub>Forgot your password?</sub>
                         </a>
                     </div>

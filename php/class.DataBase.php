@@ -53,6 +53,67 @@ class DataBase
         }
     }
 
+    public function addPassKey($array)
+    {
+        unset($array["operation"]);
+        $array["secretKey"] = generateRandomString();
+        $array["ip"] = getIpAdress();
+        foreach ($array as $key => $value) {
+            if (empty($value) || $value == null) {
+                return array("error" => true, "reason" => "Check all inputs");
+            }
+        }
+        $fields = array_keys($array); // here you have to trust your field names!
+        $values = array_values($array);
+        $fieldlist = implode(',', $fields);
+        $qs = str_repeat("?,", count($fields) - 1);
+        $sql = "insert into passwordReset($fieldlist) values(${qs}?)";
+        $q = $this->db->prepare($sql);
+        if ($q->execute($values)) {
+            return array("reset" => true, "secretKey" => $array["secretKey"]);
+        } else {
+            return array("error" => true, "reason" => "Database Error", "errorCode" => $q->errorCode());
+        }
+    }
+
+    public function updatePass($array){
+        unset($array["operation"]);
+        $pass = $_POST["pass"];
+        $secretKey = $_POST["secretKey"];
+
+        foreach ($array as $key => $value) {
+            if (empty($value) || $value == null) {
+                return array("error" => true, "reason" => "Check all inputs");
+            }
+        }
+
+        $sth = $this->db->prepare("SELECT email FROM passwordReset WHERE secretKey = :secretKey");
+        $sth->execute(array(
+            "secretKey" => $secretKey
+        ));
+        $result = $sth->fetch(PDO::FETCH_ASSOC);
+
+        $rowCount = $sth->rowCount();
+
+        if($rowCount > 0){
+            $email = $result["email"];
+            
+            $sql = "UPDATE users SET pass='$pass' WHERE email='$email'";
+            $q = $this->db->prepare($sql);
+            $q->execute();
+
+            $sth = $this->db->prepare("DELETE FROM passwordReset WHERE secretKey = :secretKey");
+            $sth->execute(array(
+                "secretKey" => $secretKey
+            ));
+
+            return array("changePass" => true, "reason" => "Succes");
+        }else{
+            return array("changePass" => false, "reason" => "Secret key undefinded");
+        }
+    }
+
+
     public function addNewImage($igUserName)
     {
         $user = new User($this->db);

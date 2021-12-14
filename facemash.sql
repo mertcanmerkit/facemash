@@ -2,10 +2,10 @@
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Anamakine: localhost:8889
--- Üretim Zamanı: 12 Ara 2021, 19:39:43
--- Sunucu sürümü: 5.7.34
--- PHP Sürümü: 8.0.8
+-- Host: localhost
+-- Generation Time: Dec 14, 2021 at 03:19 PM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 8.0.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Veritabanı: `facemash`
+-- Database: `facemash`
 --
 
 -- --------------------------------------------------------
 
 --
--- Tablo için tablo yapısı `categories`
+-- Table structure for table `categories`
 --
 
 CREATE TABLE `categories` (
@@ -33,30 +33,23 @@ CREATE TABLE `categories` (
   `name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Tablo döküm verisi `categories`
---
-
-INSERT INTO `categories` (`id`, `adder`, `name`) VALUES
-(1, 27, 'sarışınlar');
-
 -- --------------------------------------------------------
 
 --
--- Tablo için tablo yapısı `categoryData`
+-- Table structure for table `categoryData`
 --
 
 CREATE TABLE `categoryData` (
   `id` int(11) NOT NULL,
   `categoryId` int(11) NOT NULL,
   `imageId` int(11) NOT NULL,
-  `count` int(11) NOT NULL DEFAULT '0'
+  `count` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Tablo için tablo yapısı `categoryVotes`
+-- Table structure for table `categoryVotes`
 --
 
 CREATE TABLE `categoryVotes` (
@@ -69,7 +62,7 @@ CREATE TABLE `categoryVotes` (
 -- --------------------------------------------------------
 
 --
--- Tablo için tablo yapısı `images`
+-- Table structure for table `images`
 --
 
 CREATE TABLE `images` (
@@ -79,7 +72,7 @@ CREATE TABLE `images` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Tablo döküm verisi `images`
+-- Dumping data for table `images`
 --
 
 INSERT INTO `images` (`id`, `username`, `adder`) VALUES
@@ -88,7 +81,20 @@ INSERT INTO `images` (`id`, `username`, `adder`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tablo için tablo yapısı `users`
+-- Table structure for table `passwordReset`
+--
+
+CREATE TABLE `passwordReset` (
+  `id` int(11) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `secretKey` varchar(255) NOT NULL,
+  `ip` varchar(128) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -101,25 +107,25 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Tablo döküm verisi `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `pass`, `token`, `ip`) VALUES
 (27, '@hakan', 'hakan@hakan.hakan', 'hakan', 'xXGhmYitMv89', '::1');
 
 --
--- Dökümü yapılmış tablolar için indeksler
+-- Indexes for dumped tables
 --
 
 --
--- Tablo için indeksler `categories`
+-- Indexes for table `categories`
 --
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`),
   ADD KEY `category_user_id` (`adder`);
 
 --
--- Tablo için indeksler `categoryData`
+-- Indexes for table `categoryData`
 --
 ALTER TABLE `categoryData`
   ADD PRIMARY KEY (`id`),
@@ -127,20 +133,26 @@ ALTER TABLE `categoryData`
   ADD KEY `ctgey_image_id` (`imageId`);
 
 --
--- Tablo için indeksler `categoryVotes`
+-- Indexes for table `categoryVotes`
 --
 ALTER TABLE `categoryVotes`
   ADD PRIMARY KEY (`id`);
 
 --
--- Tablo için indeksler `images`
+-- Indexes for table `images`
 --
 ALTER TABLE `images`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`adder`);
 
 --
--- Tablo için indeksler `users`
+-- Indexes for table `passwordReset`
+--
+ALTER TABLE `passwordReset`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
@@ -148,58 +160,64 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `email_unique` (`email`);
 
 --
--- Dökümü yapılmış tablolar için AUTO_INCREMENT değeri
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- Tablo için AUTO_INCREMENT değeri `categories`
+-- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- Tablo için AUTO_INCREMENT değeri `categoryData`
+-- AUTO_INCREMENT for table `categoryData`
 --
 ALTER TABLE `categoryData`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- Tablo için AUTO_INCREMENT değeri `categoryVotes`
+-- AUTO_INCREMENT for table `categoryVotes`
 --
 ALTER TABLE `categoryVotes`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- Tablo için AUTO_INCREMENT değeri `images`
+-- AUTO_INCREMENT for table `images`
 --
 ALTER TABLE `images`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- Tablo için AUTO_INCREMENT değeri `users`
+-- AUTO_INCREMENT for table `passwordReset`
+--
+ALTER TABLE `passwordReset`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
--- Dökümü yapılmış tablolar için kısıtlamalar
+-- Constraints for dumped tables
 --
 
 --
--- Tablo kısıtlamaları `categories`
+-- Constraints for table `categories`
 --
 ALTER TABLE `categories`
   ADD CONSTRAINT `category_user_id` FOREIGN KEY (`adder`) REFERENCES `users` (`id`);
 
 --
--- Tablo kısıtlamaları `categoryData`
+-- Constraints for table `categoryData`
 --
 ALTER TABLE `categoryData`
   ADD CONSTRAINT `ctgey_image_id` FOREIGN KEY (`imageId`) REFERENCES `images` (`id`),
   ADD CONSTRAINT `ctgry_data_id` FOREIGN KEY (`categoryId`) REFERENCES `categories` (`id`);
 
 --
--- Tablo kısıtlamaları `images`
+-- Constraints for table `images`
 --
 ALTER TABLE `images`
   ADD CONSTRAINT `user_id` FOREIGN KEY (`adder`) REFERENCES `users` (`id`);

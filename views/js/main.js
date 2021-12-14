@@ -125,6 +125,77 @@ function login() {
     });
 }
 
+function passwordReset() {
+    var email = $("#inputEmailReset").val();
+    var settings = {
+        "url": "operations.php",
+        "method": "POST",
+        "timeout": 0,
+        "headers": {
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        "processData": false,
+        "mimeType": "multipart/form-data",
+        "contentType": false,
+        "data": "email=" + email + "&operation=reset"
+    };
+
+    $.ajax(settings).done(function (response) {
+        response = JSON.parse(response);
+        if (response.reset) {
+            // success
+            $(".sendMailStatus").text("GÖNDERİLDİ");
+
+        } else {
+
+            $(".sendMailStatus").text("Sıfırlama Maili Gönderilemedi.");
+        }
+
+    });
+}
+
+function query_string(variable) {
+    var query = window.location.search.substring(1);
+    var vars = query.split("&");
+    for (var i = 0; i < vars.length; i++) {
+        var pair = vars[i].split("=");
+        if (pair[0] == variable) { return pair[1]; }
+    }
+    return (false);
+}
+
+function passwordChange() {
+    secretKey = query_string('secretKey');
+    var pass = $("#inputNewPassword").val();
+    var settings = {
+        "url": "operations.php",
+        "method": "POST",
+        "timeout": 0,
+        "headers": {
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        "processData": false,
+        "mimeType": "multipart/form-data",
+        "contentType": false,
+        "data": "pass=" + pass + "&secretKey=" + secretKey + "&operation=changePass"
+    };
+
+    $.ajax(settings).done(function (response) {
+        response = JSON.parse(response);
+        if (response.changePass) {
+            // success
+            $(".sendMailStatus").text("GÖNDERİLDİ");
+
+        } else {
+
+            $(".sendMailStatus").text("Sıfırlama Maili Gönderilemedi.");
+        }
+
+    });
+}
+
+
+
 usernameInput.addEventListener("keyup", () => {
     usernameInputValue = usernameInput.value;
 
