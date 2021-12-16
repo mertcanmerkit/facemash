@@ -86,9 +86,11 @@ class Category
     public function getCategoriesForIndex($page)
     {
         if ($page != 1) {
-            $limit = (($page - 1) * 16) . "," ($page * 16);
+            $limitRow = $page * 8;
+            $limit = $limitRow . ",8";
+            sleep(2);
         } else {
-            $limit = "0,16";
+            $limit = "0,8";
         }
 
         $sth = $this->db->prepare(" select distinct categoryId, SUM(count) as sumCount from categoryData group by categoryId order by sumCount desc limit " . $limit);
@@ -115,7 +117,7 @@ class Category
         $fth = $sth->fetchAll(PDO::FETCH_ASSOC);
         $arr = array();
         foreach ($fth as $categoryData) {
-            array_push($arr, $this->getImageWithImageId($categoryData["imageId"]));
+            array_push($arr, encryptOrDecrypt($this->getImageWithImageId($categoryData["imageId"])));
         }
         return $arr;
     }

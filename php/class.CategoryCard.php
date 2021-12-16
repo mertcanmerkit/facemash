@@ -56,7 +56,7 @@ class CategoryCard
                         ';
             }
             $str .= '<div class="col-4 mb-3">
- <img src="/php/Image.php?name=' . $image . '" class="card-img" alt="' . $image . '">
+ <img src="/php/Image.php?name=' . $image . '" class="card-img" alt="' . encryptOrDecrypt($image, "decrypt") . '">
   </div>
   ';
 
@@ -86,7 +86,7 @@ class CategoryCard
         $rand_keys = array_rand($colorArray, 2);
         $color = $colorArray[$rand_keys[0]];
         if ($color == $this->lastColor) {
-           return $this->generateColor();
+            return $this->generateColor();
         }
         $this->lastColor = $color;
         return $color;

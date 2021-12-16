@@ -12,6 +12,8 @@
     "ext-pdo": "*",
     "maximebf/debugbar": "1.*",
     "guzzlehttp/guzzle": "^7.0",
-    "ext-json": "*"
+    "ext-json": "*",
+    "rych/phpass": "^2.0",
+    "ext-openssl": "*"
   }
 }

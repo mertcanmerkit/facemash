@@ -305,7 +305,26 @@ function addCategory() {
 }
 
 
+function createSpinner(where) {
+    if (where === "getCategories") {
+        $(".categories-out").append('<div class="d-flex spinner-border text-light getCategoriesSpinner" role="status">\n' +
+            '  <span class="sr-only">Loading...</span>\n' +
+            '</div>');
+    }
+}
+
+function deleteSpinner(where) {
+    if (where === "getCategories") {
+        $(".getCategoriesSpinner").remove();
+    }
+}
+
+var inRequest = false;
+var globalPage = 1;
+
 function getCategories(page) {
+    if (inRequest)
+        return;
     var settings = {
         "url": "operations.php",
         "method": "POST",
@@ -318,17 +337,27 @@ function getCategories(page) {
         "contentType": false,
         "data": "page=" + page + "&operation=getCategory"
     };
-
+    inRequest = true;
+    createSpinner("getCategories");
     $.ajax(settings).done(function (response) {
+        globalPage++;
+        deleteSpinner("getCategories");
+        inRequest = false;
         $(".categories-out").append(response);
         $('.carousel').carousel();
     });
-
-
 }
+
 
 $(document).ready(function () {
     if ($(".categories-out")[0]) {
-        getCategories(1);
+        getCategories(globalPage);
+        $(window).scroll(function () {
+            if ($(window).scrollTop() + $(window).height() == $(document).height()) {
+
+                getCategories(globalPage);
+            }
+        });
     }
 });
+
