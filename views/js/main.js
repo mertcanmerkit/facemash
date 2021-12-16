@@ -351,8 +351,11 @@ function getCategories(page) {
     inRequest = true;
     createSpinner("getCategories");
     $.ajax(settings).done(function (response) {
-        if (response === "")
+        if (response === ""){
+            deleteSpinner("getCategories");
             return
+
+        }
 
         globalPage++;
         deleteSpinner("getCategories");
