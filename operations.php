@@ -67,13 +67,3 @@ switch ($operation) {
     default:
         die(json_encode(array("error" => true, "reason" => "unexpected operation")));
 }
-
-function jsonDie($array)
-{
-    die(json_encode($array, JSON_PRETTY_PRINT));
-}
-
-function htmlDie($html)
-{
-    die($html);
-}

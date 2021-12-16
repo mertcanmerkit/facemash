@@ -8,7 +8,8 @@ function getIpAdress()
     return $_SERVER["REMOTE_ADDR"];
 }
 
-function generateRandomString($length = 12) {
+function generateRandomString($length = 12)
+{
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $charactersLength = strlen($characters);
     $randomString = '';
@@ -16,4 +17,14 @@ function generateRandomString($length = 12) {
         $randomString .= $characters[rand(0, $charactersLength - 1)];
     }
     return $randomString;
+}
+
+function jsonDie($array)
+{
+    die(json_encode($array, JSON_PRETTY_PRINT));
+}
+
+function htmlDie($html)
+{
+    die($html);
 }

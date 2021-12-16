@@ -1,3 +1,3 @@
 <?php
-$_GET["sef"] = "main";
+$_GET["sef"] = "index";
 include "route.php";
