@@ -95,11 +95,13 @@ class Category
         $sth->execute();
         $fth = $sth->fetchAll(PDO::FETCH_ASSOC);
         $renderedData = "";
+        $lastColor = "";
         foreach ($fth as $categoryData) {
             $categoryId = $categoryData["categoryId"];
             $categoryImages = $this->getCategoryImages($categoryId);
             $categoryName = $this->getCategoryNameWithCategoryId($categoryId);
-            $categoryCard = new CategoryCard($categoryId, $categoryImages, $categoryName);
+            $categoryCard = new CategoryCard($categoryId, $categoryImages, $categoryName, $lastColor);
+            $lastColor = $categoryCard->lastColor;
             $renderedData .= $categoryCard->render();
         }
         return $renderedData;

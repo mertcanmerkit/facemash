@@ -4,12 +4,14 @@ class CategoryCard
 {
 
     private $categoryId, $imagesArray, $name, $color;
+    public $lastColor;
 
-    public function __construct($categoryId, $imagesArray, $name)
+    public function __construct($categoryId, $imagesArray, $name, $lastColor)
     {
         $this->categoryId = $categoryId;
         $this->imagesArray = $imagesArray;
         $this->name = $name;
+        $this->lastColor = $lastColor;
         $this->color = $this->generateColor();
 
     }
@@ -46,7 +48,7 @@ class CategoryCard
                 <div class="carousel-item active">
                     <div class="card-body">
                         <div class="row">';
-            } else if (($i-1) % 6 == 0) {
+            } else if (($i - 1) % 6 == 0) {
                 $str .= '
                 </div></div></div><div class="carousel-item">
                     <div class="card-body">
@@ -82,8 +84,12 @@ class CategoryCard
     {
         $colorArray = array("blue", "yellow", "green", "pink", "red");
         $rand_keys = array_rand($colorArray, 2);
-
-        return $colorArray[$rand_keys[0]];
+        $color = $colorArray[$rand_keys[0]];
+        if ($color == $this->lastColor) {
+           return $this->generateColor();
+        }
+        $this->lastColor = $color;
+        return $color;
     }
 
 }
