@@ -34,28 +34,29 @@ const search_icon = document.getElementById("search-icon");
 const at_icon = document.getElementById("at-icon");
 const search_input = document.getElementById("search-input");
 
+if (search_icon) {
 
-search_icon.addEventListener("click", () => {
-    search_input.placeholder = "username";
-})
-search_input.addEventListener("focus", () => {
-    search_icon.classList.add(hidden);
-    at_icon.classList.remove(hidden);
-})
-search_input.addEventListener("blur", () => {
-    search_input.value = "";
-    if (body.scrollWidth <= 768) {
-        search_input.placeholder = "I'm going back!";
-    }
-    search_btn.classList.add(hidden);
-    search_icon.classList.remove(hidden);
-    at_icon.classList.add(hidden);
-})
-search_input.addEventListener("keydown", () => {
-    search_btn.classList.remove(hidden);
-    at_icon.classList.add(hidden);
-})
-
+    search_icon.addEventListener("click", () => {
+        search_input.placeholder = "username";
+    })
+    search_input.addEventListener("focus", () => {
+        search_icon.classList.add(hidden);
+        at_icon.classList.remove(hidden);
+    })
+    search_input.addEventListener("blur", () => {
+        search_input.value = "";
+        if (body.scrollWidth <= 768) {
+            search_input.placeholder = "I'm going back!";
+        }
+        search_btn.classList.add(hidden);
+        search_icon.classList.remove(hidden);
+        at_icon.classList.add(hidden);
+    })
+    search_input.addEventListener("keydown", () => {
+        search_btn.classList.remove(hidden);
+        at_icon.classList.add(hidden);
+    })
+}
 const usernameInput = document.getElementById("inputUsername");
 const usernameValidation = document.getElementById("usernameValidation");
 
@@ -322,9 +323,19 @@ function deleteSpinner(where) {
 var inRequest = false;
 var globalPage = 1;
 
+function checkNeedNewCategory() {
+    if ($(window).scrollTop() + $(window).height() == $(document).height()) {
+        getCategories(globalPage);
+    }
+    if ($(window).scrollTop() + $(window).height() < $(document).height() - 20) {
+        getCategories(globalPage);
+    }
+}
+
 function getCategories(page) {
     if (inRequest)
         return;
+    console.log("getCategories");
     var settings = {
         "url": "operations.php",
         "method": "POST",
@@ -340,14 +351,44 @@ function getCategories(page) {
     inRequest = true;
     createSpinner("getCategories");
     $.ajax(settings).done(function (response) {
+        if (response === "")
+            return
+
         globalPage++;
         deleteSpinner("getCategories");
         inRequest = false;
         $(".categories-out").append(response);
         $('.carousel').carousel();
+        checkNeedNewCategory();
     });
 }
 
+function addPhoto(id) {
+    var name = $(".addPhoto").val();
+    var settings = {
+        "url": "operations.php",
+        "method": "POST",
+        "timeout": 0,
+        "headers": {
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        "processData": false,
+        "mimeType": "multipart/form-data",
+        "contentType": false,
+        "data": "userName=" + name + "&categoryId=" + id + "&operation=addPhoto"
+    };
+
+    $.ajax(settings).done(function (response) {
+        response = JSON.parse(response);
+        console.log(response);
+        if (response.error) {
+
+        } else {
+
+        }
+
+    });
+}
 
 $(document).ready(function () {
     if ($(".categories-out")[0]) {

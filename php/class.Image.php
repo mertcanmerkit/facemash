@@ -45,4 +45,22 @@ class Image
         return file_exists(__DIR__ . "/../assets/InstagramProfilePictures/" . $this->igUserName . ".jpg");
     }
 
+    public function checkImageInDatabase($name)
+    {
+        $sth = $this->db->db->prepare("select id from images where username = ?");
+        $sth->execute(array($name));
+        $sth->fetch();
+        $rowCount = $sth->rowCount();
+        if ($rowCount > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function getErrorImage()
+    {
+        return file_get_contents(__DIR__ . "/../views/img/danger.jpg");
+    }
+
 }

@@ -122,11 +122,22 @@ class Category
         return $arr;
     }
 
-    private function getCategoryNameWithCategoryId($categoryId)
+    public function getCategoryNameWithCategoryId($categoryId)
     {
         $sth = $this->db->prepare("select name from categories where id = :catid");
         $sth->execute(array("catid" => $categoryId));
         return $sth->fetch(PDO::FETCH_ASSOC)["name"];
+    }
+
+    public function addImageToCategory($categoryId, $imageId)
+    {
+        $sth = $this->db->prepare("insert into categoryData (categoryId,imageId) values (?,?)");
+        $sth->execute(array(
+            $categoryId,
+            $imageId
+        ));
+        $sth->fetch();
+        return true;
     }
 
     private function getImageWithImageId($imageId)
@@ -135,5 +146,6 @@ class Category
         $sth->execute(array("id" => $imageId));
         return $sth->fetch(PDO::FETCH_ASSOC)["username"];
     }
+
 
 }

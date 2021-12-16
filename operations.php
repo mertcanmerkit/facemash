@@ -57,7 +57,31 @@ switch ($operation) {
         } else {
             jsonDie(array("error" => true, "reason" => "Please Login."));
         }
+        break;
+    case "addPhoto":
+        $database = new DataBase();
+        $user = new User($database->getDb());
+        if ($user->checkLoginWithToken()) {
+            if (isset($_POST["userName"]) && !empty($_POST["userName"])) {
+                $image = new Image($_POST["userName"]);
+                if ($image->getImage()) {
+                    $category = new Category($database->db, $user);
+                    $categoryName = $category->getCategoryNameWithCategoryId($_POST["categoryId"]);
+                    if (!empty($categoryName) && $categoryName) {
+                        if ($category->addImageToCategory($_POST["categoryId"], $image->imageId)) {
+                            jsonDie(array("error" => false));
+                        }
 
+                    }
+                    jsonDie(array("error" => false));
+                } else {
+                    jsonDie(array("error" => true, "reason" => "0x000454"));
+                }
+
+            }
+        } else {
+            jsonDie(array("error" => true, "reason" => "Please Login."));
+        }
         break;
     case "getCategory":
         $database = new DataBase();

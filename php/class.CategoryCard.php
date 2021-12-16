@@ -14,6 +14,7 @@ class CategoryCard
         $this->lastColor = $lastColor;
         $this->color = $this->generateColor();
 
+
     }
 
     public function render()
@@ -28,7 +29,7 @@ class CategoryCard
     {
         return '<div class="col-lg-3 col-md-4 col-sm-6 mt-3 mb-3">
     <div class="card card-shadow-' . $this->color . ' img-cards">
-        <h5 class="' . $this->color . '-text text-break" style="padding: 1rem 1rem 0rem 1rem;"> ' . $this->name . '<a href="add-photo">
+        <h5 class="' . $this->color . '-text text-break" style="padding: 1rem 1rem 0rem 1rem;"> ' . $this->name . '<a href="add-photo?id=' . $this->categoryId . '">
                 <i class="far fa-plus-square float-end"></i>
             </a>
         </h5>
@@ -74,7 +75,7 @@ class CategoryCard
         return ' </div>
                 </div>
                 <button type="button" class="btn btn-outline-primary start-btn ' . $this->color . '-border ' . $this->color . '-text fw-bold"
-                        data-bs-toggle="modal" data-bs-target="#exampleModal">' . $this->categoryId . '
+                        data-bs-toggle="modal" data-bs-target="#exampleModal">Start
                 </button>
                       </div>
         </div>';
