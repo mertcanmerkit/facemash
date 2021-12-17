@@ -12,20 +12,25 @@ $user = new User($database->getDb());
 if (isset($_COOKIE[COOKIE_NAME])) {
     $isLogged = $user->checkLoginWithToken($_COOKIE[COOKIE_NAME]);
 }
-
-
+$ignoreArr = array(".php");
+if (contains($_GET["sef"], $ignoreArr)) {
+    include __DIR__ . "/views/" . "header.php";
+    include __DIR__ . "/views/" . "index" . ".php";
+    include __DIR__ . "/views/" . "footer.php";
+    die();
+}
 if (!str_contains($_GET["sef"], "../")) {
     $file = __DIR__ . "/views/" . $_GET["sef"] . ".php";
     if (file_exists($file)) {
         include __DIR__ . "/views/" . "header.php";
         include $file;
         include __DIR__ . "/views/" . "footer.php";
-    }else{
+    } else {
         header("HTTP/1.0 404 Not Found");
-        jsonDie(array("error"=>"File not exist!"));
+        jsonDie(array("error" => "File not exist!"));
     }
-}else{
+} else {
     header("HTTP/1.0 400 Bad Request");
 
-    jsonDie(array("error"=>"Expolit test detected!"));
+    jsonDie(array("error" => "Expolit test detected!"));
 }
