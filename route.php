@@ -13,7 +13,12 @@ if (isset($_COOKIE[COOKIE_NAME])) {
     $isLogged = $user->checkLoginWithToken($_COOKIE[COOKIE_NAME]);
 }
 $ignoreArr = array(".php");
-if (contains($_GET["sef"], $ignoreArr)) {
+if (!isset($_GET["sef"])) {
+    header("HTTP/1.0 400 Bad Request");
+    jsonDie(array("error" => "Expolit test detected!"));
+
+}
+if (contains(@$_GET["sef"], $ignoreArr)) {
     include __DIR__ . "/views/" . "header.php";
     include __DIR__ . "/views/" . "index" . ".php";
     include __DIR__ . "/views/" . "footer.php";
