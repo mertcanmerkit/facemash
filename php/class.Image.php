@@ -22,6 +22,9 @@ class Image
 
             return file_get_contents(__DIR__ . "/../assets/InstagramProfilePictures/" . $this->igUserName . ".jpg");
         } else {
+            $json = $this->conn->getBodyWithoutPage();
+            if ($json == null)
+                jsonDie(array("error" => true, "reason" => "user not found"));
             $json = json_decode($this->conn->getBodyWithoutPage(), true);
             if (isset($json["graphql"])) {
                 $imageUri = null;
