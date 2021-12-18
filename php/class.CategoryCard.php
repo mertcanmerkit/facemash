@@ -74,8 +74,7 @@ class CategoryCard
     {
         return ' </div>
                 </div>
-                <button type="button" class="btn btn-outline-primary start-btn ' . $this->color . '-border ' . $this->color . '-text fw-bold"
-                        data-bs-toggle="modal" data-bs-target="#exampleModal">Start
+                <button type="button" class="btn btn-outline-primary start-btn ' . $this->color . '-border ' . $this->color . '-text fw-bold" onclick="startModalWithCategory(\'' . $this->categoryId . '\')">Start
                 </button>
                       </div>
         </div>';

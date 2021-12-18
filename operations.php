@@ -52,7 +52,7 @@ switch ($operation) {
         $database = new DataBase();
         $user = new User($database->getDb());
         $category = new Category($database->getDb(), $user);
-        if ($user->checkLoginWithToken() && preg_match('/^.{2,31}$/', $_POST["categoryName"]) && preg_match('/^[a-zA-Z0-9._].{1,30}+$/', $_POST["firstUsername"]) ) {
+        if ($user->checkLoginWithToken() && preg_match('/^.{2,31}$/', $_POST["categoryName"]) && preg_match('/^[a-zA-Z0-9._].{1,30}+$/', $_POST["firstUsername"])) {
             jsonDie($category->addCategory($_POST["categoryName"], $_POST["firstUsername"]));
         } else {
             jsonDie(array("error" => true, "reason" => "Please Login."));
@@ -82,9 +82,18 @@ switch ($operation) {
             jsonDie(array("error" => true, "reason" => "Please Login."));
         }
         break;
+    case "getMash":
+        $database = new DataBase();
+        $category = new Category($database->getDb());
+        if (!isset($_POST["categoryId"]))
+            jsonDie(array("error" => true, "reason" => "CategoryId Not Found!!!"));
+
+        $allImages = $category->getAllImagesWithCategoryId($_POST["categoryId"]);
+        jsonDie(array("error" => false, "data" => $allImages));
+        break;
     case "getCategory":
         $database = new DataBase();
-        $category = new Category($database->getDb());;
+        $category = new Category($database->getDb());
         htmlDie($category->getCategoriesForIndex($_POST["page"]));
         break;
     default:

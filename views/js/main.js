@@ -261,7 +261,7 @@ if (firstUsernameInput != null) {
             showSmall(firstUsernameValidation);
             firstUsernameValidation.innerHTML = ">£#$½§ olmaz yawrum";
         } else {
-            hideSmall(firstU );
+            hideSmall(firstU);
         }
     })
 }
@@ -473,3 +473,28 @@ $(document).ready(function () {
     }
 });
 
+
+function startModalWithCategory(categoryId) {
+    var settings = {
+        "url": "operations.php",
+        "method": "POST",
+        "timeout": 0,
+        "headers": {
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        "processData": false,
+        "mimeType": "multipart/form-data",
+        "contentType": false,
+        "data": "categoryId=" + categoryId + "&operation=getMash"
+    };
+
+    $.ajax(settings).done(function (response) {
+        response = JSON.parse(response);
+        if (response.error) {
+            // *** **** handle mert please handle
+        } else {
+
+        }
+
+    });
+}
