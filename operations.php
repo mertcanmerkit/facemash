@@ -52,7 +52,7 @@ switch ($operation) {
         $database = new DataBase();
         $user = new User($database->getDb());
         $category = new Category($database->getDb(), $user);
-        if ($user->checkLoginWithToken()) {
+        if ($user->checkLoginWithToken() && preg_match('/^.{2,31}$/', $_POST["categoryName"]) && preg_match('/^[a-zA-Z0-9._].{1,30}+$/', $_POST["firstUsername"]) ) {
             jsonDie($category->addCategory($_POST["categoryName"], $_POST["firstUsername"]));
         } else {
             jsonDie(array("error" => true, "reason" => "Please Login."));
@@ -71,7 +71,6 @@ switch ($operation) {
                         if ($category->addImageToCategory($_POST["categoryId"], $image->imageId)) {
                             jsonDie(array("error" => false));
                         }
-
                     }
                     jsonDie(array("error" => false));
                 } else {

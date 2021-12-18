@@ -1,5 +1,6 @@
 <div class="container" style="color: #fff;">
     <div class="row">
+        <h5 class="green-text text-break" id="myAlert" style="padding: 1rem 1rem 0rem 1rem;"></h5>
         <div class="col-12 col-md-6 mt-3">
             <div class="card card-shadow-green img-cards">
                 <h5 class="green-text text-break" style="padding: 1rem 1rem 0rem 1rem;">Sign In 🚀</h5>
@@ -12,7 +13,6 @@
                         <div class="mb-2">
                             <label class="form-label">Password</label>
                             <input class="form-control" type="password" id="inputPasswordLogin" placeholder="******">
-
                          <small id="passwordHelp" class="text-danger loginStatus d-flex">
 
                             </small>
@@ -26,7 +26,7 @@
                 </div>
 
                 <button type="button"
-                        class="btn btn-outline-primary start-btn green-border green-text fw-bold" onclick="login()">
+                        class="btn btn-outline-primary start-btn green-border green-text fw-bold" id="loginBtn" onclick="login()">
                     Login
                 </button>
             </div>
@@ -84,7 +84,7 @@
                         </div>
                     </div>
                 </div>
-                <button type="button" class="btn btn-outline-primary start-btn pink-border pink-text fw-bold"
+                <button type="button" class="btn btn-outline-primary start-btn pink-border pink-text fw-bold" id="registerBtn"
                         onclick="register()">Sign
                     Up
                 </button>
@@ -93,3 +93,31 @@
     </div>
 </div>
 
+<script>
+    function query_string(variable) {
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i = 0; i < vars.length; i++) {
+            var pair = vars[i].split("=");
+            if (pair[0] == variable) {
+                return pair[1];
+            }
+        }
+        return (false);
+    }
+
+    let from = query_string("from")
+    let id = query_string("id")
+
+    const myAlert = document.getElementById("myAlert");
+
+    switch (from) {
+        case "add-photo":
+            myAlert.innerText = "from ADD PHOTO ";
+            break;
+        case "add-category":
+            myAlert.innerHTML = "from ADD CATEGORYS";
+            break;
+        default:
+    }
+</script>

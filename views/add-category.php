@@ -1,3 +1,8 @@
+<?php
+if (!$isLogged) {
+    header("Location: /login?from=add-category");
+}
+?>
 <div class="container" style="color: #fff;">
     <div class="row">
         <div class="mt-3">
@@ -9,9 +14,7 @@
                         <div class="mb-3">
                             <label class="form-label">Category Name</label>
                             <input class="form-control" id="inputCategoryName" placeholder="My College Boiys 🤙">
-                            <small id="passwordHelp" class="text-danger">
-                                Must be 3-28 characters long.
-                            </small>
+                            <small id="categoryNameValidation" class="text-danger d-felx"></small>
                         </div>
 
                         <label class="form-label">First Photo</label>
@@ -21,6 +24,7 @@
                             <input type="text" class="form-control" id="firstUsername" aria-describedby="basic-addon3"
                                    placeholder="username">
                         </div>
+                        <small id="firstUsernameValidation" class="text-danger d-felx"></small>
 
 
                         <small class="mb-3 text-break">Profile photos will be used for

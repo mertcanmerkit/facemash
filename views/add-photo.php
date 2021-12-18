@@ -1,6 +1,6 @@
 <?php
 if (!$isLogged) {
-    header("Location: /login");
+    header("Location: /login?from=add-photo&id=".$_GET["id"]."");
 }
 if (!isset($_GET["id"])) {
     header("HTTP/1.0 400 Bad Request");
@@ -26,16 +26,14 @@ if ($category == null && empty($category)) {
                     <div class="row">
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon3">instagram.com/</span>
-                            <input type="text" class="form-control addPhoto" id="basic-url"
+                            <input type="text" class="form-control addPhoto" id="firstUsername"
                                    aria-describedby="basic-addon3"
                                    placeholder="username">
                         </div>
+                        <small id="firstUsernameValidation" class="text-danger d-felx"></small>
 
                         <small class="mb-3 text-break">The profile photo will be used for
                             voting.</small>
-                        <!-- <small id="passwordHelp" class="text-danger">
-                            You must add 2 photos to start a category.
-                        </small> -->
 
                     </div>
                 </div>

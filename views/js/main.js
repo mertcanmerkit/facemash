@@ -93,6 +93,19 @@ function register() {
             }
         } else {
             setCookie("__token__", response.token, 10);
+            let from = query_string("from")
+            let id = query_string("id")
+
+            switch (from) {
+                case "add-photo":
+                    location.href = from + "?id=" + id;
+                    break;
+                case "add-category":
+                    location.href = from;
+                    break;
+                default:
+                    location.href = "index";
+            }
         }
 
     });
@@ -118,6 +131,20 @@ function login() {
         response = JSON.parse(response);
         if (response.login) {
             setCookie("__token__", response.token, 10);
+            let from = query_string("from")
+            let id = query_string("id")
+
+            switch (from) {
+                case "add-photo":
+                    location.href = from + "?id=" + id;
+                    break;
+                case "add-category":
+                    location.href = from;
+                    break;
+                default:
+                    location.href = "index";
+            }
+
         } else {
 
             $(".loginStatus").text("Giriş yapılamadı.");
@@ -217,6 +244,46 @@ if (usernameInput != null) {
     })
 }
 
+const firstUsernameInput = document.getElementById("firstUsername");
+const firstUsernameValidation = document.getElementById("firstUsernameValidation");
+
+if (firstUsernameInput != null) {
+    firstUsernameInput.addEventListener("keyup", () => {
+        firstUsernameInputValue = firstUsernameInput.value;
+
+        if (firstUsernameInputValue.length < 0 || firstUsernameInputValue.length > 30) {
+            showSmall(firstUsernameValidation);
+            firstUsernameValidation.innerHTML = "0-30 olması lzm";
+        } else if (firstUsernameInputValue.length == 0) {
+            showSmall(firstUsernameValidation);
+            firstUsernameValidation.innerHTML = "Boş olamaz";
+        } else if (!firstUsernameInputValue.match(/^[a-zA-Z0-9._]+$/)) {
+            showSmall(firstUsernameValidation);
+            firstUsernameValidation.innerHTML = ">£#$½§ olmaz yawrum";
+        } else {
+            hideSmall(firstU );
+        }
+    })
+}
+
+const inputCategoryName = document.getElementById("inputCategoryName");
+const categoryNameValidation = document.getElementById("categoryNameValidation");
+
+if (inputCategoryName != null) {
+    inputCategoryName.addEventListener("keyup", () => {
+        inputCategoryNameValue = inputCategoryName.value;
+
+        if (inputCategoryNameValue.length < 0 || inputCategoryNameValue.length > 30) {
+            showSmall(categoryNameValidation);
+            setErrorFor(inputCategoryName, "0-30 olması lzm");
+        } else if (inputCategoryNameValue.length == 0) {
+            showSmall(categoryNameValidation);
+            setErrorFor(inputCategoryName, "Boş olamaz");
+        } else {
+            hideSmall(categoryNameValidation);
+        }
+    })
+}
 
 const emailInput = document.getElementById("inputEmail");
 const emailValidation = document.getElementById("emailValidation");
@@ -248,6 +315,7 @@ if (passInput && passValidation) {
             setErrorFor(passInput, "5-31 olcak");
         } else {
             hideSmall(passValidation);
+
         }
     })
 }
@@ -308,9 +376,9 @@ function addCategory() {
 
 function createSpinner(where) {
     if (where === "getCategories") {
-        $(".categories-out").append('<div class="d-flex spinner-border text-light getCategoriesSpinner" role="status">\n' +
+        $(".categories-out").append('<div class="container"><div class="row justify-content-center align-content-center"><div class="d-flex spinner-border text-light getCategoriesSpinner" role="status">\n' +
             '  <span class="sr-only">Loading...</span>\n' +
-            '</div>');
+            '</div></div></div>');
     }
 }
 
@@ -351,7 +419,7 @@ function getCategories(page) {
     inRequest = true;
     createSpinner("getCategories");
     $.ajax(settings).done(function (response) {
-        if (response === ""){
+        if (response === "") {
             deleteSpinner("getCategories");
             return
 
