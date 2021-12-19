@@ -96,6 +96,10 @@ switch ($operation) {
         $category = new Category($database->getDb());
         htmlDie($category->getCategoriesForIndex($_POST["page"]));
         break;
+    case "selectUser":
+        $database = new DataBase();
+        jsonDie($database->addSelectUser(encryptOrDecrypt($_POST["categoryDataId"],"decrypt")));
+        break;
     default:
-        die(json_encode(array("error" => true, "reason" => "unexpected operation")));
+        jsonDie(array("error" => true, "reason" => "unexpected operation"));
 }

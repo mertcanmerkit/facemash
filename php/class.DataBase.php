@@ -138,5 +138,48 @@ class DataBase
         return $fth["id"];
     }
 
+    public function addSelectUser($categoryDataId)
+    {
+        if ($categoryDataId == null || empty($categoryDataId))
+            return array("error" => "true", "reason" => "Missing field");
+
+        $categoryData = $this->getVotersAndCountFromCDataWithId($categoryDataId);
+        $newVoters = "";
+        $newCount = 0;
+        $user = new User($this->db);
+        $user->getUser();
+        $categoryData['voters'] ??= "";
+
+        if (explode(",", $categoryData["voters"])[0] == $categoryData["voters"]) {
+            $newVoters = $categoryData["voters"] . "," . $user->user["id"];
+        } else if (empty($categoryData["voters"])) {
+            $newVoters = $user->user["id"];
+        } else {
+            $arr = explode(",", $categoryData["voters"]);
+            if (in_array($user->user["id"], $arr))
+                return array("error" => true, "reason" => "already voted");
+            $arr[] = $user->user["id"];
+            $newVoters = implode(",", $arr);
+        }
+
+        $newCount = intval($categoryData["count"]) + 1;
+        $sth = $this->db->prepare("update categoryData set count = :newcount, voters = :newvoters where id = :id");
+        $sth->execute(array(
+            "newcount" => $newCount,
+            "newvoters" => $newVoters,
+            "id" => $categoryDataId
+        ));
+        $sth->execute();
+
+        return array("error" => false);
+    }
+
+    public function getVotersAndCountFromCDataWithId($categoryDataId)
+    {
+        $sth = $this->db->prepare("select * from categoryData where id = ?;");
+        $sth->execute(array($categoryDataId));
+
+        return $sth->fetch(PDO::FETCH_ASSOC);
+    }
 
 }

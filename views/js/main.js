@@ -473,8 +473,10 @@ $(document).ready(function () {
     }
 });
 
+var mCategoryId = 0;
 
-function startModalWithCategory(categoryId) {
+function startModalWithCategory(categoryId, show = true) {
+    mCategoryId = categoryId;
     var settings = {
         "url": "operations.php",
         "method": "POST",
@@ -493,8 +495,57 @@ function startModalWithCategory(categoryId) {
         if (response.error) {
             // *** **** handle mert please handle
         } else {
+            handleMashData(response.data, show)
 
         }
-
     });
+}
+
+function createImageUrl(image) {
+    return "/php/image.php?name=" + image;
+}
+
+function handleMashData(data, show) {
+    if (data.length === 0 || data.length === 1) {
+        /** handle mert handle */
+        return;
+    }
+    $(".modalTitle").html(data[0].categoryName);
+
+    $(".usernameFirst").html(data[0].name);
+    $(".imageFirst").attr("src", createImageUrl(data[0].image));
+    $("input[name=firstId]").val(data[0].categoryId);
+
+    $(".imageSecond").attr("src", createImageUrl(data[1].image));
+    $(".usernameSecond").html(data[1].name);
+    $("input[name=secondId]").val(data[1].categoryId);
+    if (show)
+        $("#mashModal").modal("show");
+}
+
+function selectUser(type) {
+    var categoryDataId = $("input[name=" + type + "Id]").val();
+    var settings = {
+        "url": "operations.php",
+        "method": "POST",
+        "timeout": 0,
+        "headers": {
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        "processData": false,
+        "mimeType": "multipart/form-data",
+        "contentType": false,
+        "data": "categoryDataId=" + categoryDataId + "&operation=selectUser"
+    };
+
+    $.ajax(settings).done(function (response) {
+        response = JSON.parse(response);
+        if (response.error) {
+            // *** **** handle mert please handle
+        } else {
+            startModalWithCategory(mCategoryId, false)
+
+        }
+    });
+
 }

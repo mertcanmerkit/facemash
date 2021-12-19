@@ -14,7 +14,7 @@
 
 <!-- Modal -->
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="mashModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-fullscreen">
         <div class="modal-content mash-bg">
             <div class="modal-header">
@@ -24,9 +24,9 @@
             <div class="modal-body d-flex justify-content-center align-content-center align-items-center">
                 <div class="container">
                     <div class="row">
-                        <div
-                                class="col-md-6 mt-3 mb-3 d-flex justify-content-center align-content-center align-items-center ">
-                            <div class="card align-items-center">
+                        <div class="col-md-6 mt-3 mb-3 d-flex justify-content-center align-content-center align-items-center">
+                            <div class="card align-items-center cursor-pointer" onclick="selectUser('first')">
+                                <input type="hidden" name="firstId">
                                 <img src="" class="card-img-top imageFirst"
                                      alt="">
                                 <div class="card-body">
@@ -34,9 +34,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div
-                                class="col-md-6 mt-3 mb-3 d-flex justify-content-center align-content-center align-items-center ">
-                            <div class="card align-items-center">
+                        <div class="col-md-6 mt-3 mb-3 d-flex justify-content-center align-content-center align-items-center">
+                            <div class="card align-items-center" onclick="selectUser('second')">
+                                <input type="hidden" name="secondId">
                                 <img src="" class="card-img-top imageSecond"
                                      alt="">
                                 <div class="card-body">
