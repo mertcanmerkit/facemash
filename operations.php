@@ -96,6 +96,11 @@ switch ($operation) {
         $category = new Category($database->getDb());
         htmlDie($category->getCategoriesForIndex($_POST["page"]));
         break;
+    case "getUserAddedCategory":
+        $database = new DataBase();
+        $category = new Category($database->getDb());
+        htmlDie($category->getUserCategories($_POST["page"]));
+        break;
     case "selectUser":
         $database = new DataBase();
         jsonDie($database->addSelectUser(encryptOrDecrypt($_POST["categoryDataId"],"decrypt")));

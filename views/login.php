@@ -1,3 +1,9 @@
+<?php
+if ($isLogged) {
+    header("Location: /profile");
+}
+?>
+
 <div class="container" style="color: #fff;">
     <div class="row">
         <h5 class="green-text text-break" id="myAlert" style="padding: 1rem 1rem 0rem 1rem;"></h5>

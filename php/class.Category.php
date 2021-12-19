@@ -110,6 +110,41 @@ class Category
 
     }
 
+    public function getUserCategories($page)
+    {
+        if ($page != 1) {
+            $limitRow = $page * 8;
+            $limit = $limitRow . ",8";
+            sleep(2);
+        } else {
+            $limit = "0,8";
+        }
+        $user = new User($this->db);
+        $user_id = $user->getUser()["id"];
+        $categoryIds = $user->getUserAddedCategories($user_id);
+        $categoryIdsArr = array();
+        foreach ($categoryIds as $categoryId) {
+            array_push($categoryIdsArr, $categoryId["id"]);
+        }
+        $categoryIdsStr = implode(",", $categoryIdsArr);
+        $q = "select distinct categoryId, SUM(count) as sumCount from categoryData WHERE categoryId IN (".$categoryIdsStr.") group by categoryId order by sumCount desc limit " . $limit;
+        $sth = $this->db->prepare($q);
+        $sth->execute();
+        $fth = $sth->fetchAll(PDO::FETCH_ASSOC);
+        $renderedData = "";
+        $lastColor = "";
+        foreach ($fth as $categoryData) {
+            $categoryId = $categoryData["categoryId"];
+            $categoryImages = $this->getCategoryImages($categoryId);
+            $categoryName = $this->getCategoryNameWithCategoryId($categoryId);
+            $categoryCard = new CategoryCard($categoryId, $categoryImages, $categoryName, $lastColor);
+            $lastColor = $categoryCard->lastColor;
+            $renderedData .= $categoryCard->render();
+        }
+        return $renderedData;
+
+    }
+
     private function getCategoryImages($categoryId)
     {
         $sth = $this->db->prepare("select * from categoryData where categoryId = :catid");

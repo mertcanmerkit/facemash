@@ -107,6 +107,13 @@ class User
         return $user;
     }
 
+    public function getUserAddedCategories($id)
+    {
+        $sth = $this->db->prepare("select id from categories where adder= ?");
+        $sth->execute(array($id));
+        return $sth->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     /**
      * @return string
      */

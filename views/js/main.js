@@ -379,11 +379,17 @@ function createSpinner(where) {
         $(".categories-out").append('<div class="container"><div class="row justify-content-center align-content-center"><div class="d-flex spinner-border text-light getCategoriesSpinner" role="status">\n' +
             '  <span class="sr-only">Loading...</span>\n' +
             '</div></div></div>');
+    }else if(where === "getUserCategories") {
+        $(".user-categories").append('<div class="container"><div class="row justify-content-center align-content-center"><div class="d-flex spinner-border text-light getCategoriesSpinner" role="status">\n' +
+            '  <span class="sr-only">Loading...</span>\n' +
+            '</div></div></div>');
     }
 }
 
 function deleteSpinner(where) {
     if (where === "getCategories") {
+        $(".getCategoriesSpinner").remove();
+    }else if (where === "getUserCategories") {
         $(".getCategoriesSpinner").remove();
     }
 }
@@ -391,13 +397,23 @@ function deleteSpinner(where) {
 var inRequest = false;
 var globalPage = 1;
 
-function checkNeedNewCategory() {
-    if ($(window).scrollTop() + $(window).height() == $(document).height()) {
-        getCategories(globalPage);
+function checkNeedNewCategory(where) {
+    if(where == "getCategories"){
+        if ($(window).scrollTop() + $(window).height() == $(document).height()) {
+            getCategories(globalPage);
+        }
+        if ($(window).scrollTop() + $(window).height() < $(document).height() - 20) {
+            getCategories(globalPage);
+        }
+    } else if(where === "getUserCategories"){
+        if ($(window).scrollTop() + $(window).height() == $(document).height()) {
+            getUserCategories(globalPage);
+        }
+        if ($(window).scrollTop() + $(window).height() < $(document).height() - 20) {
+            getUserCategories(globalPage);
+        }
     }
-    if ($(window).scrollTop() + $(window).height() < $(document).height() - 20) {
-        getCategories(globalPage);
-    }
+
 }
 
 function getCategories(page) {
@@ -430,7 +446,39 @@ function getCategories(page) {
         inRequest = false;
         $(".categories-out").append(response);
         $('.carousel').carousel();
-        checkNeedNewCategory();
+        checkNeedNewCategory("getCategories");
+    });
+}
+
+function getUserCategories(page) {
+    if (inRequest)
+        return;
+    console.log("getUserCategories");
+    var settings = {
+        "url": "operations.php",
+        "method": "POST",
+        "timeout": 0,
+        "headers": {
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        "processData": false,
+        "mimeType": "multipart/form-data",
+        "contentType": false,
+        "data": "page=" + page + "&operation=getUserAddedCategory"
+    };
+    inRequest = true;
+    createSpinner("getUserCategories");
+    $.ajax(settings).done(function (response) {
+        if (response === "") {
+            deleteSpinner("getUserCategories");
+            return
+        }
+        globalPage++;
+        deleteSpinner("getUserCategories");
+        inRequest = false;
+        $(".user-categories").append(response);
+        $('.carousel').carousel();
+        checkNeedNewCategory("getUserCategories");
     });
 }
 
@@ -468,6 +516,14 @@ $(document).ready(function () {
             if ($(window).scrollTop() + $(window).height() == $(document).height()) {
 
                 getCategories(globalPage);
+            }
+        });
+    } else if($(".user-categories")[0]){
+        getUserCategories(globalPage);
+        $(window).scroll(function () {
+            if ($(window).scrollTop() + $(window).height() == $(document).height()) {
+
+                getUserCategories(globalPage);
             }
         });
     }
