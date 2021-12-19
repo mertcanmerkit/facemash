@@ -127,7 +127,7 @@ class Category
             array_push($categoryIdsArr, $categoryId["id"]);
         }
         $categoryIdsStr = implode(",", $categoryIdsArr);
-        $q = "select distinct categoryId, SUM(count) as sumCount from categoryData WHERE categoryId IN (".$categoryIdsStr.") group by categoryId order by sumCount desc limit " . $limit;
+        $q = "select distinct categoryId, SUM(count) as sumCount from categoryData WHERE categoryId IN (" . $categoryIdsStr . ") group by categoryId order by sumCount desc limit " . $limit;
         $sth = $this->db->prepare($q);
         $sth->execute();
         $fth = $sth->fetchAll(PDO::FETCH_ASSOC);
@@ -182,10 +182,12 @@ class Category
         return $sth->fetch(PDO::FETCH_ASSOC)["username"];
     }
 
-    public function getAllImagesWithCategoryId($categoryId)
+    public function getAllImagesWithCategoryId($categoryId, $ignoreVoters = true)
     {
-        $this->user = new User($this->db);
-        $this->user->getUser();
+        if ($ignoreVoters) {
+            $this->user = new User($this->db);
+            $this->user->getUser();
+        }
         $sth = $this->db->prepare("select id,imageId,voters from categoryData where categoryId = ? order by count desc");
         $sth->execute(array($categoryId));
         $fth = $sth->fetchAll(PDO::FETCH_ASSOC);
@@ -193,18 +195,20 @@ class Category
         $categoryName = $this->getCategoryNameWithCategoryId($categoryId);
 
         foreach ($fth as $categoryData) {
-            if (count($arr) == 2)
+            if (count($arr) == 2 && $ignoreVoters)
                 return $arr;
-            $voters = $categoryData["voters"];
-            $explodedVoters = explode(",", $voters);
-            $isBreak = false;
-            foreach ($explodedVoters as $explodedVoter) {
-                if ($explodedVoter == $this->user->user["id"]) {
-                    $isBreak = true;
+            if ($ignoreVoters) {
+                $voters = $categoryData["voters"];
+                $explodedVoters = explode(",", $voters);
+                $isBreak = false;
+                foreach ($explodedVoters as $explodedVoter) {
+                    if ($explodedVoter == $this->user->user["id"]) {
+                        $isBreak = true;
+                    }
                 }
-            }
-            if ($isBreak) {
-                continue;
+                if ($isBreak) {
+                    continue;
+                }
             }
             $sthImage = $this->db->prepare("select username from images where id = ?");
             $sthImage->execute(array($categoryData["imageId"]));
