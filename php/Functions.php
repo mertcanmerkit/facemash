@@ -31,6 +31,9 @@ function htmlDie($html)
 
 function encryptOrDecrypt($string, $action = 'encrypt')
 {
+    if ($action == "encrypt") {
+        $string = "_!" . $string;
+    }
     $encrypt_method = "AES-256-CBC";
     $secret_key = HASH_KEY; // user define private key
     $secret_iv = "39" . HASH_KEY . "34"; // user define secret key
@@ -41,13 +44,15 @@ function encryptOrDecrypt($string, $action = 'encrypt')
         $output = base64_encode($output);
     } else if ($action == 'decrypt') {
         $output = openssl_decrypt(base64_decode($string), $encrypt_method, $key, 0, $iv);
+        $output = substr($output, 2);
     }
     return $output;
 }
+
 function contains($str, array $arr)
 {
-    foreach($arr as $a) {
-        if (stripos($str,$a) !== false) return true;
+    foreach ($arr as $a) {
+        if (stripos($str, $a) !== false) return true;
     }
     return false;
 }

@@ -147,5 +147,40 @@ class Category
         return $sth->fetch(PDO::FETCH_ASSOC)["username"];
     }
 
+    public function getAllImagesWithCategoryId($categoryId)
+    {
+        $this->user = new User($this->db);
+        $this->user->getUser();
+        $sth = $this->db->prepare("select id,imageId,voters from categoryData where categoryId = ? order by count desc");
+        $sth->execute(array($categoryId));
+        $fth = $sth->fetchAll(PDO::FETCH_ASSOC);
+        $arr = array();
+        $categoryName = $this->getCategoryNameWithCategoryId($categoryId);
+
+        foreach ($fth as $categoryData) {
+            if (count($arr) == 2)
+                return $arr;
+            $voters = $categoryData["voters"];
+            $explodedVoters = explode(",", $voters);
+            $isBreak = false;
+            foreach ($explodedVoters as $explodedVoter) {
+                if ($explodedVoter == $this->user->user["id"]) {
+                    $isBreak = true;
+                }
+            }
+            if ($isBreak) {
+                continue;
+            }
+            $sthImage = $this->db->prepare("select username from images where id = ?");
+            $sthImage->execute(array($categoryData["imageId"]));
+            $fthImage = $sthImage->fetch(PDO::FETCH_ASSOC);
+            $encryptData = encryptOrDecrypt($fthImage["username"]);
+            $arr[] = array("image" => $encryptData, "name" => $fthImage["username"], "categoryName" => $categoryName, "categoryId" => encryptOrDecrypt($categoryData["id"]));
+
+        }
+        return $arr;
+
+    }
+
 
 }

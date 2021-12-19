@@ -20,8 +20,12 @@ class Connection
 
     public function getBodyWithoutPage()
     {
-        $res = $this->client->request('GET', $this->url);
-        return (string)$res->getBody();
+        try {
+            $res = $this->client->request('GET', $this->url);
+            return (string)$res->getBody();
+        } catch (Exception $exception) {
+            return null;
+        }
     }
 
     public function getBodyExternalUrl($url)
