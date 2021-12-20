@@ -362,7 +362,7 @@ function addCategory() {
     $.ajax(settings).done(function (response) {
         response = JSON.parse(response);
         console.log(response);
-
+        $(".reasons").html(response.reason);
         // *** **** handle mert please handle
         if (response.error) {
 

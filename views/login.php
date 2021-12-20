@@ -6,8 +6,12 @@ if ($isLogged) {
 
 <div class="container" style="color: #fff;">
     <div class="row">
+
         <h5 class="green-text text-break" id="myAlert" style="padding: 1rem 1rem 0rem 1rem;"></h5>
-        <div class="col-12 col-md-6 mt-3">
+        <div class="col-12 col-md-6 mt-3 mb-3">
+            <div id="guest-alert">
+
+            </div>
             <div class="card card-shadow-green img-cards">
                 <h5 class="green-text text-break" style="padding: 1rem 1rem 0rem 1rem;">Sign In 🚀</h5>
                 <div class="card-body">
@@ -37,7 +41,7 @@ if ($isLogged) {
                 </button>
             </div>
         </div>
-        <div class="col-12 col-md-6 mt-3">
+        <div class="col-12 col-md-6 mt-3 mb-5">
             <div class="card card-shadow-pink img-cards">
                 <h5 class="pink-text text-break" style="padding: 1rem 1rem 0rem 1rem;">Don't have an account? 🚀
                 </h5>
@@ -116,13 +120,17 @@ if ($isLogged) {
     let id = query_string("id")
 
     const myAlert = document.getElementById("myAlert");
+    const guestAlert = document.getElementById("guest-alert");
 
     switch (from) {
         case "add-photo":
-            myAlert.innerText = "from ADD PHOTO ";
+            myAlert.innerText = "You must be logged in to add a photo!";
             break;
         case "add-category":
-            myAlert.innerHTML = "from ADD CATEGORYS";
+            myAlert.innerHTML = "You must be logged in to create a category!";
+            break;
+        case "mash":
+            guestAlert.innerHTML = '<div class="alert alert-primary" role="alert">You can only vote by <a href="#" class="alert-link">registering as a guest</a>. You cannot add categories and photos.</div>';
             break;
         default:
     }

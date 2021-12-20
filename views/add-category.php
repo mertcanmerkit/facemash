@@ -24,14 +24,11 @@ if (!$isLogged) {
                             <input type="text" class="form-control" id="firstUsername" aria-describedby="basic-addon3"
                                    placeholder="username">
                         </div>
-                        <small id="firstUsernameValidation" class="text-danger d-felx"></small>
-
+                        <small id="firstUsernameValidation" class="text-danger d-flex"></small>
+                        <small class="reasons text-danger d-flex"></small>
 
                         <small class="mb-3 text-break">Profile photos will be used for
                             voting.</small>
-                        <!-- <small id="passwordHelp" class="text-danger">
-                            You must add 2 photos to start a category.
-                        </small> -->
 
                     </div>
                 </div>
