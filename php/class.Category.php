@@ -127,7 +127,7 @@ class Category
             array_push($categoryIdsArr, $categoryId["id"]);
         }
         $categoryIdsStr = implode(",", $categoryIdsArr);
-        if(!$categoryIds){
+        if (!$categoryIds) {
             die();
         }
         $q = "select distinct categoryId, SUM(count) as sumCount from categoryData WHERE categoryId IN (" . $categoryIdsStr . ") group by categoryId order by sumCount desc limit " . $limit;
@@ -196,7 +196,7 @@ class Category
         $fth = $sth->fetchAll(PDO::FETCH_ASSOC);
         $arr = array();
         $categoryName = $this->getCategoryNameWithCategoryId($categoryId);
-
+        shuffle($fth);
         foreach ($fth as $categoryData) {
             if (count($arr) == 2 && $ignoreVoters)
                 return $arr;
