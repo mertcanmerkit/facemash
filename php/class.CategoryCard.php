@@ -29,7 +29,7 @@ class CategoryCard
     {
         return '<div class="col-lg-3 col-md-4 col-sm-6 mt-3 mb-3">
     <div class="card card-shadow-' . $this->color . ' img-cards">
-        <h5 class="' . $this->color . '-text text-break" style="padding: 1rem 1rem 0rem 1rem;"> ' . $this->name . '<a href="add-photo?id=' . $this->categoryId . '">
+        <h5 class="' . $this->color . '-text text-break" style="padding: 1rem 1rem 0rem 1rem;"><a href="/category/' . $this->categoryId . '"> ' . $this->name . '</a><a href="add-photo?id=' . $this->categoryId . '">
                 <i class="far fa-plus-square float-end"></i>
             </a>
         </h5>

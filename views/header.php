@@ -2,6 +2,8 @@
 <html lang="en">
 
 <head>
+    <base href="http://localhost:8888/">
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="views/css/bootstrap.min.css" rel="stylesheet">

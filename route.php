@@ -31,8 +31,26 @@ if (!str_contains($_GET["sef"], "../")) {
         include $file;
         include __DIR__ . "/views/" . "footer.php";
     } else {
-        header("HTTP/1.0 404 Not Found");
-        jsonDie(array("error" => "File not exist!"));
+        $explodedUrl = explode("/", $_GET["sef"]);
+        switch ($explodedUrl[0]) {
+            case "category":
+                if (empty($explodedUrl[1]) || !is_numeric($explodedUrl[1])) {
+                    header("HTTP/1.0 301 Redirect");
+                    header("Location: /");
+                    die();
+                }
+                $category = new Category($database->db);
+                include __DIR__ . "/views/header.php";
+                include __DIR__ . "/views/category-in.php";
+                include __DIR__ . "/views/footer.php";
+
+
+                break;
+            default:
+                header("HTTP/1.0 404 Not Found");
+                jsonDie(array("error" => "File not exist!"));
+                break;
+        }
     }
 } else {
     header("HTTP/1.0 400 Bad Request");

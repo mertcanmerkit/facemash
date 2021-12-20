@@ -119,7 +119,7 @@ class User
      */
     public function getToken()
     {
-        if ($this->token == null){
+        if ($this->token == null) {
             $this->token = $_COOKIE[COOKIE_NAME];
         }
         return $this->token;
