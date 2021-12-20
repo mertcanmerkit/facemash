@@ -127,6 +127,9 @@ class Category
             array_push($categoryIdsArr, $categoryId["id"]);
         }
         $categoryIdsStr = implode(",", $categoryIdsArr);
+        if(!$categoryIds){
+            die();
+        }
         $q = "select distinct categoryId, SUM(count) as sumCount from categoryData WHERE categoryId IN (" . $categoryIdsStr . ") group by categoryId order by sumCount desc limit " . $limit;
         $sth = $this->db->prepare($q);
         $sth->execute();

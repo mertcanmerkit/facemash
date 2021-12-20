@@ -323,6 +323,36 @@ button {
 
 }
 
+@media (max-width: 576px) {
+    .img-cards .card-body{
+
+    }
+}
+
+@media (min-width: 768px) {
+    .img-cards .card-body{
+
+    }
+}
+
+@media (min-width: 992px) {
+    .img-cards .card-body{
+
+    }
+}
+
+@media (min-width: 1200px) {
+    .img-cards .card-body{
+
+    }
+}
+
+@media (min-width: 1400px) {
+    .img-cards .card-body{
+
+    }
+}
+
 @media (max-height: 736px){
     .modal .card {
         width: 18rem;

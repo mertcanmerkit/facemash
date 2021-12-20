@@ -56,3 +56,11 @@ function contains($str, array $arr)
     }
     return false;
 }
+
+function generateRandomColor()
+    {
+        $colorArray = array("blue", "yellow", "green", "pink", "red");
+        $rand_keys = array_rand($colorArray, 2);
+        $color = $colorArray[$rand_keys[0]];
+        return $color;
+    }

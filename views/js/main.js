@@ -261,7 +261,7 @@ if (firstUsernameInput != null) {
             showSmall(firstUsernameValidation);
             firstUsernameValidation.innerHTML = ">£#$½§ olmaz yawrum";
         } else {
-            hideSmall(firstU);
+            hideSmall(firstUsernameValidation);
         }
     })
 }
@@ -419,7 +419,6 @@ function checkNeedNewCategory(where) {
 function getCategories(page) {
     if (inRequest)
         return;
-    console.log("getCategories");
     var settings = {
         "url": "operations.php",
         "method": "POST",
@@ -453,7 +452,6 @@ function getCategories(page) {
 function getUserCategories(page) {
     if (inRequest)
         return;
-    console.log("getUserCategories");
     var settings = {
         "url": "operations.php",
         "method": "POST",
@@ -469,7 +467,10 @@ function getUserCategories(page) {
     inRequest = true;
     createSpinner("getUserCategories");
     $.ajax(settings).done(function (response) {
-        if (response === "") {
+        if (response === "" || !response || response.length === 0) {
+            if(globalPage === 1){
+            $(".category-empty").html("You have no categories. Why? You should add one. <br><a href='add-category' class='blue-text'>Click me to add category.</a>");
+            }
             deleteSpinner("getUserCategories");
             return
         }
