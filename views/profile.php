@@ -58,7 +58,6 @@ $color = generateRandomColor();
 <div class="container">
     <div class="mt-3">
         <p><a href="logout" class="text-danger float-end ">Logout</a></p>
-<!--        <a href=""><h5 class="--><?//=$color?><!---text"><i class="fas fa-user-cog float-end me-3" ></i></h5></a>-->
         <h5 class="<?=$color?>-text text-break d-inline"><?=$username?>'s</h5>
         <h5 class="<?=$color?>-text text-break d-inline">categories</h5>
     </div>
