@@ -3,6 +3,9 @@
 
 We are developing a more advanced version of the facemash website developed by Mark Zuckerberg. Instagram profile photos will be used for voting. Other users will vote within the categories created by the users.
 
+![quality score of scrutinizer](https://scrutinizer-ci.com/g/Mrjavaci/turkey-earthquake-api/badges/quality-score.png?b=main)
+![code intelligence](https://scrutinizer-ci.com/g/Mrjavaci/turkey-earthquake-api/badges/code-intelligence.svg?b=main)
+![build](https://scrutinizer-ci.com/g/Mrjavaci/turkey-earthquake-api/badges/build.png?b=main)
 
 ## Screenshots
 
