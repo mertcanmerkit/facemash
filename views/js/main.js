@@ -563,17 +563,18 @@ function createImageUrl(image) {
 
 function handleMashData(data, show) {
     if (data.length === 0 || data.length === 1) {
+        location.href = "category/49";
         /** handle mert handle */
         return;
     }
     $(".modalTitle").html(data[0].categoryName);
 
-    $(".usernameFirst").html(data[0].name);
+    $(".usernameFirst").html("@"+data[0].name);
     $(".imageFirst").attr("src", createImageUrl(data[0].image));
     $("input[name=firstId]").val(data[0].categoryId);
 
     $(".imageSecond").attr("src", createImageUrl(data[1].image));
-    $(".usernameSecond").html(data[1].name);
+    $(".usernameSecond").html("@"+data[1].name);
     $("input[name=secondId]").val(data[1].categoryId);
     if (show)
         $("#mashModal").modal("show");

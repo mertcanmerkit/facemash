@@ -3,8 +3,8 @@ html {
 }
 
 body {
-    position: relative;
-    background-repeat: no-repeat;
+    /*position: relative;*/
+    /*background-repeat: no-repeat;*/
     background-attachment: fixed;
     background-image: linear-gradient(to bottom, #000000, #040303, #070707, #0a0a0b, #0d0d0e, #13151e, #121c2e, #07243f, #073063, #2b3884, #593aa1, #8d31b5);
 }
@@ -152,7 +152,8 @@ button {
 }
 
 .modal .card {
-    width: 22rem;
+    width: 19rem;
+    border: unset;
 }
 
 .modal .card-body {
@@ -162,7 +163,7 @@ button {
 
 .modal .card-img, .card-img-top{
     margin: 20px;
-    width: 80%;
+    width: 70%;
     border-radius: 9999px;
 }
 
@@ -174,6 +175,7 @@ button {
 }
 
 .mash-bg {
+    position: fixed;
     background: linear-gradient( 315deg, #073063, #2b3884, #593aa1, #b53183, #8d31b5, #593aa1, #2b3884, #073063);
     background-size: 400% 400%;
     animation: gradient 3s ease infinite;
@@ -279,6 +281,63 @@ button {
     box-shadow: rgb(255 255 255 / 1%) 0px 20px 25px -5px, rgb(255 0 89 / 25%) 0px 10px 10px -5px, 0 -10px 10px -10px #fd00ff inset;
 }
 
+/*########*/
+
+
+.progress {
+    transition: all 0.50s ease-in-out;
+
+    width: 100%;
+    max-width: 19rem;
+    height: 30px;
+    border-radius: .25rem;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    overflow: hidden;
+}
+.progress .progress-bar {
+    transition: all 0.50s ease-in-out;
+
+    display: block;
+    height: 100%;
+    background: linear-gradient(90deg, #ffd33d, #ea4aaa 17%, #b34bff 34%, #01feff 51%, #ffd33d 68%, #ea4aaa 85%, #b34bff);
+    background-size: 300% 100%;
+    -webkit-animation: progress-animation 2s linear infinite;
+    animation: progress-animation 1s linear infinite;
+}
+
+.progress .progress-bar-not-selected{
+    display: block;
+    height: 100%;
+    background: linear-gradient(90deg, #cca831, #cc4194 17%, #903bcc 34%, #00cccc 51%, #cca831 68%, #cc4194 85%, #903bcc);
+    background-size: 300% 100%;
+    -webkit-animation: progress-animation 2s linear infinite;
+    animation: progress-animation 1s linear infinite;
+
+}
+
+@-webkit-keyframes progress-animation {
+    0% {
+        background-position: 100%;
+    }
+    100% {
+        background-position: 0;
+    }
+}
+
+@keyframes progress-animation {
+    0% {
+        background-position: 100%;
+    }
+    100% {
+        background-position: 0;
+    }
+}
+
+
+/*########*/
+
+
 @media (max-width: 1200px) {
     .search-input {
         width: 180px;
@@ -353,20 +412,91 @@ button {
     }
 }
 
-@media (max-height: 736px){
+@media (max-height: 820px) and (max-width: 1279px){
     .modal .card {
-        width: 18rem;
+        width: 17rem;
+    }
+    .progress {
+        width: 17rem;
     }
 }
 
-@media (max-height: 731px){
+@media (max-height: 750px) and (max-width: 1279px){
     .modal .card {
+        width: 16rem;
+    }
+    .progress {
         width: 16rem;
     }
 }
 
-@media (max-height: 640px){
+@media (max-height: 731px) and (max-width: 1279px){
     .modal .card {
-        width: 14rem;
+        width: 13rem;
+    }
+    .progress {
+        width: 13rem;
     }
 }
+
+@media (max-height: 640px) and (max-width: 1279px){
+    .modal .card {
+        width: 12rem;
+    }
+    .progress {
+        width: 12rem;
+    }
+}
+
+/*########*/
+
+:root {
+    --gradient-shadow: linear-gradient(
+            45deg,
+            #ffd33d, #ea4aaa 17%, #b34bff 34%, #01feff 51%, #ffd33d 68%, #ea4aaa 85%, #b34bff
+            /*#7727f5,*/
+            /*#ff0099,*/
+            /*#ac09a4,*/
+            /*#0015ff,*/
+            /*#e676f7*/
+
+    );
+}
+
+.shadow {
+    background: #fff;
+}
+
+.shadow:hover:after{
+    content: "";
+}
+
+.shadow:before,
+.shadow:after{
+    position: absolute;
+    background: var(--gradient-shadow);
+    background-size: 400%;
+    width: calc(100% + 20px);
+    height: calc(100% + 20px);
+    z-index: -1;
+    animation: animate 5s linear infinite;
+}
+
+.shadow:after {
+    filter: blur(20px);
+    transition: all 5s ease-in-out;
+
+}
+
+@keyframes animate {
+    0% {
+        background-position: 0 0;
+    }
+    50% {
+        background-position: 300% 0;
+    }
+    100% {
+        background-position: 0 0;
+    }
+}
+
