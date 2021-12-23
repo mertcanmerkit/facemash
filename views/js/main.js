@@ -82,7 +82,6 @@ function register() {
         response = JSON.parse(response);
         if (response.error) {
             if (response.reason === 'email') {
-                console.log("email -> ", response)
                 showSmall(emailValidation);
                 setErrorFor(emailInput, "Email zaten bulunmakta!");
 
@@ -285,8 +284,8 @@ if (inputCategoryName != null) {
     })
 }
 
-const emailInput = document.getElementById("inputEmail");
-const emailValidation = document.getElementById("emailValidation");
+let emailInput = document.getElementById("inputEmail");
+let emailValidation = document.getElementById("emailValidation");
 if (emailInput != null && emailValidation != null) {
 
     emailInput.addEventListener("keyup", () => {
