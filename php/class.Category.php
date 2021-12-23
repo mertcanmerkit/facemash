@@ -83,6 +83,24 @@ class Category
 
     }
 
+    public function getRenderedCategory($categoryId)
+    {
+        $sth = $this->db->prepare("select distinct categoryId, SUM(count) as sumCount from categoryData WHERE categoryId= :categoryId group by categoryId order by sumCount");
+        $sth->execute(array("categoryId" => $categoryId));
+        $fth = $sth->fetchAll(PDO::FETCH_ASSOC);
+        $renderedData = "";
+        $lastColor = "";
+        foreach ($fth as $categoryData) {
+            $categoryId = $categoryData["categoryId"];
+            $categoryImages = $this->getCategoryImages($categoryId);
+            $categoryName = $this->getCategoryNameWithCategoryId($categoryId);
+            $categoryCard = new CategoryCard($categoryId, $categoryImages, $categoryName, $lastColor);
+            $lastColor = $categoryCard->lastColor;
+            $renderedData .= $categoryCard->render();
+        }
+        return $renderedData;
+    }
+
     public function getCategoriesForIndex($page)
     {
         if ($page != 1) {
@@ -167,6 +185,12 @@ class Category
         return $sth->fetch(PDO::FETCH_ASSOC)["name"];
     }
 
+    public function getCategorySumCount($categoryId){
+        $sth = $this->db->prepare("select distinct categoryId, SUM(count) as sumCount from categoryData WHERE categoryId= :categoryId group by categoryId order by sumCount");
+        $sth->execute(array("categoryId" => $categoryId));
+        return $sth->fetch(PDO::FETCH_ASSOC)["sumCount"];
+    }
+
     public function addImageToCategory($categoryId, $imageId)
     {
         $sth = $this->db->prepare("insert into categoryData (categoryId,imageId) values (?,?)");
@@ -185,22 +209,25 @@ class Category
         return $sth->fetch(PDO::FETCH_ASSOC)["username"];
     }
 
-    public function getAllImagesWithCategoryId($categoryId, $ignoreVoters = true)
+    public function getAllImagesWithCategoryId($categoryId, $ignoreVoters = true, $shuffle = true)
     {
         if ($ignoreVoters) {
             $this->user = new User($this->db);
             $this->user->getUser();
         }
-        $sth = $this->db->prepare("select id,imageId,voters from categoryData where categoryId = ? order by count desc");
+        $sth = $this->db->prepare("select id,imageId,voters,count from categoryData where categoryId = ? order by count desc");
         $sth->execute(array($categoryId));
         $fth = $sth->fetchAll(PDO::FETCH_ASSOC);
         $arr = array();
         $categoryName = $this->getCategoryNameWithCategoryId($categoryId);
-        shuffle($fth);
+        if($shuffle){
+            shuffle($fth);
+        }
         foreach ($fth as $categoryData) {
             if (count($arr) == 2 && $ignoreVoters)
                 return $arr;
             if ($ignoreVoters) {
+                $count = $categoryData["count"];
                 $voters = $categoryData["voters"];
                 $explodedVoters = explode(",", $voters);
                 $isBreak = false;
@@ -217,7 +244,7 @@ class Category
             $sthImage->execute(array($categoryData["imageId"]));
             $fthImage = $sthImage->fetch(PDO::FETCH_ASSOC);
             $encryptData = encryptOrDecrypt($fthImage["username"]);
-            $arr[] = array("image" => $encryptData, "name" => $fthImage["username"], "categoryName" => $categoryName, "categoryId" => encryptOrDecrypt($categoryData["id"]));
+            $arr[] = array("image" => $encryptData, "name" => $fthImage["username"], "categoryName" => $categoryName, "count" => $categoryData["count"], "categoryId" => encryptOrDecrypt($categoryData["id"]));
 
         }
         return $arr;
