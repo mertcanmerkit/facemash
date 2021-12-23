@@ -138,7 +138,7 @@ class DataBase
         return $fth["id"];
     }
 
-    public function addSelectUser($categoryDataId)
+    public function addSelectUser($categoryDataId, $firstDataId, $secondDataId)
     {
         if ($categoryDataId == null || empty($categoryDataId))
             return array("error" => "true", "reason" => "Missing field");
@@ -171,7 +171,20 @@ class DataBase
         ));
         $sth->execute();
 
-        return array("error" => false);
+        $firstVoteCount = $this->getVoteCount($firstDataId);
+        $secondVoteCount = $this->getVoteCount($secondDataId);
+        $firstSumSecond = intval($firstVoteCount) + intval($secondVoteCount);
+        $firstMath = (intval($firstVoteCount) * 100) / $firstSumSecond;
+
+
+        return array("error" => false, "firstScore" => round($firstMath), "secondScore" => round(100 - $firstMath));
+    }
+
+    private function getVoteCount($firstDataId)
+    {
+        $sth = $this->db->prepare("select voters from categoryData where id = ?");
+        $sth->execute(array($firstDataId));
+        return count(explode(",", $sth->fetch(PDO::FETCH_ASSOC)["voters"]));
     }
 
     public function getVotersAndCountFromCDataWithId($categoryDataId)
@@ -181,5 +194,6 @@ class DataBase
 
         return $sth->fetch(PDO::FETCH_ASSOC);
     }
+
 
 }

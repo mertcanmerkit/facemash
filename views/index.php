@@ -1,11 +1,11 @@
 <div class="fixed-bottom mb-3">
     <div class="container">
 
-                <button type="button"
-                        class="btn btn-outline-primary random-btn fw-bold d-flex justify-content-around align-items-center float-end"
-                        data-bs-toggle="modal" data-bs-target="#exampleModal" id="random-btn">
-                    <i class="fas fa-dice" style="font-size: 24px;"></i>
-                </button>
+        <button type="button"
+                class="btn btn-outline-primary random-btn fw-bold d-flex justify-content-around align-items-center float-end"
+                data-bs-toggle="modal" data-bs-target="#exampleModal" id="random-btn">
+            <i class="fas fa-dice" style="font-size: 24px;"></i>
+        </button>
 
     </div>
 </div>
@@ -23,7 +23,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-5 d-flex justify-content-md-end justify-content-center align-content-md-end align-content-center align-items-md-end align-items-center">
-                            <div class="card shadow align-items-center cursor-pointer" onclick="selectUser('first')">
+                            <div class="card firstCard shadow align-items-center cursor-pointer" onclick="selectUser('first')">
                                 <input type="hidden" name="firstId">
                                 <img src="" class="card-img-top imageFirst"
                                      alt="">
@@ -31,8 +31,8 @@
                                     <h5 class="card-title usernameFirst text-break text-center"></h5>
                                 </div>
                                 <div class="progress">
-                                <span class="progress-bar d-flex" style="width: 25%">
-                                    <strong class="text-white" id="progress-voted">25%</strong>
+                                <span class="progress-bar d-flex firstProgress" style="width: 25%">
+                                    <strong class="text-white firstProgressText" id="progress-voted"></strong>
                                 </span>
                                 </div>
                             </div>
@@ -41,7 +41,7 @@
                             <span class="text-white">O R</span>
                         </div>
                         <div class="col-md-5 d-flex justify-content-md-start justify-content-center align-content-md-start align-content-center align-items-md-start align-items-center">
-                            <div class="card shadow align-items-center" onclick="selectUser('second')">
+                            <div class="card secondCard shadow align-items-center" onclick="selectUser('second')">
                                 <input type="hidden" name="secondId">
                                 <img src="" class="card-img-top imageSecond"
                                      alt="">
@@ -49,21 +49,22 @@
                                     <h5 class="card-title usernameSecond text-break text-center"></h5>
                                 </div>
                                 <div class="progress">
-                                <span class="progress-bar progress-bar-not-selected d-flex" style="width: 75%">
-                                    <strong class="text-white" id="progress-voted">75%</strong>
+                                <span class="progress-bar progress-bar-not-selected d-flex secondProgress"
+                                      style="width: 75%">
+                                    <strong class="text-white secondProgressText" id="progress-voted"></strong>
                                 </span>
                                 </div>
                             </div>
                         </div>
-<!--                        <div class="row">-->
-<!--                            <div class="col mt-3 d-flex justify-content-center">-->
-<!--                                <div class="progress">-->
-<!--                                <span class="progress-bar d-flex" style="width: 25%">-->
-<!--                                    <strong class="text-white" id="progress-voted">25%</strong>-->
-<!--                                </span>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
+                        <!--                        <div class="row">-->
+                        <!--                            <div class="col mt-3 d-flex justify-content-center">-->
+                        <!--                                <div class="progress">-->
+                        <!--                                <span class="progress-bar d-flex" style="width: 25%">-->
+                        <!--                                    <strong class="text-white" id="progress-voted">25%</strong>-->
+                        <!--                                </span>-->
+                        <!--                                </div>-->
+                        <!--                            </div>-->
+                        <!--                        </div>-->
                     </div>
                 </div>
             </div>

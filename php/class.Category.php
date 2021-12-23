@@ -106,7 +106,7 @@ class Category
         if ($page != 1) {
             $limitRow = $page * 8;
             $limit = $limitRow . ",8";
-            sleep(2);
+         //   sleep(2);
         } else {
             $limit = "0,8";
         }
@@ -133,7 +133,7 @@ class Category
         if ($page != 1) {
             $limitRow = $page * 8;
             $limit = $limitRow . ",8";
-            sleep(2);
+        //    sleep(2);
         } else {
             $limit = "0,8";
         }
