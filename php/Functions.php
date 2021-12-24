@@ -35,10 +35,10 @@ function encryptOrDecrypt($string, $action = 'encrypt')
         $string = "_!" . $string;
     }
     $encrypt_method = "AES-256-CBC";
-    $secret_key = HASH_KEY; // user define private key
-    $secret_iv = "39" . HASH_KEY . "34"; // user define secret key
+    $secret_key = HASH_KEY;
+    $secret_iv = "39" . HASH_KEY . "34";
     $key = hash('sha256', $secret_key);
-    $iv = substr(hash('sha256', $secret_iv), 0, 16); // sha256 is hash_hmac_algo
+    $iv = substr(hash('sha256', $secret_iv), 0, 16); 
     if ($action == 'encrypt') {
         $output = openssl_encrypt($string, $encrypt_method, $key, 0, $iv);
         $output = base64_encode($output);
