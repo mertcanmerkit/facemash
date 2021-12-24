@@ -48,20 +48,102 @@ $allImages = $category->getAllImagesWithCategoryId($categoryId,false, $shuffle =
 
 <div class="container">
     <div class="row mt-3">
-        <h1><?=$categorySumCount?></h1>
 
         <?=$renderedCategory?>
+
+        <div class="col-lg-9 col-md-8 col-sm-6 mt-3 mb-3">
+            <div class="card card-shadow-white img-cards">
+                <h5 class="text-white text-break" style="padding: 1rem 1rem 0rem 1rem;">Top Rated</h5>
+                <div class="card-body">
+                    <div class="row">
+                        <ul class="statistics">
+
+                            <?php
+                            if(isset($allImages[0])){
+                                ?>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <a href="https://www.instagram.com/<?=$allImages[0]["name"];?>" target="_blank">
+                                        <img src="/php/image.php?name=<?=$allImages[0]["image"];?>" class="list-avatar" alt="<?=$allImages[0]["name"];?>">
+                                    </a>
+                                    <a href="https://www.instagram.com/<?=$allImages[0]["name"];?>" target="_blank" class="me-auto"><?="@".$allImages[0]["name"];?></a>
+                                    <span class="float-end"><?=$allImages[0]["count"];?> Votes</span>
+                                </li>
+                            <?php
+                            }
+                            ?>
+
+                            <?php
+                            if(isset($allImages[1])){
+                                ?>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <a href="https://www.instagram.com/<?=$allImages[1]["name"];?>" target="_blank">
+                                        <img src="/php/image.php?name=<?=$allImages[1]["image"];?>" class="list-avatar" alt="<?=$allImages[1]["name"];?>">
+                                    </a>
+                                    <a href="https://www.instagram.com/<?=$allImages[1]["name"];?>" target="_blank" class="me-auto"><?="@".$allImages[1]["name"];?></a>
+                                    <span class="float-end"><?=$allImages[1]["count"];?> Votes</span>
+                                </li>
+                                <?php
+                            }
+                            ?>
+
+                            <?php
+                            if(isset($allImages[2])){
+                                ?>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <a href="https://www.instagram.com/<?=$allImages[2]["name"];?>" target="_blank">
+                                        <img src="/php/image.php?name=<?=$allImages[2]["image"];?>" class="list-avatar" alt="<?=$allImages[2]["name"];?>">
+                                    </a>
+                                    <a href="https://www.instagram.com/<?=$allImages[2]["name"];?>" target="_blank" class="me-auto"><?="@".$allImages[2]["name"];?></a>
+                                    <span class="float-end"><?=$allImages[2]["count"];?> Votes</span>
+                                </li>
+                                <?php
+                            }
+                            ?>
+
+                            <?php
+                            if(isset($allImages[3])){
+                                ?>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <a href="https://www.instagram.com/<?=$allImages[3]["name"];?>" target="_blank">
+                                        <img src="/php/image.php?name=<?=$allImages[3]["image"];?>" class="list-avatar" alt="<?=$allImages[3]["name"];?>">
+                                    </a>
+                                    <a href="https://www.instagram.com/<?=$allImages[3]["name"];?>" target="_blank" class="me-auto"><?="@".$allImages[3]["name"];?></a>
+                                    <span class="float-end"><?=$allImages[3]["count"];?> Votes</span>
+                                </li>
+                                <?php
+                            }
+                            ?>
+
+                            <?php
+                            if(isset($allImages[4])){
+                                ?>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <a href="https://www.instagram.com/<?=$allImages[4]["name"];?>" target="_blank">
+                                        <img src="/php/image.php?name=<?=$allImages[4]["image"];?>" class="list-avatar" alt="<?=$allImages[4]["name"];?>">
+                                    </a>
+                                    <a href="https://www.instagram.com/<?=$allImages[4]["name"];?>" target="_blank" class="me-auto"><?="@".$allImages[4]["name"];?></a>
+                                    <span class="float-end"><?=$allImages[4]["count"];?> Votes</span>
+                                </li>
+                                <?php
+                            }
+                            ?>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
         <div class="container">
             <div class="row">
-                <img src="/php/image.php?name=<?=$allImages[0]["image"];?>" alt="">
-                <h1><?=$allImages[0]["count"];?></h1>
-
-                <img src="/php/image.php?name=<?=$allImages[1]["image"];?>" alt="">
-                <h1><?=$allImages[1]["count"];?></h1>
-
-                <img src="/php/image.php?name=<?=$allImages[2]["image"];?>" alt="">
-                <h1><?=$allImages[2]["count"];?></h1>
+                <h1><?=$categorySumCount?></h1>
             </div>
         </div>
     </div>
 </div>
+
+
+
+
+

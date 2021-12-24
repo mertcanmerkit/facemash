@@ -153,12 +153,12 @@ button {
 
 .modal .card {
     width: 19rem;
+    height: 22rem;
     border: unset;
 }
 
 .modal .card-body {
     flex: 1 1 auto;
-    padding: 7px 1rem;
 }
 
 .modal .card-img, .card-img-top{
@@ -217,6 +217,22 @@ button {
     border-right: 1px solid transparent!important;
 }
 
+.statistics .list-group-item{
+    padding: 0.5rem 0rem;
+    color: white;
+    background-color: unset;
+    border: unset;
+
+}
+
+
+.list-avatar{
+    margin-right: 1rem;
+    width: 45px;
+    height: auto;
+    border-radius: 99px;
+}
+
 .blue-text {
     color: #00ceff;
 }
@@ -227,6 +243,10 @@ button {
 
 .card-shadow-blue {
     box-shadow: rgb(255 255 255 / 1%) 0px 20px 25px -5px, rgb(0 206 255 / 25%) 0px 10px 10px -5px, 0 -10px 10px -10px #00ceff inset;
+}
+
+.card-shadow-white {
+    box-shadow: rgb(255 255 255 / 1%) 0px 20px 25px -5px, rgb(255 255 255 / 25%) 0px 10px 10px -5px, 0 -10px 10px -10px #ffffff inset;
 }
 
 .yellow-card {
@@ -289,13 +309,14 @@ button {
 
     width: 100%;
     max-width: 19rem;
-    height: 30px;
+    height: 32px;
     border-radius: .25rem;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
     overflow: hidden;
 }
 .progress .progress-bar {
+    width: 0;
     transition: all 0.50s ease-in-out;
 
     display: block;
@@ -415,6 +436,7 @@ button {
 @media (max-height: 820px) and (max-width: 1279px){
     .modal .card {
         width: 17rem;
+        height: 20rem;
     }
     .progress {
         width: 17rem;
@@ -424,6 +446,7 @@ button {
 @media (max-height: 750px) and (max-width: 1279px){
     .modal .card {
         width: 16rem;
+        height: 19rem;
     }
     .progress {
         width: 16rem;
@@ -433,6 +456,7 @@ button {
 @media (max-height: 731px) and (max-width: 1279px){
     .modal .card {
         width: 13rem;
+        height: 16rem;
     }
     .progress {
         width: 13rem;
@@ -442,6 +466,7 @@ button {
 @media (max-height: 640px) and (max-width: 1279px){
     .modal .card {
         width: 12rem;
+        height: 15rem;
     }
     .progress {
         width: 12rem;
@@ -467,9 +492,13 @@ button {
     background: #fff;
 }
 
-.shadow:hover:after{
-    content: "";
+@media (min-width: 1025px) {
+    .shadow:hover:after{
+        content: "";
+    }
 }
+
+
 .shadowC:after{
     content: "";
 }

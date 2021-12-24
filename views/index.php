@@ -27,11 +27,11 @@
                                 <input type="hidden" name="firstId">
                                 <img src="" class="card-img-top imageFirst"
                                      alt="">
-                                <div class="card-body">
-                                    <h5 class="card-title usernameFirst text-break text-center"></h5>
+                                <div class="card-body" style="padding: 0;">
+                                    <h5 class="card-title usernameFirst mt-3 text-break text-center"></h5>
                                 </div>
-                                <div class="progress">
-                                <span class="progress-bar d-flex firstProgress" style="width: 25%">
+                                <div class="progress" style="display: none;">
+                                <span class="progress-bar d-flex firstProgress">
                                     <strong class="text-white firstProgressText" id="progress-voted"></strong>
                                 </span>
                                 </div>
@@ -45,26 +45,16 @@
                                 <input type="hidden" name="secondId">
                                 <img src="" class="card-img-top imageSecond"
                                      alt="">
-                                <div class="card-body">
-                                    <h5 class="card-title usernameSecond text-break text-center"></h5>
+                                <div class="card-body" style="padding: 0;">
+                                    <h5 class="card-title usernameSecond mt-3 text-break text-center"></h5>
                                 </div>
-                                <div class="progress">
-                                <span class="progress-bar progress-bar-not-selected d-flex secondProgress"
-                                      style="width: 75%">
+                                <div class="progress" style="display: none;">
+                                <span class="progress-bar progress-bar-not-selected d-flex secondProgress">
                                     <strong class="text-white secondProgressText" id="progress-voted"></strong>
                                 </span>
                                 </div>
                             </div>
                         </div>
-                        <!--                        <div class="row">-->
-                        <!--                            <div class="col mt-3 d-flex justify-content-center">-->
-                        <!--                                <div class="progress">-->
-                        <!--                                <span class="progress-bar d-flex" style="width: 25%">-->
-                        <!--                                    <strong class="text-white" id="progress-voted">25%</strong>-->
-                        <!--                                </span>-->
-                        <!--                                </div>-->
-                        <!--                            </div>-->
-                        <!--                        </div>-->
                     </div>
                 </div>
             </div>

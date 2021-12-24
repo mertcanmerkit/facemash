@@ -613,6 +613,7 @@ function selectUser(type) {
             // *** **** handle mert please handle
         } else {
             $(".progress").show();
+
             $(".firstProgressText").html(response.firstScore + "%");
             $(".secondProgressText").html(response.secondScore + "%");
 
@@ -622,6 +623,8 @@ function selectUser(type) {
                 console.log("timeOut");
                 startModalWithCategory(mCategoryId, false);
                 $(".progress").hide();
+                $(".firstProgress").css("width", "0%");
+                $(".secondProgress").css("width", "0%");
                 $(".firstCard").removeClass("shadowC");
                 $(".secondCard").removeClass("shadowC");
 
