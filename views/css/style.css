@@ -219,7 +219,7 @@ button {
 
 .statistics .list-group-item{
     padding: 0.5rem 0rem;
-    color: white;
+    color: #9cc7ff;
     background-color: unset;
     border: unset;
 
@@ -231,6 +231,10 @@ button {
     width: 45px;
     height: auto;
     border-radius: 99px;
+}
+
+.voteCount{
+    color: #7c899b!important;
 }
 
 .blue-text {

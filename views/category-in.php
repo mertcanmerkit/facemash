@@ -68,11 +68,16 @@ array_splice($allImages, 5, count($allImages));
         <?= $renderedCategory ?>
         <div class="col-lg-9 col-md-8 col-sm-6 mt-3 mb-3">
             <div class="card card-shadow-white img-cards">
-                <h5 class="text-white text-break" style="padding: 1rem 1rem 0rem 1rem;">Top Rated</h5>
+                <h5 class="text-white text-break" style="padding: 1rem 1rem 0rem 1rem;">
+                    Top Rated
+                    <small id="copyAlert" class="float-end"></small>
+                    <a id="share" onclick="copyToClipboard(url)">
+                    <i class="fas fa-share-alt yellow-text float-end" style="font-size: 25px;"></i>
+                    </a>
+                </h5>
                 <div class="card-body">
                     <div class="row">
                         <ul class="statistics">
-
                             <?php
                             foreach ($allImages as $image) {
                                 ?>
@@ -83,7 +88,7 @@ array_splice($allImages, 5, count($allImages));
                                     </a>
                                     <a href="https://www.instagram.com/<?= $image["name"]; ?>" target="_blank"
                                        class="me-auto"><?= "@" . $image["name"]; ?></a>
-                                    <span class="float-end"><?= $image["count"]; ?> Votes</span>
+                                    <span class="voteCount float-end"><?= $image["count"]; ?> Votes</span>
                                 </li>
                                 <?php
                             }
@@ -91,18 +96,15 @@ array_splice($allImages, 5, count($allImages));
                         </ul>
                     </div>
                 </div>
-            </div>
-
-        </div>
-
-        <div class="container">
-            <div class="row">
-                <h1><?= $categorySumCount ?></h1>
+                <p class="voteCount text-break" style="padding: 0rem 1rem 0rem 1rem;">The winners out of <?= $categorySumCount ?> votes.</p>
             </div>
         </div>
     </div>
 </div>
 
+<script>
+    var url = window.location.href;
+</script>
 
 
 

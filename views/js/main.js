@@ -560,6 +560,24 @@ function startModalWithCategory(categoryId, show = true) {
     });
 }
 
+function copyToClipboard(element) {
+    var $temp = $("<input>");
+    $("body").append($temp);
+    $temp.val(element).select();
+    document.execCommand("copy");
+    $temp.remove();
+    $("#copyAlert").html("Copied");
+    $("#share").hide();
+
+    $("#copyAlert").fadeTo(1000, 500).slideUp(500, function() {
+        $("#copyAlert").slideUp(500);
+        $("#share").show();
+    });
+
+
+}
+
+
 function createImageUrl(image) {
     return "/php/image.php?name=" + image;
 }
