@@ -470,6 +470,9 @@ button {
 .shadow:hover:after{
     content: "";
 }
+.shadowC:after{
+    content: "";
+}
 
 .shadow:before,
 .shadow:after{

@@ -62,10 +62,11 @@ switch ($operation) {
         $database = new DataBase();
         $user = new User($database->getDb());
         if ($user->checkLoginWithToken()) {
+            $category = new Category($database->db, $user);
+
             if (isset($_POST["userName"]) && !empty($_POST["userName"])) {
                 $image = new Image($_POST["userName"]);
                 if ($image->getImage()) {
-                    $category = new Category($database->db, $user);
                     $categoryName = $category->getCategoryNameWithCategoryId($_POST["categoryId"]);
                     if (!empty($categoryName) && $categoryName) {
                         if ($category->addImageToCategory($_POST["categoryId"], $image->imageId)) {
@@ -87,8 +88,9 @@ switch ($operation) {
         $category = new Category($database->getDb());
         if (!isset($_POST["categoryId"]))
             jsonDie(array("error" => true, "reason" => "CategoryId Not Found!!!"));
-
         $allImages = $category->getAllImagesWithCategoryId($_POST["categoryId"]);
+        if (count($allImages) == 0 || count($allImages) == 1)
+            jsonDie(array("error" => true, "reason" => "Not enough image", "errorCode" => 1));
         jsonDie(array("error" => false, "data" => $allImages));
         break;
     case "getCategory":
@@ -103,8 +105,17 @@ switch ($operation) {
         break;
     case "selectUser":
         $database = new DataBase();
-        jsonDie($database->addSelectUser(encryptOrDecrypt($_POST["categoryDataId"],"decrypt")));
+        $firstDataId = @$_POST["firstDataId"];
+        $secondDataId = @$_POST["secondDataId"];
+
+        if (!isset($firstDataId) && !isset($secondDataId))
+            jsonDie(array("error" => true, "reason" => "missing arguments"));
+        $categoryId = encryptOrDecrypt($_POST["categoryDataId"], "decrypt");
+        $firstDataId = encryptOrDecrypt($firstDataId, "decrypt");
+        $secondDataId = encryptOrDecrypt($secondDataId, "decrypt");
+        jsonDie($database->addSelectUser($categoryId, $firstDataId, $secondDataId));
         break;
     default:
         jsonDie(array("error" => true, "reason" => "unexpected operation"));
 }
+

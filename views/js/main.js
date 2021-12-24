@@ -378,7 +378,7 @@ function createSpinner(where) {
         $(".categories-out").append('<div class="container"><div class="row justify-content-center align-content-center"><div class="d-flex spinner-border text-light getCategoriesSpinner" role="status">\n' +
             '  <span class="sr-only">Loading...</span>\n' +
             '</div></div></div>');
-    }else if(where === "getUserCategories") {
+    } else if (where === "getUserCategories") {
         $(".user-categories").append('<div class="container"><div class="row justify-content-center align-content-center"><div class="d-flex spinner-border text-light getCategoriesSpinner" role="status">\n' +
             '  <span class="sr-only">Loading...</span>\n' +
             '</div></div></div>');
@@ -388,7 +388,7 @@ function createSpinner(where) {
 function deleteSpinner(where) {
     if (where === "getCategories") {
         $(".getCategoriesSpinner").remove();
-    }else if (where === "getUserCategories") {
+    } else if (where === "getUserCategories") {
         $(".getCategoriesSpinner").remove();
     }
 }
@@ -397,14 +397,14 @@ var inRequest = false;
 var globalPage = 1;
 
 function checkNeedNewCategory(where) {
-    if(where == "getCategories"){
+    if (where == "getCategories") {
         if ($(window).scrollTop() + $(window).height() == $(document).height()) {
             getCategories(globalPage);
         }
         if ($(window).scrollTop() + $(window).height() < $(document).height() - 20) {
             getCategories(globalPage);
         }
-    } else if(where === "getUserCategories"){
+    } else if (where === "getUserCategories") {
         if ($(window).scrollTop() + $(window).height() == $(document).height()) {
             getUserCategories(globalPage);
         }
@@ -467,8 +467,8 @@ function getUserCategories(page) {
     createSpinner("getUserCategories");
     $.ajax(settings).done(function (response) {
         if (response === "" || !response || response.length === 0) {
-            if(globalPage === 1){
-            $(".category-empty").html("You have no categories. Why? You should add one. <br><a href='add-category' class='blue-text'>Click me to add category.</a>");
+            if (globalPage === 1) {
+                $(".category-empty").html("You have no categories. Why? You should add one. <br><a href='add-category' class='blue-text'>Click me to add category.</a>");
             }
             deleteSpinner("getUserCategories");
             return
@@ -518,7 +518,7 @@ $(document).ready(function () {
                 getCategories(globalPage);
             }
         });
-    } else if($(".user-categories")[0]){
+    } else if ($(".user-categories")[0]) {
         getUserCategories(globalPage);
         $(window).scroll(function () {
             if ($(window).scrollTop() + $(window).height() == $(document).height()) {
@@ -550,6 +550,9 @@ function startModalWithCategory(categoryId, show = true) {
         response = JSON.parse(response);
         if (response.error) {
             // *** **** handle mert please handle
+            if (response.errorCode !== undefined && response.errorCode === 1) {
+                window.location.href = '/category/' + mCategoryId;
+            }
         } else {
             handleMashData(response.data, show)
 
@@ -569,12 +572,12 @@ function handleMashData(data, show) {
     }
     $(".modalTitle").html(data[0].categoryName);
 
-    $(".usernameFirst").html("@"+data[0].name);
+    $(".usernameFirst").html("@" + data[0].name);
     $(".imageFirst").attr("src", createImageUrl(data[0].image));
     $("input[name=firstId]").val(data[0].categoryId);
 
     $(".imageSecond").attr("src", createImageUrl(data[1].image));
-    $(".usernameSecond").html("@"+data[1].name);
+    $(".usernameSecond").html("@" + data[1].name);
     $("input[name=secondId]").val(data[1].categoryId);
     if (show)
         $("#mashModal").modal("show");
@@ -582,6 +585,15 @@ function handleMashData(data, show) {
 
 function selectUser(type) {
     var categoryDataId = $("input[name=" + type + "Id]").val();
+    var firstId = $("input[name=firstId]").val();
+    var secondId = $("input[name=secondId]").val();
+
+    if (type === "first") {
+        $(".firstCard").addClass("shadowC");
+    } else {
+        $(".secondCard").addClass("shadowC");
+    }
+
     var settings = {
         "url": "operations.php",
         "method": "POST",
@@ -592,7 +604,7 @@ function selectUser(type) {
         "processData": false,
         "mimeType": "multipart/form-data",
         "contentType": false,
-        "data": "categoryDataId=" + categoryDataId + "&operation=selectUser"
+        "data": "categoryDataId=" + categoryDataId + "&firstDataId=" + firstId + "&secondDataId=" + secondId + "&operation=selectUser"
     };
 
     $.ajax(settings).done(function (response) {
@@ -600,7 +612,22 @@ function selectUser(type) {
         if (response.error) {
             // *** **** handle mert please handle
         } else {
-            startModalWithCategory(mCategoryId, false)
+            $(".progress").show();
+            $(".firstProgressText").html(response.firstScore + "%");
+            $(".secondProgressText").html(response.secondScore + "%");
+
+            $(".firstProgress").css("width", response.firstScore + "%");
+            $(".secondProgress").css("width", response.secondScore + "%");
+            const timeout = setTimeout(() => {
+                console.log("timeOut");
+                startModalWithCategory(mCategoryId, false);
+                $(".progress").hide();
+                $(".firstCard").removeClass("shadowC");
+                $(".secondCard").removeClass("shadowC");
+
+                clearTimeout(timeout)
+            }, 2000);
+
 
         }
     });
