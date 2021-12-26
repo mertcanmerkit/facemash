@@ -5,15 +5,16 @@ class CategoryCard
 
     private $categoryId, $imagesArray, $name, $color;
     public $lastColor;
+    private $user = null;
 
-    public function __construct($categoryId, $imagesArray, $name, $lastColor)
+    public function __construct($categoryId, $imagesArray, $name, $lastColor, $user = null)
     {
         $this->categoryId = $categoryId;
         $this->imagesArray = $imagesArray;
         $this->name = $name;
         $this->lastColor = $lastColor;
         $this->color = $this->generateColor();
-
+        $this->user = $user;
 
     }
 
@@ -74,7 +75,8 @@ class CategoryCard
     {
         return ' </div>
                 </div>
-                <button type="button" class="btn btn-outline-primary start-btn ' . $this->color . '-border ' . $this->color . '-text fw-bold" onclick="startModalWithCategory(\'' . $this->categoryId . '\')">Start
+                <button type="button" class="btn btn-outline-primary start-btn ' . $this->color . '-border ' . $this->color . '-text fw-bold" onclick="startModalWithCategory(\'' . $this->categoryId . '\')">
+                ' . $this->getStartOrRestart() . '
                 </button>
                       </div>
         </div>
@@ -86,6 +88,17 @@ class CategoryCard
        });
         </script>
         ';
+    }
+
+    private function getStartOrRestart()
+    {
+        if ($this->user == null)
+            return "Start";
+        if ($this->user["finishedCategories"] == $this->categoryId)
+            return "Restart";
+        if (in_array($this->categoryId, explode(",", $this->user["finishedCategories"])))
+            return "Restart";
+        return "Start";
     }
 
     private function generateColor()

@@ -3,7 +3,7 @@ $categoryId = $explodedUrl[1];
 
 $renderedCategory = $category->getRenderedCategory($categoryId);
 $categorySumCount = $category->getCategorySumCount($categoryId);
-$allImages = $category->getAllImagesWithCategoryId($categoryId, false, $shuffle = false);
+$allImages = $category->getAllImagesWithCategoryId($categoryId, false, $shuffle = false,false);
 array_splice($allImages, 5, count($allImages));
 
 ?>

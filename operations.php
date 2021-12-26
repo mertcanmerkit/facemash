@@ -90,10 +90,19 @@ switch ($operation) {
         $database = new DataBase();
         $category = new Category($database->getDb());
         if (!isset($_POST["categoryId"]))
-            jsonDie(array("error" => true, "reason" => "CategoryId Not Found!!!"));
+            jsonDie(array("error" => true, "reason" => "CategoryId Not Found"));
         $allImages = $category->getAllImagesWithCategoryId($_POST["categoryId"]);
-        if (count($allImages) == 0 || count($allImages) == 1)
-            jsonDie(array("error" => true, "reason" => "Not enough image", "errorCode" => 1));
+        if (count($allImages) == 0 || count($allImages) == 1) {
+            $user = new User($database->getDb());
+            $user->getUser();
+            if ($user->addFinishedCategories($_POST["categoryId"])["updated"]) {
+                jsonDie(array("error" => true, "reason" => "Not enough image", "errorCode" => 1));
+            } else {
+                $allImages = $category->getAllImagesWithCategoryId($_POST["categoryId"], false);
+             //   array_splice($allImages, 2, count($allImages));
+
+            }
+        }
         jsonDie(array("error" => false, "data" => $allImages));
         break;
     case "getCategory":

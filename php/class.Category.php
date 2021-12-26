@@ -7,7 +7,6 @@ class Category
      */
     private $db = null;
     private $user = null;
-    //private $imageId = null;
 
     /**
      * @param $db
@@ -90,11 +89,12 @@ class Category
         $fth = $sth->fetchAll(PDO::FETCH_ASSOC);
         $renderedData = "";
         $lastColor = "";
+        $user = new User($this->db);
         foreach ($fth as $categoryData) {
             $categoryId = $categoryData["categoryId"];
             $categoryImages = $this->getCategoryImages($categoryId);
             $categoryName = $this->getCategoryNameWithCategoryId($categoryId);
-            $categoryCard = new CategoryCard($categoryId, $categoryImages, $categoryName, $lastColor);
+            $categoryCard = new CategoryCard($categoryId, $categoryImages, $categoryName, $lastColor,$user->getUser());
             $lastColor = $categoryCard->lastColor;
             $renderedData .= $categoryCard->render();
         }
@@ -116,11 +116,12 @@ class Category
         $fth = $sth->fetchAll(PDO::FETCH_ASSOC);
         $renderedData = "";
         $lastColor = "";
+        $user = new User($this->db);
         foreach ($fth as $categoryData) {
             $categoryId = $categoryData["categoryId"];
             $categoryImages = $this->getCategoryImages($categoryId);
             $categoryName = $this->getCategoryNameWithCategoryId($categoryId);
-            $categoryCard = new CategoryCard($categoryId, $categoryImages, $categoryName, $lastColor);
+            $categoryCard = new CategoryCard($categoryId, $categoryImages, $categoryName, $lastColor, $user->getUser());
             $lastColor = $categoryCard->lastColor;
             $renderedData .= $categoryCard->render();
         }
@@ -158,7 +159,7 @@ class Category
             $categoryId = $categoryData["categoryId"];
             $categoryImages = $this->getCategoryImages($categoryId);
             $categoryName = $this->getCategoryNameWithCategoryId($categoryId);
-            $categoryCard = new CategoryCard($categoryId, $categoryImages, $categoryName, $lastColor);
+            $categoryCard = new CategoryCard($categoryId, $categoryImages, $categoryName, $lastColor, $user->user);
             $lastColor = $categoryCard->lastColor;
             $renderedData .= $categoryCard->render();
         }
@@ -224,6 +225,7 @@ class Category
         if ($shuffle) {
             shuffle($fth);
         }
+
         foreach ($fth as $categoryData) {
             if (count($arr) == 2 && $ignoreVoters)
                 return $arr;
