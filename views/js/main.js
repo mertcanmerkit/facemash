@@ -380,7 +380,7 @@ function createSpinner(where) {
             '</div></div></div>');
     } else if (where === "getUserCategories") {
         $(".user-categories").append('<div class="container"><div class="row justify-content-center align-content-center"><div class="d-flex spinner-border text-light getCategoriesSpinner" role="status">\n' +
-            '  <span class="sr-only">Loading...</span>\n' +
+            '  <span class="sr-only">ing...</span>\n' +
             '</div></div></div>');
     }
 }
@@ -569,7 +569,7 @@ function copyToClipboard(element) {
     $("#copyAlert").html("Copied");
     $("#share").hide();
 
-    $("#copyAlert").fadeTo(1000, 500).slideUp(500, function() {
+    $("#copyAlert").fadeTo(1000, 500).slideUp(500, function () {
         $("#copyAlert").slideUp(500);
         $("#share").show();
     });

@@ -33,7 +33,7 @@ class CategoryCard
                 <i class="far fa-plus-square float-end"></i>
             </a>
         </h5>
-        <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+        <div id="carouselExampleSlidesOnly" class="carousel slide carousel-id-' . $this->categoryId . '" data-bs-ride="carousel">
             <div class="carousel-inner">
         ';
     }
@@ -57,7 +57,7 @@ class CategoryCard
                         ';
             }
             $str .= '<div class="col-4 mb-3">
- <img src="/php/Image.php?name=' . $image . '" class="card-img" alt="' . encryptOrDecrypt($image, "decrypt") . '">
+ <img src="/php/Image.php?name=' . $image . '" class="card-img img-category-' . $this->categoryId . '" alt="' . encryptOrDecrypt($image, "decrypt") . '">
   </div>
   ';
 
@@ -77,7 +77,15 @@ class CategoryCard
                 <button type="button" class="btn btn-outline-primary start-btn ' . $this->color . '-border ' . $this->color . '-text fw-bold" onclick="startModalWithCategory(\'' . $this->categoryId . '\')">Start
                 </button>
                       </div>
-        </div>';
+        </div>
+        <script>
+       $(".img-category-' . $this->categoryId . '").on("load",function(){
+        const height = $($(".carousel-id-' . $this->categoryId . '")).height();
+        $(".carousel-id-' . $this->categoryId . '").css("min-height", height);
+       
+       });
+        </script>
+        ';
     }
 
     private function generateColor()

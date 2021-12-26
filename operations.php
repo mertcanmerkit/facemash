@@ -63,10 +63,13 @@ switch ($operation) {
         $user = new User($database->getDb());
         if ($user->checkLoginWithToken()) {
             $category = new Category($database->db, $user);
-
             if (isset($_POST["userName"]) && !empty($_POST["userName"])) {
                 $image = new Image($_POST["userName"]);
-                if ($image->getImage()) {
+                $mImage = $image->getImage();
+                if ($category->checkInCategory($_POST["categoryId"], $image)) {
+                    jsonDie(array("error" => true, "reason" => "This user already Added"));
+                }
+                if ($mImage) {
                     $categoryName = $category->getCategoryNameWithCategoryId($_POST["categoryId"]);
                     if (!empty($categoryName) && $categoryName) {
                         if ($category->addImageToCategory($_POST["categoryId"], $image->imageId)) {

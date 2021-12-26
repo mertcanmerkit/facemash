@@ -106,7 +106,7 @@ class Category
         if ($page != 1) {
             $limitRow = $page * 8;
             $limit = $limitRow . ",8";
-         //   sleep(2);
+            //   sleep(2);
         } else {
             $limit = "0,8";
         }
@@ -133,7 +133,7 @@ class Category
         if ($page != 1) {
             $limitRow = $page * 8;
             $limit = $limitRow . ",8";
-        //    sleep(2);
+            //    sleep(2);
         } else {
             $limit = "0,8";
         }
@@ -185,7 +185,8 @@ class Category
         return $sth->fetch(PDO::FETCH_ASSOC)["name"];
     }
 
-    public function getCategorySumCount($categoryId){
+    public function getCategorySumCount($categoryId)
+    {
         $sth = $this->db->prepare("select distinct categoryId, SUM(count) as sumCount from categoryData WHERE categoryId= :categoryId group by categoryId order by sumCount");
         $sth->execute(array("categoryId" => $categoryId));
         return $sth->fetch(PDO::FETCH_ASSOC)["sumCount"];
@@ -220,7 +221,7 @@ class Category
         $fth = $sth->fetchAll(PDO::FETCH_ASSOC);
         $arr = array();
         $categoryName = $this->getCategoryNameWithCategoryId($categoryId);
-        if($shuffle){
+        if ($shuffle) {
             shuffle($fth);
         }
         foreach ($fth as $categoryData) {
@@ -249,6 +250,14 @@ class Category
         }
         return $arr;
 
+    }
+
+    public function checkInCategory($categoryId, $image)
+    {
+        $imageID = $image->imageId;
+        $sth = $this->db->prepare("select id from categoryData where (categoryId = :cat_id and imageId = :imageid)");
+        $sth->execute(array("cat_id" => $categoryId, "imageid" => $imageID));
+        return $sth->fetch();
     }
 
 

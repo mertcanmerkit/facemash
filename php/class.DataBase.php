@@ -163,7 +163,7 @@ class DataBase
         }
 
         $newCount = intval($categoryData["count"]) + 1;
-        $sth = $this->db->prepare("update categoryData set count = :newcount, voters = :newvoters where id = :id");
+        $sth = $this->db->prepare("update categoryData set count = :newcount, voters = :newvoters, date = CURRENT_TIMESTAMP () where id = :id");
         $sth->execute(array(
             "newcount" => $newCount,
             "newvoters" => $newVoters,
