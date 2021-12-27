@@ -1,6 +1,6 @@
 <div class="container" style="color: #fff;">
     <div class="row">
-        <div class="col-12 col-md-6 mt-3">
+        <div class="col mt-3">
             <div class="card card-shadow-green img-cards">
                 <h5 class="green-text text-break" style="padding: 1rem 1rem 0rem 1rem;">Change Your Password</h5>
                 <div class="card-body">
@@ -14,8 +14,7 @@
                 </div>
 
                 <button type="button"
-                        class="btn btn-outline-primary start-btn green-border green-text fw-bold"
-                        onclick="passwordChange()">
+                        class="btn btn-outline-primary start-btn green-border green-text fw-bold" id="passChangeBtn" onclick="passwordChange()">
                     Change
                 </button>
             </div>

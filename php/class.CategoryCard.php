@@ -75,7 +75,7 @@ class CategoryCard
     {
         return ' </div>
                 </div>
-                <button type="button" class="btn btn-outline-primary start-btn ' . $this->color . '-border ' . $this->color . '-text fw-bold" onclick="startModalWithCategory(\'' . $this->categoryId . '\')">
+                <button type="button" class="btn btn-outline-primary start-btn ' . $this->color . '-border ' . $this->color . '-text fw-bold" id="startMashBtn" onclick="startModalWithCategory(\'' . $this->categoryId . '\')">
                 ' . $this->getStartOrRestart() . '
                 </button>
                       </div>

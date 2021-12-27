@@ -68,5 +68,4 @@
     <div class="row mt-3 categories-out">
 
     </div>
-
 </div>
