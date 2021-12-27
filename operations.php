@@ -99,7 +99,7 @@ switch ($operation) {
                 jsonDie(array("error" => true, "reason" => "Not enough image", "errorCode" => 1));
             } else {
                 $allImages = $category->getAllImagesWithCategoryId($_POST["categoryId"], false);
-             //   array_splice($allImages, 2, count($allImages));
+                //   array_splice($allImages, 2, count($allImages));
 
             }
         }
@@ -126,6 +126,14 @@ switch ($operation) {
         $firstDataId = encryptOrDecrypt($firstDataId, "decrypt");
         $secondDataId = encryptOrDecrypt($secondDataId, "decrypt");
         jsonDie($database->addSelectUser($categoryId, $firstDataId, $secondDataId));
+        break;
+    case "search":
+        if (!isset($_POST["searchText"]) || empty($_POST["searchText"]))
+            jsonDie(array("error" => true, "reason" => "Missing argument's"));
+        $database = new DataBase();
+        $dataArray = $database->searchText($_POST["searchText"]);
+        jsonDie(array("error" => false, "data" => $dataArray));
+
         break;
     default:
         jsonDie(array("error" => true, "reason" => "unexpected operation"));

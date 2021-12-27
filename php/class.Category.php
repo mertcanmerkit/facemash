@@ -94,7 +94,7 @@ class Category
             $categoryId = $categoryData["categoryId"];
             $categoryImages = $this->getCategoryImages($categoryId);
             $categoryName = $this->getCategoryNameWithCategoryId($categoryId);
-            $categoryCard = new CategoryCard($categoryId, $categoryImages, $categoryName, $lastColor,$user->getUser());
+            $categoryCard = new CategoryCard($categoryId, $categoryImages, $categoryName, $lastColor, $user->getUser());
             $lastColor = $categoryCard->lastColor;
             $renderedData .= $categoryCard->render();
         }
@@ -235,6 +235,9 @@ class Category
                 $explodedVoters = explode(",", $voters);
                 $isBreak = false;
                 foreach ($explodedVoters as $explodedVoter) {
+                    if (!$this->user->user) {
+                        jsonDie(array("error" => true, "reason" => "Please Login"));
+                    }
                     if ($explodedVoter == $this->user->user["id"]) {
                         $isBreak = true;
                     }
@@ -254,7 +257,8 @@ class Category
 
     }
 
-    public function checkInCategory($categoryId, $image)
+    public
+    function checkInCategory($categoryId, $image)
     {
         $imageID = $image->imageId;
         $sth = $this->db->prepare("select id from categoryData where (categoryId = :cat_id and imageId = :imageid)");
