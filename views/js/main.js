@@ -62,10 +62,12 @@ const usernameValidation = document.getElementById("usernameValidation");
 
 
 function addSpinner(mClass) {
+    $(mClass).html("");
     $(mClass).append("  <span class=\"spinner-border spinner-border-sm mspinner_" + mClass.substring(1) + " \" role=\"status\" aria-hidden=\"true\"></span>\n")
 }
 
-function removeSpinner(mClass) {
+function removeSpinner(mClass, htmlText) {
+    $(mClass).html(htmlText);
     $(".mspinner_" + mClass.substring(1)).remove();
 }
 
@@ -85,9 +87,10 @@ function register() {
         "contentType": false,
         "data": "email=" + email + "&username=" + username + "&pass=" + pass + "&operation=register"
     };
+    let registerBtnText = $("#registerBtn").text();
     addSpinner("#registerBtn");
     $.ajax(settings).done(function (response) {
-        removeSpinner("#registerBtn");
+        removeSpinner("#registerBtn", registerBtnText);
         response = JSON.parse(response);
         if (response.error) {
             if (response.reason === 'email') {
@@ -134,8 +137,10 @@ function login() {
         "contentType": false,
         "data": "email=" + email + "&pass=" + pass + "&operation=login"
     };
-
+    let loginBtnText = $("#loginBtn").text();
+    addSpinner("#loginBtn");
     $.ajax(settings).done(function (response) {
+        removeSpinner("#loginBtn", loginBtnText);
         response = JSON.parse(response);
         if (response.login) {
             setCookie("__token__", response.token, 10);
@@ -175,8 +180,10 @@ function passwordReset() {
         "contentType": false,
         "data": "email=" + email + "&operation=reset"
     };
-
+    let passResetBtn = $("#passResetBtn").text();
+    addSpinner("#passResetBtn");
     $.ajax(settings).done(function (response) {
+        removeSpinner("#passResetBtn", passResetBtn);
         response = JSON.parse(response);
         if (response.reset) {
             // success
@@ -217,8 +224,10 @@ function passwordChange() {
         "contentType": false,
         "data": "pass=" + pass + "&secretKey=" + secretKey + "&operation=changePass"
     };
-
+    let passChangeBtn = $("#passChangeBtn").text();
+    addSpinner("#passChangeBtn");
     $.ajax(settings).done(function (response) {
+        removeSpinner("#passChangeBtn", passChangeBtn);
         response = JSON.parse(response);
 
         if (response.changePass) {
@@ -366,8 +375,10 @@ function addCategory() {
         "contentType": false,
         "data": "firstUsername=" + firstUsername + "&categoryName=" + categoryName + "&operation=addCategory"
     };
-
+    let addCategoryBtn = $("#addCategoryBtn").text();
+    addSpinner("#addCategoryBtn");
     $.ajax(settings).done(function (response) {
+        removeSpinner("#addCategoryBtn", addCategoryBtn);
         response = JSON.parse(response);
         console.log(response);
         $(".reasons").html(response.reason);
@@ -505,8 +516,10 @@ function addPhoto(id) {
         "contentType": false,
         "data": "userName=" + name + "&categoryId=" + id + "&operation=addPhoto"
     };
-
+    let addPhotoBtn = $("#addPhotoBtn").text();
+    addSpinner("#addPhotoBtn");
     $.ajax(settings).done(function (response) {
+        removeSpinner("#addPhotoBtn", addPhotoBtn);
         response = JSON.parse(response);
         console.log(response);
         if (response.error) {
@@ -554,8 +567,10 @@ function startModalWithCategory(categoryId, show = true) {
         "contentType": false,
         "data": "categoryId=" + categoryId + "&operation=getMash"
     };
-
+    let startMashBtn = $("#startMashBtn").text();
+    addSpinner("#startMashBtn");
     $.ajax(settings).done(function (response) {
+        removeSpinner("#startMashBtn", startMashBtn);
         response = JSON.parse(response);
         if (response.error) {
             // *** **** handle mert please handle

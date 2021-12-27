@@ -33,7 +33,7 @@ if (!$isLogged) {
                     </div>
                 </div>
                 <button type="button"
-                        class="btn btn-outline-primary start-btn blue-border blue-text fw-bold" onclick="addCategory()">Create
+                        class="btn btn-outline-primary start-btn blue-border blue-text fw-bold" id="addCategoryBtn" onclick="addCategory()">Create
                 </button>
             </div>
         </div>

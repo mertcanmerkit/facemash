@@ -39,6 +39,7 @@ if ($category == null && empty($category)) {
                 </div>
                 <button type="button"
                         class="btn btn-outline-primary start-btn blue-border blue-text fw-bold"
+                        id="addPhotoBtn"
                         onclick="addPhoto(<?= $_GET["id"] ?>);">Add
                 </button>
             </div>
