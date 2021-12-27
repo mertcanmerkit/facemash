@@ -120,9 +120,36 @@ class User
     public function getToken()
     {
         if ($this->token == null) {
-            $this->token = $_COOKIE[COOKIE_NAME];
+            $this->token = @$_COOKIE[COOKIE_NAME];
         }
         return $this->token;
+    }
+
+    public function addFinishedCategories($categoryId)
+    {
+        $newFinishedCategories = "";
+        $inArray = false;
+        if (explode(",", $this->user["finishedCategories"])[0] == $this->user["finishedCategories"]) {
+            $newFinishedCategories = $this->user["finishedCategories"] . "," . $categoryId;
+        } else if (empty($this->user["finishedCategories"])) {
+            $newFinishedCategories = $categoryId;
+        } else {
+            $arr = explode(",", $this->user["finishedCategories"]);
+            if (in_array($categoryId, $arr))
+                $inArray = true;
+            $arr[] = $categoryId;
+            $newFinishedCategories = implode(",", $arr);
+        }
+        if ($inArray)
+            return array("updated"=>false);
+
+        $sth = $this->db->prepare("update users set finishedCategories = :newFinishedCategories where id = :id");
+        $sth->execute(array(
+            "newFinishedCategories" => $newFinishedCategories,
+            "id" => $this->user["id"]
+        ));
+        $sth->fetch();
+        return array("updated" => true );
     }
 
 

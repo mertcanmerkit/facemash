@@ -5,15 +5,16 @@ class CategoryCard
 
     private $categoryId, $imagesArray, $name, $color;
     public $lastColor;
+    private $user = null;
 
-    public function __construct($categoryId, $imagesArray, $name, $lastColor)
+    public function __construct($categoryId, $imagesArray, $name, $lastColor, $user = null)
     {
         $this->categoryId = $categoryId;
         $this->imagesArray = $imagesArray;
         $this->name = $name;
         $this->lastColor = $lastColor;
         $this->color = $this->generateColor();
-
+        $this->user = $user;
 
     }
 
@@ -33,7 +34,7 @@ class CategoryCard
                 <i class="far fa-plus-square float-end"></i>
             </a>
         </h5>
-        <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+        <div id="carouselExampleSlidesOnly" class="carousel slide carousel-id-' . $this->categoryId . '" data-bs-ride="carousel">
             <div class="carousel-inner">
         ';
     }
@@ -57,7 +58,7 @@ class CategoryCard
                         ';
             }
             $str .= '<div class="col-4 mb-3">
- <img src="/php/Image.php?name=' . $image . '" class="card-img" alt="' . encryptOrDecrypt($image, "decrypt") . '">
+ <img src="/php/Image.php?name=' . $image . '" class="card-img img-category-' . $this->categoryId . '" alt="' . encryptOrDecrypt($image, "decrypt") . '">
   </div>
   ';
 
@@ -74,10 +75,30 @@ class CategoryCard
     {
         return ' </div>
                 </div>
-                <button type="button" class="btn btn-outline-primary start-btn ' . $this->color . '-border ' . $this->color . '-text fw-bold" onclick="startModalWithCategory(\'' . $this->categoryId . '\')">Start
+                <button type="button" class="btn btn-outline-primary start-btn ' . $this->color . '-border ' . $this->color . '-text fw-bold" onclick="startModalWithCategory(\'' . $this->categoryId . '\')">
+                ' . $this->getStartOrRestart() . '
                 </button>
                       </div>
-        </div>';
+        </div>
+        <script>
+       $(".img-category-' . $this->categoryId . '").on("load",function(){
+        const height = $($(".carousel-id-' . $this->categoryId . '")).height();
+        $(".carousel-id-' . $this->categoryId . '").css("min-height", height);
+       
+       });
+        </script>
+        ';
+    }
+
+    private function getStartOrRestart()
+    {
+        if ($this->user == null)
+            return "Start";
+        if ($this->user["finishedCategories"] == $this->categoryId)
+            return "Restart";
+        if (in_array($this->categoryId, explode(",", $this->user["finishedCategories"])))
+            return "Restart";
+        return "Start";
     }
 
     private function generateColor()

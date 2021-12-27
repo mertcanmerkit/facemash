@@ -149,7 +149,7 @@ class DataBase
         $user = new User($this->db);
         $user->getUser();
         $categoryData['voters'] ??= "";
-
+        $inArray = false;
         if (explode(",", $categoryData["voters"])[0] == $categoryData["voters"]) {
             $newVoters = $categoryData["voters"] . "," . $user->user["id"];
         } else if (empty($categoryData["voters"])) {
@@ -157,25 +157,34 @@ class DataBase
         } else {
             $arr = explode(",", $categoryData["voters"]);
             if (in_array($user->user["id"], $arr))
-                return array("error" => true, "reason" => "already voted");
+                $inArray = true;
+            //return array("error" => true, "reason" => "already voted");
             $arr[] = $user->user["id"];
             $newVoters = implode(",", $arr);
         }
-
-        $newCount = intval($categoryData["count"]) + 1;
-        $sth = $this->db->prepare("update categoryData set count = :newcount, voters = :newvoters where id = :id");
-        $sth->execute(array(
-            "newcount" => $newCount,
-            "newvoters" => $newVoters,
-            "id" => $categoryDataId
-        ));
-        $sth->execute();
+        if (!$inArray) {
+            if (!$this->checkUserFinishedWithCategory($categoryData["categoryId"], $user) or !in_array($user->user["id"], explode(",", $categoryData["voters"]))) {
+                $newCount = intval($categoryData["count"]) + 1;
+                $sth = $this->db->prepare("update categoryData set count = :newcount, voters = :newvoters, date = CURRENT_TIMESTAMP () where id = :id");
+                $sth->execute(array(
+                    "newcount" => $newCount,
+                    "newvoters" => $newVoters,
+                    "id" => $categoryDataId
+                ));
+                $sth->fetch();
+            }
+        } else {
+            $sth = $this->db->prepare("update categoryData set date = CURRENT_TIMESTAMP () where id = :id");
+            $sth->execute(array(
+                "id" => $categoryDataId
+            ));
+            $sth->fetch();
+        }
 
         $firstVoteCount = $this->getVoteCount($firstDataId);
         $secondVoteCount = $this->getVoteCount($secondDataId);
         $firstSumSecond = intval($firstVoteCount) + intval($secondVoteCount);
         $firstMath = (intval($firstVoteCount) * 100) / $firstSumSecond;
-
 
         return array("error" => false, "firstScore" => round($firstMath), "secondScore" => round(100 - $firstMath));
     }
@@ -193,6 +202,17 @@ class DataBase
         $sth->execute(array($categoryDataId));
 
         return $sth->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function checkUserFinishedWithCategory($categoryId, $user)
+    {
+        if ($user->user["finishedCategories"] == $categoryId)
+            return true;
+        if (explode(",", $user->user["finishedCategories"])[0] == $categoryId)
+            return true;
+        if (in_array($categoryId, explode(",", $user->user["finishedCategories"])))
+            return true;
+        return false;
     }
 
 

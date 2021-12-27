@@ -61,6 +61,14 @@ const usernameInput = document.getElementById("inputUsername");
 const usernameValidation = document.getElementById("usernameValidation");
 
 
+function addSpinner(mClass) {
+    $(mClass).append("  <span class=\"spinner-border spinner-border-sm mspinner_" + mClass.substring(1) + " \" role=\"status\" aria-hidden=\"true\"></span>\n")
+}
+
+function removeSpinner(mClass) {
+    $(".mspinner_" + mClass.substring(1)).remove();
+}
+
 function register() {
     var email = $("#inputEmail").val();
     var username = $("#inputUsername").val();
@@ -77,8 +85,9 @@ function register() {
         "contentType": false,
         "data": "email=" + email + "&username=" + username + "&pass=" + pass + "&operation=register"
     };
-
+    addSpinner("#registerBtn");
     $.ajax(settings).done(function (response) {
+        removeSpinner("#registerBtn");
         response = JSON.parse(response);
         if (response.error) {
             if (response.reason === 'email') {
@@ -380,7 +389,7 @@ function createSpinner(where) {
             '</div></div></div>');
     } else if (where === "getUserCategories") {
         $(".user-categories").append('<div class="container"><div class="row justify-content-center align-content-center"><div class="d-flex spinner-border text-light getCategoriesSpinner" role="status">\n' +
-            '  <span class="sr-only">Loading...</span>\n' +
+            '  <span class="sr-only">ing...</span>\n' +
             '</div></div></div>');
     }
 }
@@ -569,7 +578,7 @@ function copyToClipboard(element) {
     $("#copyAlert").html("Copied");
     $("#share").hide();
 
-    $("#copyAlert").fadeTo(1000, 500).slideUp(500, function() {
+    $("#copyAlert").fadeTo(1000, 500).slideUp(500, function () {
         $("#copyAlert").slideUp(500);
         $("#share").show();
     });
@@ -584,7 +593,7 @@ function createImageUrl(image) {
 
 function handleMashData(data, show) {
     if (data.length === 0 || data.length === 1) {
-        location.href = "category/49";
+      //  location.href = "category/49";
         /** handle mert handle */
         return;
     }
