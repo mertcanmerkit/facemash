@@ -608,7 +608,7 @@ function createImageUrl(image) {
 
 function handleMashData(data, show) {
     if (data.length === 0 || data.length === 1) {
-      //  location.href = "category/49";
+        //  location.href = "category/49";
         /** handle mert handle */
         return;
     }
@@ -678,3 +678,39 @@ function selectUser(type) {
     });
 
 }
+
+function search(text) {
+    var settings = {
+        "url": "operations.php",
+        "method": "POST",
+        "timeout": 0,
+        "headers": {
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        "processData": false,
+        "mimeType": "multipart/form-data",
+        "contentType": false,
+        "data": "searchText=" + text + "&operation=search"
+    };
+
+    $.ajax(settings).done(function (response) {
+        response = JSON.parse(response);
+        if (response.error) {
+            console.log("error!");
+        } else {
+            if (response.data.length === 0) {
+                //sonuç yok
+            } else {
+                console.log(response.data);
+                response.data.map(function (myData) {
+                    //mydata döngüde!
+                })
+            }
+        }
+    });
+
+}
+
+$('input[type="search"]').keyup(function () {
+    search($("input[type='search']").val())
+});
