@@ -220,6 +220,7 @@ class DataBase
         $sth = $this->db->prepare("select name,id from categories where name like :searchText");
         $sth->execute(array("searchText" => "%" . $searchText . "%"));
         $fth = $sth->fetchAll(PDO::FETCH_ASSOC);
+        sort($fth);
         return $fth;
     }
 

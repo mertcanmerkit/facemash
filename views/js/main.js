@@ -567,15 +567,18 @@ function startModalWithCategory(categoryId, show = true) {
         "contentType": false,
         "data": "categoryId=" + categoryId + "&operation=getMash"
     };
-    let startMashBtn = $("#startMashBtn").text();
-    addSpinner("#startMashBtn");
+    let buttonText = $(".btn-start-category-" + categoryId).text();
+    addSpinner(".btn-start-category-" + categoryId);
     $.ajax(settings).done(function (response) {
-        removeSpinner("#startMashBtn", startMashBtn);
+        removeSpinner(".btn-start-category-" + categoryId, buttonText);
         response = JSON.parse(response);
         if (response.error) {
             // *** **** handle mert please handle
             if (response.errorCode !== undefined && response.errorCode === 1) {
                 window.location.href = '/category/' + mCategoryId;
+            }
+            if (response.errorCode !== undefined && response.errorCode === 2) {
+                window.location.href = '/add-photo/' + mCategoryId + "&from=index";
             }
         } else {
             handleMashData(response.data, show)
