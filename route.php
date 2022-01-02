@@ -15,7 +15,7 @@ if (isset($_COOKIE[COOKIE_NAME])) {
 $ignoreArr = array(".php");
 if (!isset($_GET["sef"])) {
     header("HTTP/1.0 400 Bad Request");
-    jsonDie(array("error" => "Expolit test detected!"));
+    jsonDie(array("error" => "Exploit test detected!"));
 
 }
 if (contains(@$_GET["sef"], $ignoreArr)) {
@@ -26,7 +26,7 @@ if (contains(@$_GET["sef"], $ignoreArr)) {
 }
 if (str_contains($_GET["sef"], "../")) {
     header("HTTP/1.0 400 Bad Request");
-    jsonDie(array("error" => "Expolit test detected!"));
+    jsonDie(array("error" => "Exploit test detected!"));
 }
 $file = __DIR__ . "/views/" . $_GET["sef"] . ".php";
 if (file_exists($file)) {

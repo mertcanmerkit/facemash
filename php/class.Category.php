@@ -266,5 +266,31 @@ class Category
         return $sth->fetch();
     }
 
+    public function getTotalImageCount($categoryId)
+    {
+        $sth = $this->db->prepare("select COUNT(id) as idCount from categoryData where categoryId = ? ");
+        $sth->execute(array($categoryId));
+        return $sth->fetchAll(PDO::FETCH_ASSOC)[0];
+    }
+
+    public function getAllCategoryIds()
+    {
+        $sth = $this->db->prepare("select id from categories ");
+        $sth->execute();
+        return $sth->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getRandomCategoryId($array = null)
+    {
+        if ($array == null)
+            $array = $this->getAllCategoryIds();
+        shuffle($array);
+        if ($this->getTotalImageCount($array[0]["id"])["idCount"] < 2) {
+            $this->getRandomCategoryId($array);
+        }
+        return $array[0]["id"];
+
+    }
+
 
 }

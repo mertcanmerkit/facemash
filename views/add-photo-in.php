@@ -1,6 +1,6 @@
 <?php
 if (!$isLogged) {
-    header("Location: /login?from=add-photo&id=".$_GET["id"]."");
+    header("Location: /login?from=add-photo&id=" . $_GET["id"] . "");
 }
 if (!isset($_GET["id"])) {
     header("HTTP/1.0 400 Bad Request");
@@ -14,6 +14,10 @@ if ($category == null && empty($category)) {
     htmlDie("error");
     die();
 }
+$reason = "";
+if (isset($_GET["from"]) && $_GET["from"] == "index")
+    $reason = "Please add second image";
+
 ?>
 
 <div class="container" style="color: white;">
@@ -30,7 +34,7 @@ if ($category == null && empty($category)) {
                                    aria-describedby="basic-addon3"
                                    placeholder="username">
                         </div>
-                        <small id="firstUsernameValidation" class="text-danger d-felx"></small>
+                        <small id="firstUsernameValidation" class="text-danger d-felx"><?= $reason ?></small>
 
                         <small class="mb-3 text-break">The profile photo will be used for
                             voting.</small>

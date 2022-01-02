@@ -2,8 +2,7 @@
     <div class="container">
 
         <button type="button"
-                class="btn btn-outline-primary random-btn fw-bold d-flex justify-content-around align-items-center float-end"
-                data-bs-toggle="modal" data-bs-target="#exampleModal" id="random-btn">
+                class="btn btn-outline-primary random-btn fw-bold d-flex justify-content-around align-items-center float-end" onclick="startModalWithCategory(0)" id="random-btn">
             <i class="fas fa-dice" style="font-size: 24px;"></i>
         </button>
 
