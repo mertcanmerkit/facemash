@@ -95,19 +95,18 @@ switch ($operation) {
             $_POST["categoryId"] = $category->getRandomCategoryId();
         }
         $allImages = $category->getAllImagesWithCategoryId($_POST["categoryId"]);
-
         if (count($allImages) == 0 || count($allImages) == 1) {
             $user = new User($database->getDb());
             $user->getUser();
-            if ($category->getTotalImageCount($_POST["categoryId"]) > 2)
-                jsonDie(array("error" => true, "reason" => "Not enough image", "errorCode" => 2));
             if ($user->addFinishedCategories($_POST["categoryId"])["updated"]) {
                 jsonDie(array("error" => true, "reason" => "Not enough image", "errorCode" => 1));
             } else {
                 $allImages = $category->getAllImagesWithCategoryId($_POST["categoryId"], false);
-                //   array_splice($allImages, 2, count($allImages));
-
             }
+            if ($category->getTotalImageCount($_POST["categoryId"]) >= 2) {
+                jsonDie(array("error" => true, "reason" => "Not enough image", "errorCode" => 2));
+            }
+
         }
         jsonDie(array("error" => false, "data" => $allImages));
         break;

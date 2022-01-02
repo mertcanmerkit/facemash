@@ -59,6 +59,26 @@ switch ($explodedUrl[0]) {
         include __DIR__ . "/views/add-photo-in.php";
         include __DIR__ . "/views/footer.php";
         break;
+    case "profile":
+        if (!isset($explodedUrl[1]) || empty($explodedUrl[1])) {
+            include __DIR__ . "/views/header.php";
+            include __DIR__ . "/views/profile-out.php";
+            include __DIR__ . "/views/footer.php";
+            die();
+        }
+
+        $voter = new Voter($database->db, $explodedUrl[1]);
+        if (!$voter->checkVoterIsExist()) {
+            include __DIR__ . "/views/header.php";
+            include __DIR__ . "/views/notfound.php";
+            include __DIR__ . "/views/footer.php";
+            die();
+        }
+        include __DIR__ . "/views/header.php";
+        include __DIR__ . "/views/profile-in.php";
+        include __DIR__ . "/views/footer.php";
+
+        break;
     default:
         header("HTTP/1.0 404 Not Found");
         jsonDie(array("error" => "File not exist!"));

@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <base href="http://localhost:8888/">
+    <base href="http://192.168.43.229:8888/">
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
