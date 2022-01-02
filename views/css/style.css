@@ -104,12 +104,19 @@ button {
     order: 2;
     outline: none;
     border: none;
-    border-radius: 9999px;
+    border-radius: 20px;
     background-color: rgb(97 65 148);
     padding: 10px;
     padding-left: 45px;
     transition: all 0.50s ease-in-out;
     -webkit-appearance: none;
+}
+
+
+
+.search-input-dropdown{
+    border-bottom-left-radius: 0!important;
+    border-bottom-right-radius: 0!important;
 }
 
 .search-icon {
@@ -137,6 +144,27 @@ button {
     padding: 5px;
     padding-left: 10px;
     z-index: 3;
+}
+
+.dropdown-menu-search{
+    position: absolute;
+    z-index: 99;
+    margin-top: 15px;
+    color: black;
+    width: 200px;
+    flex: 1 1 auto;
+    order: 2;
+    outline: none;
+    border: none;
+    background-color: rgb(97 65 148);
+    padding: 10px;
+    padding-left: 45px;
+    transition: all 0.50s ease-in-out;
+    -webkit-appearance: none;
+}
+
+.dropdown-item-search{
+    padding: 0.5rem 0rem 1rem 0.5rem;
 }
 
 .category-add {
@@ -237,6 +265,17 @@ button {
     color: #7c899b!important;
 }
 
+.profile-photo{
+}
+
+.badges .badge{
+    margin-right: 10px;
+}
+
+.badges>span{
+    color: black;
+}
+
 .blue-text {
     color: #00ceff;
 }
@@ -245,9 +284,14 @@ button {
     border-color: #00ceff;
 }
 
+.bg-blue{
+    background-color: #00ceff;
+}
+
 .card-shadow-blue {
     box-shadow: rgb(255 255 255 / 1%) 0px 20px 25px -5px, rgb(0 206 255 / 25%) 0px 10px 10px -5px, 0 -10px 10px -10px #00ceff inset;
 }
+
 
 .card-shadow-white {
     box-shadow: rgb(255 255 255 / 1%) 0px 20px 25px -5px, rgb(255 255 255 / 25%) 0px 10px 10px -5px, 0 -10px 10px -10px #ffffff inset;
@@ -265,6 +309,11 @@ button {
     border-color: #ffc100;
 }
 
+.bg-yellow{
+    background-color: #ffc100;
+}
+
+
 .card-shadow-yellow {
     box-shadow: rgb(255 255 255 / 1%) 0px 20px 25px -5px, rgb(255 193 0 / 25%) 0px 10px 10px -5px, 0 -10px 10px -10px #ffc100 inset;
 }
@@ -276,6 +325,11 @@ button {
 .green-border {
     border-color: #06ff00;
 }
+
+.bg-green{
+    background-color: #06ff00;
+}
+
 
 .card-shadow-green {
     box-shadow: rgb(255 255 255 / 1%) 0px 20px 25px -5px, rgb(6 255 0 / 25%) 0px 10px 10px -5px, 0 -10px 10px -10px #06ff00 inset;
@@ -289,6 +343,10 @@ button {
     border-color: #ff0059;
 }
 
+.bg-red{
+    background-color: #ff0059;
+}
+
 .card-shadow-red {
     box-shadow: rgb(255 255 255 / 1%) 0px 20px 25px -5px, rgb(255 0 89 / 25%) 0px 10px 10px -5px, 0 -10px 10px -10px #ff0059 inset;
 }
@@ -299,6 +357,10 @@ button {
 
 .pink-border {
     border-color: #fd00ff;
+}
+
+.bg-pink{
+    background-color: #fd00ff;
 }
 
 .card-shadow-pink {
@@ -367,10 +429,16 @@ button {
     .search-input {
         width: 180px;
     }
+    .dropdown-menu-search{
+        width: 180px;
+    }
 }
 
 @media (max-width: 992px) {
     .search-input {
+        width: 150px;
+    }
+    .dropdown-menu-search{
         width: 150px;
     }
 }
@@ -385,12 +453,13 @@ button {
     .search-icon:hover~.search-input {
         position: absolute;
         background-color: rgb(167, 189, 23);
+        border-radius: 9999px!important;
         width: 200px;
         height: 200px;
         padding: 10px;
         padding-left: 45px;
         z-index: 2;
-        transition: all 0.50s ease-in-out;
+        transition: all 0s ease-in-out!important;
     }
     .search-input:focus {
         position: absolute;
@@ -401,6 +470,9 @@ button {
         padding-left: 45px;
         z-index: 2;
         transition: all 0.50s ease-in-out;
+    }
+    .dropdown-menu-search{
+        width: 200px;
     }
 
     .mash-img{}

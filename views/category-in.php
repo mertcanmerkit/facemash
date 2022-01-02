@@ -34,11 +34,11 @@ include "modal.php";
                             foreach ($allImages as $image) {
                                 ?>
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    <a href="https://www.instagram.com/<?= $image["name"]; ?>" target="_blank">
+                                    <a href="profile/<?= $image["name"]; ?>">
                                         <img src="/php/image.php?name=<?= $image["image"]; ?>" class="list-avatar"
                                              alt="<?= $image["name"]; ?>">
                                     </a>
-                                    <a href="https://www.instagram.com/<?= $image["name"]; ?>" target="_blank"
+                                    <a href="profile/<?= $image["name"]; ?>"
                                        class="me-auto"><?= "@" . $image["name"]; ?></a>
                                     <span class="voteCount float-end"><?= $image["count"]; ?> Votes</span>
                                 </li>
