@@ -10,6 +10,10 @@ We are developing a more advanced version of the facemash website developed by M
 ![Uygulama Ekran Görüntüsü](https://i.ibb.co/g730G4b/Screenshot-769.jpg")
 ![Uygulama Ekran Görüntüsü](https://i.ibb.co/hmz6xfB/Screenshot-769.jpg)
 
+## Badges
+
+[![CodeFactor](https://www.codefactor.io/repository/github/mrjavaci/facemash/badge)](https://www.codefactor.io/repository/github/mrjavaci/facemash)
+
 ## Run it on your computer
 
 Clone the project
