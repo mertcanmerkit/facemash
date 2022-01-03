@@ -143,7 +143,7 @@ class Category
         $categoryIds = $user->getUserAddedCategories($user_id);
         $categoryIdsArr = array();
         foreach ($categoryIds as $categoryId) {
-            array_push($categoryIdsArr, $categoryId["id"]);
+            $categoryIdsArr[] = $categoryId["id"];
         }
         $categoryIdsStr = implode(",", $categoryIdsArr);
         if (!$categoryIds) {
@@ -167,7 +167,7 @@ class Category
 
     }
 
-    private function getCategoryImages($categoryId)
+    public function getCategoryImages($categoryId)
     {
         $sth = $this->db->prepare("select * from categoryData where categoryId = :catid");
         $sth->execute(array("catid" => $categoryId));
@@ -204,7 +204,7 @@ class Category
         return true;
     }
 
-    private function getImageWithImageId($imageId)
+    public function getImageWithImageId($imageId)
     {
         $sth = $this->db->prepare("select username from images where id = :id");
         $sth->execute(array("id" => $imageId));

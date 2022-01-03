@@ -38,7 +38,7 @@ function encryptOrDecrypt($string, $action = 'encrypt')
     $secret_key = HASH_KEY;
     $secret_iv = "39" . HASH_KEY . "34";
     $key = hash('sha256', $secret_key);
-    $iv = substr(hash('sha256', $secret_iv), 0, 16); 
+    $iv = substr(hash('sha256', $secret_iv), 0, 16);
     if ($action == 'encrypt') {
         $output = openssl_encrypt($string, $encrypt_method, $key, 0, $iv);
         $output = base64_encode($output);
@@ -57,10 +57,14 @@ function contains($str, array $arr)
     return false;
 }
 
-function generateRandomColor()
-    {
-        $colorArray = array("blue", "yellow", "green", "pink", "red");
-        $rand_keys = array_rand($colorArray, 2);
-        $color = $colorArray[$rand_keys[0]];
-        return $color;
+function generateRandomColor($lc = null)
+{
+    $colorArray = array("blue", "yellow", "green", "pink", "red");
+    $rand_keys = array_rand($colorArray, 2);
+    $color = $colorArray[$rand_keys[0]];
+    if ($lc != null && $color == $lc){
+        return generateRandomColor($lc);
     }
+    return $color;
+
+}

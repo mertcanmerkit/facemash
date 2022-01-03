@@ -135,7 +135,7 @@ class User
             $newFinishedCategories = $categoryId;
         } else {
             $arr = explode(",", $this->user["finishedCategories"]);
-            if (in_array($categoryId, $arr))
+            if (in_array($categoryId, $arr, true))
                 $inArray = true;
             $arr[] = $categoryId;
             $newFinishedCategories = implode(",", $arr);

@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <base href="http://localhost:8888/">
+    <base href="http://192.168.43.229:8888/">
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -28,14 +28,13 @@
                                 class="fas fa-user-circle"></i></a>
                     </li>
                     <li class="nav-item search">
-                        <div></div>
                         <form class="d-flex align-items-center" action="#">
                             <div class="at-icon hidden mx-auto my-auto" id="at-icon" type="submit"><i
                                     class="fas fa-at"></i></div>
                             <div class="search-icon mx-auto my-auto" id="search-icon" type="submit"><i
                                     class="fas fa-search"></i></div>
                             <input class="search-input" id="search-input" type="search" placeholder="username"
-                                   aria-label="Search">
+                                   aria-label="Search" autocomplete="off">
                             <button class="search-btn hidden mx-auto my-auto" id="search-btn" type="submit"><i
                                     class="fas fa-search"></i></button>
                         </form>
@@ -57,3 +56,4 @@
         </div>
     </div>
 </div>
+

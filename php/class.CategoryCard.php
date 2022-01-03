@@ -58,7 +58,7 @@ class CategoryCard
                         ';
             }
             $str .= '<div class="col-4 mb-3">
- <img src="/php/Image.php?name=' . $image . '" class="card-img img-category-' . $this->categoryId . '" alt="' . encryptOrDecrypt($image, "decrypt") . '">
+ <a href="profile/'.encryptOrDecrypt($image, "decrypt") .'"><img src="/php/Image.php?name=' . $image . '" class="card-img img-category-' . $this->categoryId . '" alt="' . encryptOrDecrypt($image, "decrypt") . '"></a>
   </div>
   ';
 
@@ -96,7 +96,7 @@ class CategoryCard
             return "Start";
         if ($this->user["finishedCategories"] == $this->categoryId)
             return "Restart";
-        if (in_array($this->categoryId, explode(",", $this->user["finishedCategories"])))
+        if (in_array($this->categoryId, explode(",", $this->user["finishedCategories"]), true))
             return "Restart";
         return "Start";
     }

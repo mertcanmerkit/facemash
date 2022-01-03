@@ -40,18 +40,29 @@ if (search_icon) {
         search_input.placeholder = "username";
     })
     search_input.addEventListener("focus", () => {
+        $(".searchInner").html("");
+
+        $(".dropdown-menu-search").removeClass("animate__fadeIn");
+        $(".dropdown-menu-search").addClass("animate__fadeOut");
+
         search_icon.classList.add(hidden);
         at_icon.classList.remove(hidden);
     })
+
     search_input.addEventListener("blur", () => {
-        search_input.value = "";
-        if (body.scrollWidth <= 768) {
-            search_input.placeholder = "I'm going back!";
-        }
-        search_btn.classList.add(hidden);
-        search_icon.classList.remove(hidden);
-        at_icon.classList.add(hidden);
-    })
+        $(".dropdown-menu-search").removeClass("animate__fadeIn");
+        $(".dropdown-menu-search").addClass("animate__fadeOut");
+            $(".search-input").removeClass("search-input-dropdown");
+
+            search_input.value = "";
+            if (body.scrollWidth <= 768) {
+                search_input.placeholder = "I'm going back!";
+            }
+            search_btn.classList.add(hidden);
+            search_icon.classList.remove(hidden);
+            at_icon.classList.add(hidden);
+        })
+
     search_input.addEventListener("keydown", () => {
         search_btn.classList.remove(hidden);
         at_icon.classList.add(hidden);
@@ -702,12 +713,27 @@ function search(text) {
             console.log("error!");
         } else {
             if (response.data.length === 0) {
+                $(".dropdown-menu-search").html("SONUÇ YOK WOO");
+                console.log("SONUÇ YOK WOO");
                 //sonuç yok
             } else {
                 console.log(response.data);
-                response.data.map(function (myData) {
+                $(".searchInner").html("");
+                $(".search-input").removeClass("search-input-dropdown");
+                $(".searchInner").append("<div class='dropdown-menu-search ' style=''></div>")
+
+                if ($("input[type='search']").val().length <= 2) {
+                    $(".dropdown-menu-search").addClass("animate__animated animate__fadeIn");
+                }
+                response.data.slice(0, 5).map(function (myData) {
+                    let name = myData["name"];
+                    $(".search-input").addClass("search-input-dropdown");
+                    $(".dropdown-menu-search").append("<div class=\"dropdown-item-search\">\n" + "<span id=\"categoryName\"><a href='/category/" + myData["id"] + "' style='font-size:unset;color: unset'>" + name + "</a></span>\n" + "</div>");
                     //mydata döngüde!
                 })
+                if ($("input[type='search']").val().length > 0) {
+                    //    $(".dropdown-menu-search").addClass("animate__animated animate__fadeIn");
+                }
             }
         }
     });
@@ -715,5 +741,14 @@ function search(text) {
 }
 
 $('input[type="search"]').keyup(function () {
-    search($("input[type='search']").val())
+
+    let input = $("input[type='search']").val();
+    if (input && input.length >= 2) {
+        search($("input[type='search']").val())
+    } else {
+        $(".searchInner").html("");
+        $(".search-input").removeClass("search-input-dropdown");
+    }
+
+
 });
