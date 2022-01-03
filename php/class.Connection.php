@@ -28,6 +28,21 @@ class Connection
         }
     }
 
+    public function getImageUrlWithoutPage()
+    {
+        try {
+            $regex = '/og:image\" content=\"(.*)\"/m';
+            $req = $this->client->request('GET', $this->url);
+            $str = (string)$req->getBody();
+            preg_match_all($regex, $str, $matches, PREG_SET_ORDER, 0);
+
+            return $matches[0][1];
+        } catch (Exception $exception) {
+            return null;
+        }
+
+    }
+
     public function getBodyExternalUrl($url)
     {
         $ch = curl_init();
