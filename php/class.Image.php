@@ -10,7 +10,7 @@ class Image
     public function __construct($igUserName)
     {
         $this->igUserName = $igUserName;
-        $conn = new Connection("https://instagram.com/" . $igUserName . "/?__a=1");
+        $conn = new Connection("https://instagram.com/" . $igUserName);
         $this->conn = $conn;
         $this->db = new DataBase();
     }
@@ -22,25 +22,16 @@ class Image
 
             return file_get_contents(__DIR__ . "/../assets/InstagramProfilePictures/" . $this->igUserName . ".jpg");
         } else {
-            $json = $this->conn->getBodyWithoutPage();
-            if ($json == null)
+            $url = $this->conn->getImageUrlWithoutPage();
+            if ($url == null)
                 jsonDie(array("error" => true, "reason" => "user not found"));
-            $json = json_decode($this->conn->getBodyWithoutPage(), true);
-            if (isset($json["graphql"])) {
-                $imageUri = null;
-                if (isset($json["graphql"]["user"]["profile_pic_url_hd"])) {
-                    $imageUri = $json["graphql"]["user"]["profile_pic_url_hd"];
-                } else {
-                    $imageUri = $json["graphql"]["user"]["profile_pic_url"];
-                }
-                $file = file_get_contents($imageUri);
-                file_put_contents(__DIR__ . "/../assets/InstagramProfilePictures/" . $this->igUserName . ".jpg", $file);
-                $this->imageId = $this->db->addNewImage($this->igUserName);
 
-                return $file;
-            }
+            $file = file_get_contents($url);
+            file_put_contents(__DIR__ . "/../assets/InstagramProfilePictures/" . $this->igUserName . ".jpg", $file);
+            $this->imageId = $this->db->addNewImage($this->igUserName);
+            return $file;
+
         }
-        return null;
     }
 
     private function checkCache()

@@ -19,9 +19,9 @@ if (!isset($_GET["sef"])) {
 
 }
 if (contains(@$_GET["sef"], $ignoreArr)) {
-    include __DIR__ . "/views/" . "header.php";
-    include __DIR__ . "/views/" . "index" . ".php";
-    include __DIR__ . "/views/" . "footer.php";
+    include __DIR__ . "/views/header.php";
+    include __DIR__ . "/views/index.php";
+    include __DIR__ . "/views/footer.php";
     die();
 }
 if (str_contains($_GET["sef"], "../")) {
@@ -30,9 +30,9 @@ if (str_contains($_GET["sef"], "../")) {
 }
 $file = __DIR__ . "/views/" . $_GET["sef"] . ".php";
 if (file_exists($file)) {
-    include __DIR__ . "/views/" . "header.php";
+    include __DIR__ . "/views/header.php";
     include $file;
-    include __DIR__ . "/views/" . "footer.php";
+    include __DIR__ . "/views/footer.php";
     die();
 }
 $explodedUrl = explode("/", $_GET["sef"]);
